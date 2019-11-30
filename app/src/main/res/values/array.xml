@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="type">
+        <item>DHL</item>
+        <item>천일택배</item>
+        <item>CJ대한통운</item>
+        <item>CU 편의점택배</item>
+        <item>GS Postbox택배</item>
+        <item>CWAY (Woori Express)</item>
+        <item>대신택배</item>
+        <item>우체국 택배</item>
+        <item>한의사랑택배</item>
+        <item>한진택배</item>
+        <item>합동택배</item>
+        <item>홈픽</item>
+        <item>한서호남택배</item>
+        <item>일양로지스</item>
+        <item>경동택배</item>
+        <item>건영택배</item>
+        <item>로젠택배</item>
+        <item>롯데택배</item>
+        <item>SLX</item>
+        <item>TNT</item>
+        <item>EMS</item>
+        <item>Fedex</item>
+        <item>UPS</item>
+        <item>USPS</item>
+    </string-array>
+
+    <string-array name="convert_type">
+        <item>de.dhl</item>
+        <item>kr.chunilps</item>
+        <item>kr.cjlogistics</item>
+        <item>kr.cupost</item>
+        <item>kr.cvsnet</item>
+        <item>kr.cway</item>
+        <item>kr.daesin</item>
+        <item>kr.epost</item>
+        <item>kr.hanips</item>
+        <item>kr.hanjin</item>
+        <item>kr.hdexp</item>
+        <item>kr.homepick</item>
+        <item>kr.honamlogis</item>
+        <item>kr.kdexp</item>
+        <item>kr.kunyoung</item>
+        <item>kr.logen</item>
+        <item>kr.lotte</item>
+        <item>kr.slx</item>
+        <item>nl.tnt</item>
+        <item>un.upu.ems</item>
+        <item>us.fedex</item>
+        <item>us.ups</item>
+        <item>us.usps</item>
+    </string-array>
+
+</resources>

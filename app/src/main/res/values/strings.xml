@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FindTaek</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="refresh">새로고침</string>
+    <string name="deleteAll">전체삭제</string>
+    <string name="product_name_item">제품명:</string>
+    <string name="carrier_name_item">택배사 이름 :</string>
+    <string name="product_num_item">운송장 번호 :</string>
+    <string name="add_delivery_item">확인</string>
+</resources>
