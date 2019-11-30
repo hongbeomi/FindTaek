@@ -1,4 +1,4 @@
-package com.hongbeomi.findtaek.api
+package com.hongbeomi.findtaek.api.service
 
 import com.hongbeomi.findtaek.models.network.DeliveryResponse
 import com.hongbeomi.findtaek.models.network.ProgressResponse

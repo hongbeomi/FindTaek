@@ -39,6 +39,7 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
         setSupportActionBar(toolbar)
 
         mainVM = getViewModel()
+
         adapter = DeliveryAdapter { delivery ->
                 startActivity<TimeLineActivity>(
                     TimeLineActivity.TRACK_ID to delivery.trackId,

@@ -1,6 +1,8 @@
-package com.hongbeomi.findtaek.api
+package com.hongbeomi.findtaek.api.client
 
-import com.hongbeomi.findtaek.models.network.DeliveryResponse
+import com.hongbeomi.findtaek.api.ApiResponse
+import com.hongbeomi.findtaek.api.service.DeliveryService
+import com.hongbeomi.findtaek.api.async
 import com.hongbeomi.findtaek.models.network.ProgressResponse
 
 class ProgressClient (private val service: DeliveryService) {

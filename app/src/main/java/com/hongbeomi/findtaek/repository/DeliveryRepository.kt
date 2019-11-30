@@ -3,7 +3,7 @@ package com.hongbeomi.findtaek.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.hongbeomi.findtaek.api.ApiResponse
-import com.hongbeomi.findtaek.api.DeliveryClient
+import com.hongbeomi.findtaek.api.client.DeliveryClient
 import com.hongbeomi.findtaek.api.message
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.models.network.DeliveryResponse

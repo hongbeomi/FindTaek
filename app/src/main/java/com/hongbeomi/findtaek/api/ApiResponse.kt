@@ -7,19 +7,19 @@ sealed class ApiResponse<out T> {
 
     class Success<T>(response: Response<T>) : ApiResponse<T>() {
         val data: T? = response.body()
-        override fun toString() = "[ApiResponse.Success]: $data"
+        override fun toString() = "[Api.Success]: $data"
     }
 
     sealed class Failure<out T> {
         class Error<out T>(response: Response<out T>) : ApiResponse<T>() {
-            val responseBody: ResponseBody? = response.errorBody()
+            val errorBody: ResponseBody? = response.errorBody()
             val code: Int = response.code()
-            override fun toString(): String = "[ApiResponse.Failure $code]: $responseBody"
+            override fun toString(): String = "[Api.Failure $code]: $errorBody"
         }
 
         class Exception<out T>(exception: Throwable) : ApiResponse<T>() {
             val message: String? = exception.localizedMessage
-            override fun toString(): String = "[ApiResponse.Failure]: $message"
+            override fun toString(): String = "[Api.Failure]: $message"
         }
     }
 
@@ -37,4 +37,5 @@ sealed class ApiResponse<out T> {
             Failure.Exception(ex)
         }
     }
+
 }

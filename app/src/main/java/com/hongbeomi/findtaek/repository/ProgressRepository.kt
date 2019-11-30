@@ -3,7 +3,7 @@ package com.hongbeomi.findtaek.repository
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.hongbeomi.findtaek.api.ApiResponse
-import com.hongbeomi.findtaek.api.ProgressClient
+import com.hongbeomi.findtaek.api.client.ProgressClient
 import com.hongbeomi.findtaek.api.message
 import com.hongbeomi.findtaek.models.entity.Progress
 import com.hongbeomi.findtaek.models.network.ProgressResponse
