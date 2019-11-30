@@ -1,8 +1,13 @@
 package com.hongbeomi.findtaek.di
 
 import com.google.gson.GsonBuilder
+import com.hongbeomi.findtaek.api.DeliveryClient
+import com.hongbeomi.findtaek.api.DeliveryService
+import com.hongbeomi.findtaek.api.ProgressClient
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -14,6 +19,8 @@ private const val WRITE_TIMEOUT = 15L
 private const val READ_TIMEOUT = 15L
 
 val networkModule = module {
+
+    single { Cache(androidApplication().cacheDir, 10L * 1024 * 1024) }
 
     single { GsonBuilder().create() }
 
@@ -34,9 +41,11 @@ val networkModule = module {
         Retrofit.Builder()
             .baseUrl("https://apis.tracker.delivery/")
             .addConverterFactory(GsonConverterFactory.create(get()))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(get())
             .build()
     }
+
+    single { DeliveryClient(get()) }
+    single { ProgressClient(get()) }
 
 }

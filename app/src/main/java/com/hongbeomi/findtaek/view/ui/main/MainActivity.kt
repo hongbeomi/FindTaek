@@ -21,6 +21,9 @@ import com.hongbeomi.findtaek.util.RecyclerItemTouchHelper
 import com.hongbeomi.findtaek.view.adapter.DeliveryAdapter
 import com.hongbeomi.findtaek.view.ui.add.AddActivity
 import com.hongbeomi.findtaek.view.ui.timeline.TimeLineActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -43,12 +46,6 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
                 )
             }
 
-//        recyclerView.apply {
-//            setHasFixedSize(true)
-//        }.also {
-//            it.adapter = adapter
-//            it.layoutManager = lm
-//        }
         initRecyclerView(recyclerView, adapter)
 
         mainVM.also {
@@ -74,7 +71,9 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
         Snackbar
             .make(coordinator, "물품 삭제완료", Snackbar.LENGTH_LONG)
             .setAction("취소") {
-                mainVM.insert(deletedItem)
+                GlobalScope.launch(Dispatchers.IO) {
+                    mainVM.rollback(deletedItem)
+                }
             }
             .setActionTextColor(Color.YELLOW)
             .show()

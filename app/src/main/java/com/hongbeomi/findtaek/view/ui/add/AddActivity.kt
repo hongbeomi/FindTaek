@@ -1,9 +1,7 @@
 package com.hongbeomi.findtaek.view.ui.add
 
 import android.os.Bundle
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
 import com.hongbeomi.findtaek.R
 import kotlinx.android.synthetic.main.activity_add.*
 import org.jetbrains.anko.toast
@@ -30,11 +28,7 @@ class AddActivity : AppCompatActivity() {
             val trackId = "348621627991"
             val carrierName = "CJ대한통운"
             addVM.apply {
-                setProductNameInput(productName)
-                setCarrierNameInput(carrierName)
-                setTrackIdInput(trackId)
-                setCarrierId()
-                carrierIdValidation(productName, carrierName, trackId)
+                checkTrackIdAndInsertDelivery(productName, carrierName, trackId)
             }
         }
     }

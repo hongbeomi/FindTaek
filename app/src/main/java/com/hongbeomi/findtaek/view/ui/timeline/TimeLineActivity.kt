@@ -24,7 +24,7 @@ class TimeLineActivity: BaseActivity() {
 
         initRecyclerView(timeline_recyclerView, adapter)
 
-        vm.getProgressesFromServer(intent.getStringExtra(TRACK_ID), intent.getStringExtra(CARRIER_ID))
+        vm.getProgress(intent.getStringExtra(CARRIER_ID), intent.getStringExtra(TRACK_ID))
             .observe(this, Observer<ArrayList<Progress>> { progress ->
             adapter.setProgressListItem(progress)
         })

@@ -18,7 +18,7 @@ class DeliveryResponse(
     @SerializedName("carrier")
     @Expose
     val carrier: Carrier
-) {
+): NetworkResponseModel {
     data class From(
         @SerializedName("name")
         val name: String,

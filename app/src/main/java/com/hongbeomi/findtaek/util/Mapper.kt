@@ -2,6 +2,6 @@ package com.hongbeomi.findtaek.util
 
 interface Mapper<in E, T> {
 
-    abstract fun mapFrom(by: E): T
+    fun mapFrom(by: E): T
 
 }

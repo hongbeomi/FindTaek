@@ -1,7 +1,8 @@
 package com.hongbeomi.findtaek.api
 
 import com.hongbeomi.findtaek.models.network.DeliveryResponse
-import io.reactivex.Observable
+import com.hongbeomi.findtaek.models.network.ProgressResponse
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
@@ -13,6 +14,13 @@ interface DeliveryService {
     fun getList(
         @Path("carrier_id") carrierId: String,
         @Path("track_id") trackId: String
-    ): Observable<DeliveryResponse>
+    ): Call<DeliveryResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("carriers/{carrier_id}/tracks/{track_id}")
+    fun getProgressList(
+        @Path("carrier_id") carrierId: String,
+        @Path("track_id") trackId: String
+    ): Call<ProgressResponse>
 
 }
