@@ -7,8 +7,10 @@ import com.hongbeomi.findtaek.util.SingleLiveEvent
 class FinishActivityEvent : SingleLiveEvent<Boolean>() {
 
     fun observe(owner: LifecycleOwner, observer: (Boolean) -> Unit) =
-        super.observe(owner, Observer { it.run {
-            observer(it)
-        } })
+        super.observe(owner, Observer {
+            it.run {
+                observer(it)
+            }
+        })
 
 }

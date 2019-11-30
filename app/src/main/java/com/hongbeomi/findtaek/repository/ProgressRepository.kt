@@ -20,7 +20,6 @@ constructor(private val client: ProgressClient) :
         trackId: String, error : (String) -> Unit
     ): MutableLiveData<ArrayList<Progress>> {
         val mutableLiveProgress = MutableLiveData<ArrayList<Progress>>()
-
         client.fetchDelivery(carrierId, trackId) { response ->
                 when (response) {
                     is ApiResponse.Success -> {

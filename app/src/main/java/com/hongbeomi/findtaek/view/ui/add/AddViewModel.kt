@@ -1,5 +1,6 @@
 package com.hongbeomi.findtaek.view.ui.add
 
+import androidx.databinding.ObservableField
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
 import com.hongbeomi.findtaek.util.event.FinishActivityEvent
@@ -11,6 +12,9 @@ class AddViewModel
 constructor(private val repository: DeliveryRepository) : BaseViewModel() {
 
     private val finishEvent = FinishActivityEvent()
+    val productName = ObservableField<String>()
+    val carrierName = ObservableField<String>()
+    val trackId = ObservableField<String>()
 
     fun observeFinish(lifecycleOwner: LifecycleOwner, observer: (Boolean) -> Unit) {
         finishEvent.observe(lifecycleOwner, observer)
@@ -20,18 +24,18 @@ constructor(private val repository: DeliveryRepository) : BaseViewModel() {
         finishEvent.value = true
     }
 
-    // 유효성 검사 필요!
-    fun checkTrackIdAndInsertDelivery(
-        inputProductName: String, inputCarrierName: String, inputTrackId: String) {
-        if (inputProductName.isNotEmpty() and inputTrackId.isNotEmpty() and inputCarrierName.isNotEmpty()) {
+    fun checkValidationAndInsertDelivery() {
+        if (productName.get().isNullOrBlank()
+            or carrierName.get().isNullOrBlank()
+            or trackId.get().isNullOrBlank()) {
+            showToast("비어 있는 항목이 있습니다!")
+        } else {
             viewModelScope.launch {
                 repository.insert("맥북", "CJ대한통운", "348621627991") {
                     showToast(it)
                 }
             }
             finishActivity()
-        } else {
-            showToast("비어 있는 항목이 있습니다!")
         }
     }
 

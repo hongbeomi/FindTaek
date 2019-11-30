@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<layout>
+
+    <data>
+        <variable
+            name="vm"
+            type="com.hongbeomi.findtaek.view.ui.add.AddViewModel" />
+    </data>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -17,7 +25,7 @@
             android:text="@string/product_name_item" />
 
         <EditText
-            android:id="@+id/product_name_editText"
+            android:text="@={vm.productName}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"/>
@@ -36,7 +44,7 @@
             android:text="@string/carrier_name_item" />
 
         <EditText
-            android:id="@+id/carrier_name_editText"
+            android:text="@={vm.carrierName}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"/>
@@ -55,7 +63,7 @@
             android:text="@string/product_num_item"/>
 
         <EditText
-            android:id="@+id/product_num_editText"
+            android:text="@={vm.trackId}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -63,7 +71,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/add_button"
+        android:onClick="@{() -> vm.checkValidationAndInsertDelivery()}"
         android:layout_marginTop="120dp"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
@@ -71,3 +79,4 @@
         android:text="@string/add_delivery_item" />
 
 </LinearLayout>
+</layout>

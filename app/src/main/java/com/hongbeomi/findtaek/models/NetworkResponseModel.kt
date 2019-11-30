@@ -1,0 +1,3 @@
+package com.hongbeomi.findtaek.models
+
+interface NetworkResponseModel
