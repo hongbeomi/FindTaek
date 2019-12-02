@@ -1,5 +1,8 @@
 package com.hongbeomi.findtaek.util
 
+/**
+ * @author hongbeomi
+ */
 val carrierIdMap = mapOf(
     "DHL" to "de.dhl",
     "천일택배" to "kr.chunilps",

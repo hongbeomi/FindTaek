@@ -5,13 +5,18 @@ import androidx.lifecycle.Observer
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.compose.BaseActivity
 import com.hongbeomi.findtaek.models.entity.Progress
+import com.hongbeomi.findtaek.view.TimeLineActivity.CARRIER_ID
+import com.hongbeomi.findtaek.view.TimeLineActivity.TRACK_ID
 import com.hongbeomi.findtaek.view.adapter.TimeLineAdapter
 import kotlinx.android.synthetic.main.activity_timeline.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
+/**
+ * @author hongbeomi
+ */
 class TimeLineActivity: BaseActivity() {
 
-    private lateinit var vm: TimeLineViewModel
+    private lateinit var timeLineViewModel: TimeLineViewModel
     private lateinit var adapter: TimeLineAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,20 +24,16 @@ class TimeLineActivity: BaseActivity() {
         setContentView(R.layout.activity_timeline)
         setSupportActionBar(toolbar_timeline)
 
-        vm = getViewModel()
+        timeLineViewModel = getViewModel()
         adapter = TimeLineAdapter()
 
         initRecyclerView(timeline_recyclerView, adapter)
 
-        vm.getProgress(intent.getStringExtra(CARRIER_ID), intent.getStringExtra(TRACK_ID))
+        timeLineViewModel.getProgress(intent.getStringExtra(CARRIER_ID), intent.getStringExtra(TRACK_ID))
             .observe(this, Observer<ArrayList<Progress>> { progress ->
-            adapter.setProgressListItem(progress)
+            adapter.setItems(progress)
         })
     }
 
-    companion object {
-        const val TRACK_ID = "TRACK_ID"
-        const val CARRIER_ID = "CARRIER_ID"
-    }
 }
 

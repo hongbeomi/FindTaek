@@ -7,6 +7,9 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
 
+/**
+ * @author hongbeomi
+ */
 interface DeliveryService {
 
     @Headers("Content-Type: application/json")

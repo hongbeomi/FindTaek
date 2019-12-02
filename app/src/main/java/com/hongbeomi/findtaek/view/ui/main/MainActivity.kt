@@ -1,58 +1,66 @@
 package com.hongbeomi.findtaek.view.ui.main
 
-import android.graphics.*
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.compose.BaseActivity
 import com.hongbeomi.findtaek.models.entity.Delivery
-import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.startActivity
 import com.hongbeomi.findtaek.util.RecyclerItemTouchHelper
-import com.hongbeomi.findtaek.view.adapter.DeliveryAdapter
+import com.hongbeomi.findtaek.view.AddActivity.EXTRA_CIRCULAR_REVEAL_X
+import com.hongbeomi.findtaek.view.AddActivity.EXTRA_CIRCULAR_REVEAL_Y
+import com.hongbeomi.findtaek.view.TimeLineActivity.CARRIER_ID
+import com.hongbeomi.findtaek.view.TimeLineActivity.TRACK_ID
+import com.hongbeomi.findtaek.view.adapter.MainAdapter
 import com.hongbeomi.findtaek.view.ui.add.AddActivity
 import com.hongbeomi.findtaek.view.ui.timeline.TimeLineActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
+/**
+ * @author hongbeomi
+ */
 class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
 
-    private val lm by lazy { LinearLayoutManager(this) }
-    private lateinit var mainVM: MainViewModel
-    private lateinit var adapter: DeliveryAdapter
+    private lateinit var adapter: MainAdapter
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        mainVM = getViewModel()
+        mainViewModel = getViewModel()
 
-        adapter = DeliveryAdapter { delivery ->
-                startActivity<TimeLineActivity>(
-                    TimeLineActivity.TRACK_ID to delivery.trackId,
-                    TimeLineActivity.CARRIER_ID to delivery.carrierId
-                )
-            }
+        adapter = MainAdapter { delivery ->
+            startActivity<TimeLineActivity>(
+                TRACK_ID to delivery.trackId,
+                CARRIER_ID to delivery.carrierId
+            )
+        }
 
         initRecyclerView(recyclerView, adapter)
 
-        mainVM.also {
+        mainViewModel.also {
             it.observeToast(this) { message -> toast(message) }
             it.getAll().observe(this, Observer<List<Delivery>> { deliveryList ->
-                adapter.setDeliveryList(deliveryList)
+                adapter.setItems(deliveryList)
             })
         }
 
@@ -60,20 +68,35 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
             ItemTouchHelper(it).attachToRecyclerView(recyclerView)
         }
 
-        fab.setOnClickListener {
-            startActivity<AddActivity>()
+        fab.setOnClickListener { v ->
+            sendFabButtonLocation(v)
         }
+    }
+
+    private fun sendFabButtonLocation(view: View) {
+        val options: ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            this, view, "transition"
+        )
+        val revealX = (view.x + view.width / 2).toInt()
+        val revealY = (view.y + view.height / 2).toInt()
+
+        startActivity(
+            intentFor<AddActivity>(
+                EXTRA_CIRCULAR_REVEAL_X to revealX,
+                EXTRA_CIRCULAR_REVEAL_Y to revealY
+            ),
+            options.toBundle()
+        )
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {
         val deletedItem = adapter.getDeliveryPosition(position)
-        mainVM.delete(adapter.getDeliveryPosition(position))
+        mainViewModel.delete(adapter.getDeliveryPosition(position))
 
-        Snackbar
-            .make(coordinator, "물품 삭제완료", Snackbar.LENGTH_LONG)
+        Snackbar.make(coordinator, "물품 삭제완료", Snackbar.LENGTH_LONG)
             .setAction("취소") {
                 GlobalScope.launch(Dispatchers.IO) {
-                    mainVM.rollback(deletedItem)
+                    mainViewModel.rollback(deletedItem)
                 }
             }
             .setActionTextColor(Color.YELLOW)
@@ -91,16 +114,16 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
                 scaleY = 0.5f
                 setOnClickListener {
                     it.startAnimation(rotation)
-                    mainVM.updateDeliveryFromServer()
-                    lm.scrollToPosition(0)
+                    mainViewModel.update()
+                    linearLayoutManager.scrollToPosition(0)
                 }
-        }
+            }
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.menuDeleteAll) {
-            mainVM.deleteAll()
+            mainViewModel.deleteAll()
         }
         return super.onOptionsItemSelected(item)
     }

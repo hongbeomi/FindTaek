@@ -1,9 +1,12 @@
-package com.hongbeomi.findtaek.room
+package com.hongbeomi.findtaek.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.hongbeomi.findtaek.models.entity.Delivery
 
+/**
+ * @author hongbeomi
+ */
 @Dao
 interface DeliveryDao {
 

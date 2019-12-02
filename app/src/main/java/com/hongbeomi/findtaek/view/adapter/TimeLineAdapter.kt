@@ -12,18 +12,20 @@ import com.hongbeomi.findtaek.models.entity.Progress
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_timeline.*
 
+/**
+ * @author hongbeomi
+ */
 class TimeLineAdapter :
     RecyclerView.Adapter<TimeLineAdapter.TimeLineViewHolder>() {
 
     private lateinit var layoutInflater: LayoutInflater
-    private var progressList: ArrayList<Progress> = arrayListOf()
+    private var items: ArrayList<Progress> = arrayListOf()
 
     override fun getItemViewType(position: Int): Int {
         return TimelineView.getTimeLineViewType(position, itemCount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeLineViewHolder {
-
         if (!::layoutInflater.isInitialized) {
             layoutInflater = LayoutInflater.from(parent.context)
         }
@@ -36,7 +38,7 @@ class TimeLineAdapter :
 
     override fun onBindViewHolder(holder: TimeLineViewHolder, position: Int) {
         setMarker(holder)
-        holder.bind(progressList[position])
+        holder.bind(items[position])
     }
 
     private fun setMarker(holder: TimeLineViewHolder) {
@@ -48,7 +50,7 @@ class TimeLineAdapter :
             )
     }
 
-    override fun getItemCount() = progressList.size
+    override fun getItemCount() = items.size
 
     inner class TimeLineViewHolder(itemView: View, viewType: Int) :
         RecyclerView.ViewHolder(itemView), LayoutContainer {
@@ -69,8 +71,8 @@ class TimeLineAdapter :
         }
     }
 
-    fun setProgressListItem(progressList: ArrayList<Progress>){
-        this.progressList = progressList
+    fun setItems(items: ArrayList<Progress>){
+        this.items = items
         notifyDataSetChanged()
     }
 

@@ -4,6 +4,9 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.hongbeomi.findtaek.util.SingleLiveEvent
 
+/**
+ * @author hongbeomi
+ */
 class FinishActivityEvent : SingleLiveEvent<Boolean>() {
 
     fun observe(owner: LifecycleOwner, observer: (Boolean) -> Unit) =

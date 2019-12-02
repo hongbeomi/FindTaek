@@ -5,15 +5,19 @@ import androidx.lifecycle.viewModelScope
 import com.hongbeomi.findtaek.models.entity.Progress
 import com.hongbeomi.findtaek.compose.BaseViewModel
 import com.hongbeomi.findtaek.repository.ProgressRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * @author hongbeomi
+ */
 class TimeLineViewModel(private val repository: ProgressRepository) : BaseViewModel() {
 
     private var mutableLiveProgress = MutableLiveData<ArrayList<Progress>>()
 
     fun getProgress(carrierId: String, trackId: String): MutableLiveData<ArrayList<Progress>> {
-        viewModelScope.launch {
-            mutableLiveProgress = repository.getProgressFromServer(carrierId, trackId) {
+        viewModelScope.launch(Dispatchers.IO) {
+            mutableLiveProgress = repository.getProgressList(carrierId, trackId) {
                 showToast(it)
             }
         }

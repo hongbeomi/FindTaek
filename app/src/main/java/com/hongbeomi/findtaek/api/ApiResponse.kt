@@ -3,6 +3,9 @@ package com.hongbeomi.findtaek.api
 import okhttp3.ResponseBody
 import retrofit2.Response
 
+/**
+ * @author hongbeomi
+ */
 sealed class ApiResponse<out T> {
 
     class Success<T>(response: Response<T>) : ApiResponse<T>() {

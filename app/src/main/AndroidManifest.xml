@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.hongbeomi.findtaek.view.ui.add.AddActivity">
+        <activity android:name="com.hongbeomi.findtaek.view.ui.add.AddActivity"
+            android:theme="@style/AppTheme.Transparent">
         </activity>
         <activity android:name="com.hongbeomi.findtaek.view.ui.timeline.TimeLineActivity">
         </activity>

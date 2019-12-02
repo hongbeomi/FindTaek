@@ -5,6 +5,9 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 
+/**
+ * @author hongbeomi
+ */
 object VectorDrawableUtils {
 
     private fun getDrawable(context: Context, drawableResId: Int): Drawable? {

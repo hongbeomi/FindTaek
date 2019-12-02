@@ -10,13 +10,15 @@ import com.hongbeomi.findtaek.models.entity.Delivery
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_main.*
 
+/**
+ * @author hongbeomi
+ */
+class MainAdapter(val ItemClick: (Delivery) -> Unit) :
+    RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
-class DeliveryAdapter(val ItemClick: (Delivery) -> Unit)
-    : RecyclerView.Adapter<DeliveryAdapter.ViewHolder>() {
+    private var items: List<Delivery> = listOf()
 
-    private var deliveryList: List<Delivery> = listOf()
-
-    override fun onCreateViewHolder(parent: ViewGroup, i: Int) = ViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, i: Int) = MainViewHolder(
         LayoutInflater.from(parent.context).inflate(
             R.layout.item_main,
             parent,
@@ -24,14 +26,13 @@ class DeliveryAdapter(val ItemClick: (Delivery) -> Unit)
         )
     )
 
-    override fun getItemCount() = deliveryList.size
+    override fun getItemCount() = items.size
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) =
-        viewHolder.bind(deliveryList[position])
+    override fun onBindViewHolder(mainViewHolder: MainViewHolder, position: Int) {
+        mainViewHolder.bind(items[position])
+    }
 
-    // android KTX + LayoutContainer 를 사용해서 findViewId() 캐시 사용
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), LayoutContainer {
-
+    inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), LayoutContainer {
         override val containerView: View?
             get() = itemView
         val viewForeground: LinearLayout = view_foreground
@@ -53,11 +54,11 @@ class DeliveryAdapter(val ItemClick: (Delivery) -> Unit)
 
     }
 
-    fun setDeliveryList(deliveryList: List<Delivery>) {
-        this.deliveryList = deliveryList
+    fun setItems(items: List<Delivery>) {
+        this.items = items
         notifyDataSetChanged()
     }
 
-    fun getDeliveryPosition(position: Int): Delivery = this.deliveryList[position]
+    fun getDeliveryPosition(position: Int): Delivery = items[position]
 
 }

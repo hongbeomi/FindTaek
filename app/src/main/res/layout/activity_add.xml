@@ -9,7 +9,10 @@
     </data>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@android:color/background_light"
+    android:id="@+id/addActivityLayout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -70,8 +73,21 @@
             android:inputType="number"/>
     </LinearLayout>
 
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="힌트!">
+
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
-        android:onClick="@{() -> vm.checkValidationAndInsertDelivery()}"
+        android:onClick="@{() -> vm.insertDelivery()}"
         android:layout_marginTop="120dp"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"

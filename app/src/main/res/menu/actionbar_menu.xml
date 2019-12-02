@@ -9,7 +9,6 @@
         app:actionViewClass="android.widget.ImageView"
         app:showAsAction="ifRoom" />
 
-
     <item
         android:id="@+id/menuDeleteAll"
         android:title="@string/deleteAll"

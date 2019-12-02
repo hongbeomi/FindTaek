@@ -3,8 +3,11 @@ package com.hongbeomi.findtaek.util
 import android.graphics.Canvas
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.hongbeomi.findtaek.view.adapter.DeliveryAdapter
+import com.hongbeomi.findtaek.view.adapter.MainAdapter
 
+/**
+ * @author hongbeomi
+ */
 class RecyclerItemTouchHelper(
     dragDirs: Int,
     swipeDirs: Int,
@@ -14,12 +17,13 @@ class RecyclerItemTouchHelper(
     override fun onMove(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
-        target: RecyclerView.ViewHolder) = true
+        target: RecyclerView.ViewHolder
+    ) = true
 
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
         viewHolder?.let { v ->
-            (v as DeliveryAdapter.ViewHolder).viewForeground.let {
+            (v as MainAdapter.MainViewHolder).viewForeground.let {
                 ItemTouchHelper.Callback.getDefaultUIUtil().onSelected(it)
             }
         }
@@ -28,8 +32,9 @@ class RecyclerItemTouchHelper(
     override fun onChildDrawOver(
         c: Canvas, recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float,
-        actionState: Int, isCurrentlyActive: Boolean) =
-        (viewHolder as DeliveryAdapter.ViewHolder).viewForeground.let {
+        actionState: Int, isCurrentlyActive: Boolean
+    ) =
+        (viewHolder as MainAdapter.MainViewHolder).viewForeground.let {
             ItemTouchHelper.Callback.getDefaultUIUtil().onDrawOver(
                 c, recyclerView, it, dX, dY,
                 actionState, isCurrentlyActive
@@ -37,15 +42,17 @@ class RecyclerItemTouchHelper(
         }
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) =
-        (viewHolder as DeliveryAdapter.ViewHolder).viewForeground.let {
+        (viewHolder as MainAdapter.MainViewHolder).viewForeground.let {
             ItemTouchHelper.Callback.getDefaultUIUtil().clearView(it)
         }
 
 
-    override fun onChildDraw(c: Canvas, recyclerView: RecyclerView,
+    override fun onChildDraw(
+        c: Canvas, recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float,
-        actionState: Int, isCurrentlyActive: Boolean) {
-        val foregroundView = (viewHolder as DeliveryAdapter.ViewHolder).viewForeground
+        actionState: Int, isCurrentlyActive: Boolean
+    ) {
+        val foregroundView = (viewHolder as MainAdapter.MainViewHolder).viewForeground
 
         ItemTouchHelper.Callback.getDefaultUIUtil().onDraw(
             c, recyclerView, foregroundView, dX, dY,
@@ -53,8 +60,9 @@ class RecyclerItemTouchHelper(
         )
     }
 
-    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) =
+    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         listener.onSwiped(viewHolder, direction, viewHolder.adapterPosition)
+    }
 
     interface RecyclerItemTouchHelperListener {
         fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int)

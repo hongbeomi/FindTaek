@@ -1,5 +1,8 @@
-package com.hongbeomi.findtaek.room
+package com.hongbeomi.findtaek.db
 
+/**
+ * @author hongbeomi
+ */
 object DATABASE {
 
     const val DATABASE_DELIVERY = "delivery.db"

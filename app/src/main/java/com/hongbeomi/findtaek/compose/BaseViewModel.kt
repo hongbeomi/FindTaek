@@ -4,6 +4,9 @@ package com.hongbeomi.findtaek.compose
 import androidx.lifecycle.*
 import com.hongbeomi.findtaek.util.event.ToastMessageEvent
 
+/**
+ * @author hongbeomi
+ */
 open class BaseViewModel : ViewModel() {
 
     private val toastMessage = ToastMessageEvent()

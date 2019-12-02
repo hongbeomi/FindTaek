@@ -19,7 +19,7 @@ buildscript {
 
         // architecture components
         lifecycleVersion = '2.2.0-rc02'
-        roomVersion = '1.1.1'
+        roomVersion = '2.2.2'
 
         // network
         retrofitVersion = '2.5.0'

@@ -3,6 +3,9 @@ package com.hongbeomi.findtaek.models.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * @author hongbeomi
+ */
 @Entity(tableName = "delivery")
 data class Delivery (
     @PrimaryKey(autoGenerate = true)
