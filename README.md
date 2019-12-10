@@ -20,6 +20,10 @@
 
 ## Tech Stack & Library Version
 
+[Android Jetpack](https://android-developers.googleblog.com/2018/05/use-android-jetpack-to-accelerate-your.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+blogspot%2FhsDu+%28Android+Developers+Blog%29)
+
+![jetpack](https://1.bp.blogspot.com/-dwL58chu7wo/WvD1RrHln3I/AAAAAAAAFUg/cRTc0IZga_wMPTWr3CI53IZ5BwtnZMeYACLcBGAs/s1600/Screen%2BShot%2B2018-05-05%2Bat%2B11.49.30%2BAMimage1.png)
+
 **DataBase**
 
 - Room
@@ -53,4 +57,3 @@
 <br>
 
 ## LICENSE
-
