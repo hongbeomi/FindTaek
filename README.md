@@ -2,25 +2,35 @@
 
 > MVVM 패턴을 적용한 Toy Project 입니다.
 
-**내가 구매한 택배가 어디까지 왔는지 타임 라인으로 확인할 수 있습니다.**
-
-**아래로 당겨서 수동으로 업데이트하고 옆으로 넘겨서 항목을 삭제할 수 있습니다.**
+// image
 
 <br>
 
-## Demo
+## ✨ Features
+
+![kotlin](https://img.shields.io/badge/kotlin-black?logo=kotlin) ![api](https://img.shields.io/badge/API-19%2B-green) ![license](https://img.shields.io/github/license/hongbeomi/FindTaek?color=blue) ![hit](https://img.shields.io/github/search/hongbeomi/FindTaek/app?color=red&label=hits)
+
+<br>
+
+**내가 구매한 택배가 어디까지 왔는지 타임 라인으로 확인할 수 있습니다.**
+
+**아래로 당겨서 수동으로 업데이트하고 오른쪽으로 밀어서 항목을 삭제할 수 있습니다.**
+
+<br>
+
+## 📱 Demo
 
 - Upload 예정
 
 <br>
 
-## Architecture - MVVM
+## 🛠  Architecture - MVVM
 
 ![mvvm](https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/mvvm.png)
 
 <br>
 
-## Tech Stack & Library Version
+## 💡 Tech Stack & Library Version
 
 [Android Jetpack](https://android-developers.googleblog.com/2018/05/use-android-jetpack-to-accelerate-your.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+blogspot%2FhsDu+%28Android+Developers+Blog%29)
 
@@ -52,10 +62,26 @@
 
 <br>
 
-## Thanks
+## 🙌 Thanks
 
 - Vipulasri - https://github.com/vipulasri/Timeline-View
 
 <br>
 
-## LICENSE
+## License
+
+```
+Copyright 2019 Hongbeom Ahn
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
