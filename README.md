@@ -20,43 +20,29 @@
 
 ## Tech Stack & Library Version
 
-<br>
-
 **DataBase**
 
-- **Room**
-
-  
+- Room
 
 **Network**
 
-- **Okhttp3**
-
-- **Retrofit2**
-
-  
+- Okhttp3
+- Retrofit2
 
 **Jetpack AAC**
 
-- **Data Binding**
-
-- **Lifecycle**
-
-- **LiveData**
-
-- **ViewModel**
-
-  
+- Data Binding
+- Lifecycle
+- LiveData
+- ViewModel
 
 **DI**
 
-- **Koin**
-
-  
+- Koin
 
 **Asynchronous Processing**
 
-- **Coroutine**
+- Coroutine
 
 
 
