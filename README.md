@@ -14,7 +14,7 @@
 
 ## Architecture - MVVM
 
-![mvvm](https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/mvvm.jpg)
+![mvvm](https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/mvvm.png)
 
 <br>
 
