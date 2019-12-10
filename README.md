@@ -14,7 +14,7 @@
 
 ## Architecture - MVVM
 
-![mvvm](/Users/hongbeom/Workspace/Android_Data/FindTaek/Demo&Picture/mvvm.jpg)
+![mvvm](https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/mvvm.jpg)
 
 <br>
 
@@ -63,4 +63,3 @@
 
 
 ### License
-
