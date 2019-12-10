@@ -48,8 +48,9 @@
 
 ## Thanks
 
-- 
+- Vipulasri - https://github.com/vipulasri/Timeline-View
 
 <br>
 
 ## LICENSE
+
