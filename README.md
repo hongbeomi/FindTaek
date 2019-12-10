@@ -64,7 +64,7 @@
 
 ## 🙌 Thanks
 
-- Vipulasri - https://github.com/vipulasri/Timeline-View
+- [**TimeLineView**] Vipulasri - https://github.com/vipulasri/Timeline-View
 
 <br>
 
