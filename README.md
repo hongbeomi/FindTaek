@@ -2,7 +2,7 @@
 
 > MVVM 패턴을 적용한 Toy Project 입니다.
 
-// image
+![image](https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/image.png)
 
 <br>
 
