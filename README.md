@@ -26,35 +26,39 @@
 
 - **Room**
 
-**<br>**
+  
 
 **Network**
 
 - **Okhttp3**
+
 - **Retrofit2**
 
-**<br>**
+  
 
 **Jetpack AAC**
 
 - **Data Binding**
+
 - **Lifecycle**
+
 - **LiveData**
+
 - **ViewModel**
 
-**<br>**
+  
 
 **DI**
 
 - **Koin**
 
-**<br>**
+  
 
 **Asynchronous Processing**
 
 - **Coroutine**
 
-<br>
+
 
 ## Thanks
 
