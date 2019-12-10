@@ -47,7 +47,7 @@
 
 **Jetpack AAC**
 
-- Data Binding
+- Data Binding (부분 적용)
 - Lifecycle
 - LiveData
 - ViewModel
