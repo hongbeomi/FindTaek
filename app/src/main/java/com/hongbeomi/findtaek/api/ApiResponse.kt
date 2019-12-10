@@ -1,6 +1,9 @@
 package com.hongbeomi.findtaek.api
 
-import okhttp3.ResponseBody
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.hongbeomi.findtaek.models.network.ErrorResponse
+import retrofit2.HttpException
 import retrofit2.Response
 
 /**
@@ -15,9 +18,15 @@ sealed class ApiResponse<out T> {
 
     sealed class Failure<out T> {
         class Error<out T>(response: Response<out T>) : ApiResponse<T>() {
-            val errorBody: ResponseBody? = response.errorBody()
+            private val errorResponse =
+                Gson().fromJson<ErrorResponse>(
+                    response.errorBody()?.string(), ErrorResponse::class.java
+                )
+
+            val errorMessage: String = errorResponse.message
+
             val code: Int = response.code()
-            override fun toString(): String = "[Api.Failure $code]: $errorBody"
+            override fun toString(): String = "[Api.Failure $code]: $errorMessage"
         }
 
         class Exception<out T>(exception: Throwable) : ApiResponse<T>() {
@@ -27,6 +36,7 @@ sealed class ApiResponse<out T> {
     }
 
     companion object {
+
         fun <T> error(ex: Throwable) = Failure.Exception<T>(ex)
 
         fun <T> of(f: () -> Response<T>): ApiResponse<T> = try {

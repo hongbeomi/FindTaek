@@ -4,11 +4,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -17,18 +15,16 @@ import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.compose.BaseActivity
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.util.RecyclerItemTouchHelper
-import com.hongbeomi.findtaek.view.AddActivity.EXTRA_CIRCULAR_REVEAL_X
-import com.hongbeomi.findtaek.view.AddActivity.EXTRA_CIRCULAR_REVEAL_Y
-import com.hongbeomi.findtaek.view.TimeLineActivity.CARRIER_ID
-import com.hongbeomi.findtaek.view.TimeLineActivity.TRACK_ID
+import com.hongbeomi.findtaek.extension.sendFabButtonLocation
+import com.hongbeomi.findtaek.extension.swipeRefreshRecyclerView
+import com.hongbeomi.findtaek.util.TimeLineActivity.CARRIER_ID
+import com.hongbeomi.findtaek.util.TimeLineActivity.TRACK_ID
 import com.hongbeomi.findtaek.view.adapter.MainAdapter
-import com.hongbeomi.findtaek.view.ui.add.AddActivity
 import com.hongbeomi.findtaek.view.ui.timeline.TimeLineActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -68,25 +64,11 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
             ItemTouchHelper(it).attachToRecyclerView(recyclerView)
         }
 
+        swipeRefreshRecyclerView(swipeView, mainViewModel)
+
         fab.setOnClickListener { v ->
             sendFabButtonLocation(v)
         }
-    }
-
-    private fun sendFabButtonLocation(view: View) {
-        val options: ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-            this, view, "transition"
-        )
-        val revealX = (view.x + view.width / 2).toInt()
-        val revealY = (view.y + view.height / 2).toInt()
-
-        startActivity(
-            intentFor<AddActivity>(
-                EXTRA_CIRCULAR_REVEAL_X to revealX,
-                EXTRA_CIRCULAR_REVEAL_Y to revealY
-            ),
-            options.toBundle()
-        )
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {
@@ -101,31 +83,6 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
             }
             .setActionTextColor(Color.YELLOW)
             .show()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.actionbar_menu, menu)
-        val rotation: Animation = AnimationUtils.loadAnimation(applicationContext, R.anim.rotation)
-
-        (menu?.findItem(R.id.menuRefresh)?.actionView as ImageView)
-            .apply {
-                setImageResource(R.drawable.ic_autorenew_white_48dp)
-                scaleX = 0.5f
-                scaleY = 0.5f
-                setOnClickListener {
-                    it.startAnimation(rotation)
-                    mainViewModel.update()
-                    linearLayoutManager.scrollToPosition(0)
-                }
-            }
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.menuDeleteAll) {
-            mainViewModel.deleteAll()
-        }
-        return super.onOptionsItemSelected(item)
     }
 
 }

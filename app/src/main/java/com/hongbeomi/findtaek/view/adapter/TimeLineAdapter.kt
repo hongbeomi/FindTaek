@@ -55,9 +55,7 @@ class TimeLineAdapter :
     inner class TimeLineViewHolder(itemView: View, viewType: Int) :
         RecyclerView.ViewHolder(itemView), LayoutContainer {
 
-        init {
-            timeline.initLine(viewType)
-        }
+        init { timeline.initLine(viewType) }
 
         override val containerView: View?
             get() = itemView

@@ -1,7 +1,6 @@
 package com.hongbeomi.findtaek.view.ui.main
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.compose.BaseViewModel
@@ -43,19 +42,17 @@ constructor(private val repository: DeliveryRepository) :
 
     fun update() {
         viewModelScope.launch(Dispatchers.IO) {
-            if (isItemsValues()) {
-                showToast("리스트가 비었습니다.")
-            } else {
+            try {
                 for (item in items.value!!) {
                     repository.update(item) {
                         showToast(it)
                     }
                 }
+            } catch (e: NullPointerException) {
+                showToast("리스트가 비었습니다!")
             }
         }
     }
-
-    fun isItemsValues() = items.value.isNullOrEmpty()
 
 }
 

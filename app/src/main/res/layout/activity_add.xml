@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
             name="vm"
             type="com.hongbeomi.findtaek.view.ui.add.AddViewModel" />
+        <import type="com.hongbeomi.findtaek.view.ui.add.AddActivity"/>
+        <import type="com.hongbeomi.findtaek.util.CarrierIdListKt"/>
     </data>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -46,8 +48,8 @@
             android:layout_height="wrap_content"
             android:text="@string/carrier_name_item" />
 
+<!--        android:text="@={vm.carrierName}"-->
         <EditText
-            android:text="@={vm.carrierName}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"/>
@@ -73,18 +75,25 @@
             android:inputType="number"/>
     </LinearLayout>
 
-
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:layout_width="wrap_content"
+        android:id="@+id/dropdown_layout"
         android:layout_height="wrap_content"
-        android:hint="힌트!">
+        android:hint="택배사">
 
-        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-            android:layout_width="match_parent"
+        <com.google.android.material.textview.MaterialAutoCompleteTextView
+            android:text="@={vm.carrierName}"
+            android:id="@+id/exposed_dropdown"
+            android:inputType="text"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:cursorVisible="false"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"/>
-
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:onClick="@{() -> vm.insertDelivery()}"

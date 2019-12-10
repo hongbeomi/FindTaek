@@ -15,11 +15,7 @@ object VectorDrawableUtils {
     }
 
     fun getDrawable(context: Context, drawableResId: Int, colorFilter: Int): Drawable {
-        val drawable =
-            getDrawable(
-                context,
-                drawableResId
-            )
+        val drawable = getDrawable(context, drawableResId)
         drawable!!.setColorFilter(colorFilter, PorterDuff.Mode.SRC_IN)
         return drawable
     }

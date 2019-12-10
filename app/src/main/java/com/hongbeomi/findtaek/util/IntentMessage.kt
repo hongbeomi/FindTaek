@@ -1,10 +1,7 @@
-package com.hongbeomi.findtaek.view
+package com.hongbeomi.findtaek.util
 
 /**
  * @author hongbeomi
- */
-/**
- * 테스트 시 중복 데이터로 수행된다면 각 Activity 안으로 배치하기
  */
 object AddActivity {
     const val EXTRA_CIRCULAR_REVEAL_X = "EXTRA_CIRCULAR_REVEAL_X"

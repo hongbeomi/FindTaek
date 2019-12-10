@@ -12,7 +12,9 @@ class FinishActivityEvent : SingleLiveEvent<Boolean>() {
     fun observe(owner: LifecycleOwner, observer: (Boolean) -> Unit) =
         super.observe(owner, Observer {
             it.run {
-                observer(it)
+                if (it) {
+                    observer(it)
+                }
             }
         })
 

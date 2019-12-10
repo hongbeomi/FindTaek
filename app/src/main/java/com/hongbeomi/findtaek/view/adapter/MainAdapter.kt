@@ -33,6 +33,7 @@ class MainAdapter(val ItemClick: (Delivery) -> Unit) :
     }
 
     inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), LayoutContainer {
+
         override val containerView: View?
             get() = itemView
         val viewForeground: LinearLayout = view_foreground

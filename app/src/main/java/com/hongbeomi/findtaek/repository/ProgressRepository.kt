@@ -7,6 +7,7 @@ import com.hongbeomi.findtaek.api.client.ProgressClient
 import com.hongbeomi.findtaek.api.message
 import com.hongbeomi.findtaek.models.entity.Progress
 import com.hongbeomi.findtaek.models.network.ProgressResponse
+import com.hongbeomi.findtaek.repository.util.Mapper
 
 /**
  * @author hongbeomi
@@ -17,9 +18,7 @@ constructor(private val client: ProgressClient) :
 
     private var progressList: ArrayList<Progress> = arrayListOf()
 
-    fun getProgressList(
-        carrierId: String,
-        trackId: String, error : (String) -> Unit
+    fun loadProgressList(carrierId: String, trackId: String, error : (String) -> Unit
     ): MutableLiveData<ArrayList<Progress>> {
         val mutableLiveProgress = MutableLiveData<ArrayList<Progress>>()
         client.fetchDelivery(carrierId, trackId) { response ->

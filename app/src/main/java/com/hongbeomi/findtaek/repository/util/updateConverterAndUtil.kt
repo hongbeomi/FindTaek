@@ -1,4 +1,4 @@
-package com.hongbeomi.findtaek.repository
+package com.hongbeomi.findtaek.repository.util
 
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.models.network.DeliveryResponse
@@ -23,4 +23,4 @@ fun updateConverter(delivery: Delivery, data: DeliveryResponse) =
 fun decideToTime(toTimeData: String) =
     if (isNullOrEmptyToTime(toTimeData)) "정보없음" else toTimeData.substring(0, 10)
 
-fun isNullOrEmptyToTime(toTimeData: String) = toTimeData.isNullOrEmpty()
+fun isNullOrEmptyToTime(toTimeData: String?) = toTimeData.isNullOrEmpty()
