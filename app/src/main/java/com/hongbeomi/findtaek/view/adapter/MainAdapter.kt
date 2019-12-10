@@ -28,11 +28,11 @@ class MainAdapter(val ItemClick: (Delivery) -> Unit) :
 
     override fun getItemCount() = items.size
 
-    override fun onBindViewHolder(mainViewHolder: MainViewHolder, position: Int) {
+    override fun onBindViewHolder(mainViewHolder: MainViewHolder, position: Int) =
         mainViewHolder.bind(items[position])
-    }
 
-    inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), LayoutContainer {
+    inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        LayoutContainer {
 
         override val containerView: View?
             get() = itemView
@@ -41,9 +41,9 @@ class MainAdapter(val ItemClick: (Delivery) -> Unit) :
             delivery.apply {
                 carrier_name.text = carrierName
                 from_name.text = fromName
-                from_time.text = fromTime
+//                from_time.text = fromTime
                 to_name.text = toName
-                to_time.text = toTime
+//                to_time.text = toTime
                 status_textView.text = status
                 product_name.text = productName
                 product_num.text = trackId

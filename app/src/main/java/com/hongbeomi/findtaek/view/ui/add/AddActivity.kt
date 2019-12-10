@@ -2,13 +2,11 @@ package com.hongbeomi.findtaek.view.ui.add
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.databinding.ActivityAddBinding
 import com.hongbeomi.findtaek.extension.revealActivity
@@ -36,7 +34,6 @@ class AddActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add)
 
         binding.vm = getViewModel()
-
         binding.vm.also {
             it?.observeToast(this) { message -> toast(message) }
             it?.observeFinish(this) { finish() }
@@ -75,7 +72,8 @@ class AddActivity : AppCompatActivity() {
         val adapter: ArrayAdapter<String> = ArrayAdapter(
             this,
             R.layout.dropdown_menu_popup_item,
-            carrierIdMap.keys.toTypedArray())
+            carrierIdMap.keys.toTypedArray()
+        )
 
         exposed_dropdown.apply {
             setAdapter(adapter)

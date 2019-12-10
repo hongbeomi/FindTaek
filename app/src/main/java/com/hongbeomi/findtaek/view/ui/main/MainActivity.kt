@@ -66,9 +66,7 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
 
         swipeRefreshRecyclerView(swipeView, mainViewModel)
 
-        fab.setOnClickListener { v ->
-            sendFabButtonLocation(v)
-        }
+        fab.setOnClickListener { v -> sendFabButtonLocation(v) }
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {

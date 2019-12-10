@@ -18,25 +18,26 @@ constructor(private val client: ProgressClient) :
 
     private var progressList: ArrayList<Progress> = arrayListOf()
 
-    fun loadProgressList(carrierId: String, trackId: String, error : (String) -> Unit
+    fun loadProgressList(
+        carrierId: String, trackId: String, error: (String) -> Unit
     ): MutableLiveData<ArrayList<Progress>> {
         val mutableLiveProgress = MutableLiveData<ArrayList<Progress>>()
         client.fetchDelivery(carrierId, trackId) { response ->
-                when (response) {
-                    is ApiResponse.Success -> {
-                        progressList.clear()
-                        response.data?.progresses?.forEach {
-                            progressList.add(mapFrom(it))
-                        }
-                        mutableLiveProgress.postValue(progressList)
+            when (response) {
+                is ApiResponse.Success -> {
+                    progressList.clear()
+                    response.data?.progresses?.forEach {
+                        progressList.add(mapFrom(it))
                     }
-                    is ApiResponse.Failure.Error -> error(response.message())
-                    is ApiResponse.Failure.Exception -> {
-                        error("통신 상태를 확인해주세요!")
-                        Log.e("Progress ERROR", response.message())
-                    }
+                    mutableLiveProgress.postValue(progressList)
+                }
+                is ApiResponse.Failure.Error -> error(response.message())
+                is ApiResponse.Failure.Exception -> {
+                    error("통신 상태를 확인해주세요!")
+                    Log.e("Progress ERROR", response.message())
                 }
             }
+        }
         return mutableLiveProgress
     }
 

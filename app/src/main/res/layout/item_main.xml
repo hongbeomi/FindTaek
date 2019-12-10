@@ -70,14 +70,14 @@
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
-        <TextView
-            tools:text="발송시간"
-            android:id="@+id/from_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
+<!--        <TextView-->
+<!--            tools:text="발송시간"-->
+<!--            android:id="@+id/from_time"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="20sp" />-->
 
         <TextView
             tools:text="수신자"
@@ -87,14 +87,14 @@
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
-        <TextView
-            tools:text="수신완료시간"
-            android:id="@+id/to_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
+<!--        <TextView-->
+<!--            tools:text="수신완료시간"-->
+<!--            android:id="@+id/to_time"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="20sp" />-->
 
         <TextView
             tools:text="배송상황"

@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 /**
  * @author hongbeomi
  */
-open class SingleLiveEvent<T>: MutableLiveData<T>() {
+open class SingleLiveEvent<T> : MutableLiveData<T>() {
 
     private val pending = AtomicBoolean(false)
 

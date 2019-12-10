@@ -12,13 +12,14 @@ class FindTaekApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        startKoin(this, listOf(
-            networkModule,
-            roomModule,
-            repositoryModule,
-            viewModelModule
-        ))
-
+        startKoin(
+            this, listOf(
+                networkModule,
+                roomModule,
+                repositoryModule,
+                viewModelModule
+            )
+        )
     }
 
 }

@@ -87,10 +87,6 @@ constructor(
         deliveryDao.deleteItem(delivery)
     }
 
-    fun deleteAll() {
-        deliveryDao.deleteAll()
-    }
-
     private fun convertCarrierId(inputCarrierName: String) =
         carrierIdMap[inputCarrierName].toString()
 

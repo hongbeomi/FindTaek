@@ -22,7 +22,4 @@ interface DeliveryDao {
     @Delete
     fun deleteItem(delivery: Delivery)
 
-    @Query("DELETE FROM delivery")
-    fun deleteAll()
-
 }

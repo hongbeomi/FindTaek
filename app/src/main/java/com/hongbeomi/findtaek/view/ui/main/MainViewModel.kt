@@ -28,12 +28,6 @@ constructor(private val repository: DeliveryRepository) :
         }
     }
 
-    fun deleteAll() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteAll()
-        }
-    }
-
     fun rollback(delivery: Delivery) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.rollback(delivery)
