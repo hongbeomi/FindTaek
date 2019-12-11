@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.databinding.ActivityAddBinding
+import com.hongbeomi.findtaek.extension.isMinVersionLOLLIPOP
 import com.hongbeomi.findtaek.extension.revealActivity
 import com.hongbeomi.findtaek.extension.unRevealActivity
 import com.hongbeomi.findtaek.util.carrierIdMap
@@ -22,6 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 /**
  * @author hongbeomi
  */
+
 class AddActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddBinding
@@ -46,7 +48,7 @@ class AddActivity : AppCompatActivity() {
     }
 
     private fun receiveIntentFromMainActivity(savedInstanceState: Bundle?) {
-        if (savedInstanceState == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
+        if (savedInstanceState == null && isMinVersionLOLLIPOP() &&
             intent.hasExtra(EXTRA_CIRCULAR_REVEAL_X) &&
             intent.hasExtra(EXTRA_CIRCULAR_REVEAL_Y)
         ) {

@@ -1,4 +1,4 @@
-package com.hongbeomi.findtaek.util
+package com.hongbeomi.findtaek.util.event
 
 import android.util.Log
 import androidx.annotation.MainThread
@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 /**
  * @author hongbeomi
  */
+
 open class SingleLiveEvent<T> : MutableLiveData<T>() {
 
     private val pending = AtomicBoolean(false)

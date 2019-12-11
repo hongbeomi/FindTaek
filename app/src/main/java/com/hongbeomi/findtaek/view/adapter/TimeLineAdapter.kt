@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.item_timeline.*
 /**
  * @author hongbeomi
  */
+
 class TimeLineAdapter :
     RecyclerView.Adapter<TimeLineAdapter.TimeLineViewHolder>() {
 

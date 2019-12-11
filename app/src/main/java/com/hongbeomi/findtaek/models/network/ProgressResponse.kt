@@ -4,6 +4,10 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.hongbeomi.findtaek.models.NetworkResponseModel
 
+/**
+ * @author hongbeomi
+ */
+
 class ProgressResponse(
     @SerializedName("progresses")
     @Expose

@@ -22,10 +22,11 @@ import com.hongbeomi.findtaek.view.ui.main.MainViewModel
 /**
  * @author hongbeomi
  */
-fun isVersion() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+
+fun isMinVersionLOLLIPOP() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
 
 fun AppCompatActivity.revealActivity(layout: LinearLayout, x: Int, y: Int) {
-    if (isVersion()) {
+    if (isMinVersionLOLLIPOP()) {
         val finalRadius: Float = (max(addActivityLayout.width, addActivityLayout.height) * 1.1).toFloat()
         val circularReveal = ViewAnimationUtils.createCircularReveal(
             layout, x, y, 0F, finalRadius
@@ -41,9 +42,8 @@ fun AppCompatActivity.revealActivity(layout: LinearLayout, x: Int, y: Int) {
     }
 }
 
-
 fun AppCompatActivity.unRevealActivity(layout: LinearLayout, x: Int, y: Int) {
-    if (isVersion()) {
+    if (isMinVersionLOLLIPOP()) {
         val finalRadius: Float = (max(addActivityLayout.width, addActivityLayout.height) * 1.1).toFloat()
         val circularReveal = ViewAnimationUtils.createCircularReveal(
             layout, x, y, finalRadius, 0F
@@ -63,7 +63,6 @@ fun AppCompatActivity.unRevealActivity(layout: LinearLayout, x: Int, y: Int) {
     }
 }
 
-
 fun AppCompatActivity.sendFabButtonLocation(view: View) {
     val options: ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
         this , view, "transition"
@@ -80,10 +79,7 @@ fun AppCompatActivity.sendFabButtonLocation(view: View) {
     )
 }
 
-fun swipeRefreshRecyclerView(
-    swipeRefreshLayout: SwipeRefreshLayout,
-    mainViewModel: MainViewModel
-) {
+fun swipeRefreshRecyclerView(swipeRefreshLayout: SwipeRefreshLayout, mainViewModel: MainViewModel) {
     swipeRefreshLayout.apply {
         setColorSchemeResources(R.color.holo_blue_light)
         setOnRefreshListener {

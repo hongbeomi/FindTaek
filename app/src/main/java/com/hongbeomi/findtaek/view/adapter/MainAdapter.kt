@@ -13,10 +13,11 @@ import kotlinx.android.synthetic.main.item_main.*
 /**
  * @author hongbeomi
  */
+
 class MainAdapter(val ItemClick: (Delivery) -> Unit) :
     RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
-    private var items: List<Delivery> = listOf()
+    private var itemList: List<Delivery> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, i: Int) = MainViewHolder(
         LayoutInflater.from(parent.context).inflate(
@@ -26,10 +27,10 @@ class MainAdapter(val ItemClick: (Delivery) -> Unit) :
         )
     )
 
-    override fun getItemCount() = items.size
+    override fun getItemCount() = itemList.size
 
     override fun onBindViewHolder(mainViewHolder: MainViewHolder, position: Int) =
-        mainViewHolder.bind(items[position])
+        mainViewHolder.bind(itemList[position])
 
     inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         LayoutContainer {
@@ -41,9 +42,7 @@ class MainAdapter(val ItemClick: (Delivery) -> Unit) :
             delivery.apply {
                 carrier_name.text = carrierName
                 from_name.text = fromName
-//                from_time.text = fromTime
                 to_name.text = toName
-//                to_time.text = toTime
                 status_textView.text = status
                 product_name.text = productName
                 product_num.text = trackId
@@ -55,11 +54,11 @@ class MainAdapter(val ItemClick: (Delivery) -> Unit) :
 
     }
 
-    fun setItems(items: List<Delivery>) {
-        this.items = items
+    fun setItemList(itemList: List<Delivery>) {
+        this.itemList = itemList
         notifyDataSetChanged()
     }
 
-    fun getDeliveryPosition(position: Int): Delivery = items[position]
+    fun getItemPosition(position: Int): Delivery = itemList[position]
 
 }

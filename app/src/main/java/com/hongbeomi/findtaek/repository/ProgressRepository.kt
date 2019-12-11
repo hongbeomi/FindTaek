@@ -12,6 +12,7 @@ import com.hongbeomi.findtaek.repository.util.Mapper
 /**
  * @author hongbeomi
  */
+
 class ProgressRepository
 constructor(private val client: ProgressClient) :
     Mapper<ProgressResponse.Progresses, Progress> {

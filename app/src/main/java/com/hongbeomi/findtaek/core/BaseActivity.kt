@@ -1,4 +1,4 @@
-package com.hongbeomi.findtaek.compose
+package com.hongbeomi.findtaek.core
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * @author hongbeomi
  */
+
 @SuppressLint("Registered")
 open class BaseActivity : AppCompatActivity() {
 

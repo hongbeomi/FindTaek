@@ -2,17 +2,12 @@ package com.hongbeomi.findtaek.view.ui.main
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.hongbeomi.findtaek.R
-import com.hongbeomi.findtaek.compose.BaseActivity
+import com.hongbeomi.findtaek.core.BaseActivity
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.util.RecyclerItemTouchHelper
 import com.hongbeomi.findtaek.extension.sendFabButtonLocation
@@ -32,6 +27,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 /**
  * @author hongbeomi
  */
+
 class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
 
     private lateinit var adapter: MainAdapter
@@ -56,7 +52,7 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
         mainViewModel.also {
             it.observeToast(this) { message -> toast(message) }
             it.getAll().observe(this, Observer<List<Delivery>> { deliveryList ->
-                adapter.setItems(deliveryList)
+                adapter.setItemList(deliveryList)
             })
         }
 
@@ -70,14 +66,12 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {
-        val deletedItem = adapter.getDeliveryPosition(position)
-        mainViewModel.delete(adapter.getDeliveryPosition(position))
+        val deletedItem = adapter.getItemPosition(position)
+        mainViewModel.delete(deletedItem)
 
         Snackbar.make(coordinator, "물품 삭제완료", Snackbar.LENGTH_LONG)
             .setAction("취소") {
-                GlobalScope.launch(Dispatchers.IO) {
                     mainViewModel.rollback(deletedItem)
-                }
             }
             .setActionTextColor(Color.YELLOW)
             .show()

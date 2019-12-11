@@ -8,6 +8,7 @@ import com.hongbeomi.findtaek.models.entity.Delivery
 /**
  * @author hongbeomi
  */
+
 @Database(entities = [Delivery::class], version = DATABASE_DELIVERY_VERSION, exportSchema = false)
 abstract class DeliveryDatabase : RoomDatabase() {
 

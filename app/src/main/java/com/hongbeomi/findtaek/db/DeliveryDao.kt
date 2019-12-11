@@ -7,6 +7,7 @@ import com.hongbeomi.findtaek.models.entity.Delivery
 /**
  * @author hongbeomi
  */
+
 @Dao
 interface DeliveryDao {
 

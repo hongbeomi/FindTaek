@@ -3,7 +3,7 @@ package com.hongbeomi.findtaek.view.ui.timeline
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.hongbeomi.findtaek.R
-import com.hongbeomi.findtaek.compose.BaseActivity
+import com.hongbeomi.findtaek.core.BaseActivity
 import com.hongbeomi.findtaek.models.entity.Progress
 import com.hongbeomi.findtaek.util.TimeLineActivity.CARRIER_ID
 import com.hongbeomi.findtaek.util.TimeLineActivity.TRACK_ID

@@ -36,7 +36,6 @@ sealed class ApiResponse<out T> {
     }
 
     companion object {
-
         fun <T> error(ex: Throwable) = Failure.Exception<T>(ex)
 
         fun <T> of(f: () -> Response<T>): ApiResponse<T> = try {

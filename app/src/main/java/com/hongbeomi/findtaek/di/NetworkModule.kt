@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit
 /**
  * @author hongbeomi
  */
+
 private const val CONNECT_TIMEOUT = 15L
 private const val WRITE_TIMEOUT = 15L
 private const val READ_TIMEOUT = 15L

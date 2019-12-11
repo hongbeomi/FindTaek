@@ -1,4 +1,4 @@
-package com.hongbeomi.findtaek.compose
+package com.hongbeomi.findtaek.core
 
 
 import androidx.lifecycle.*

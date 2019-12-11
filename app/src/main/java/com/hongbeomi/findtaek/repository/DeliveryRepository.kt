@@ -1,18 +1,12 @@
 package com.hongbeomi.findtaek.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.hongbeomi.findtaek.api.ApiResponse
 import com.hongbeomi.findtaek.api.client.DeliveryClient
-import com.hongbeomi.findtaek.api.message
 import com.hongbeomi.findtaek.db.DeliveryDao
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.models.network.DeliveryResponse
-import com.hongbeomi.findtaek.repository.util.Mapper
-import com.hongbeomi.findtaek.repository.util.decideToTime
-import com.hongbeomi.findtaek.repository.util.updateConverter
-import com.hongbeomi.findtaek.util.carrierIdMap
-import com.hongbeomi.findtaek.view.ui.add.AddViewModel
+import com.hongbeomi.findtaek.repository.util.*
 
 /**
  * @author hongbeomi
@@ -42,53 +36,32 @@ constructor(
                     deliveryDao.insertItem(mapFrom(response.data!!))
                     finishActivity()
                 }
-                is ApiResponse.Failure.Error -> {
-                    error(response.errorMessage)
-                }
-                is ApiResponse.Failure.Exception -> {
-                    error("통신 상태를 확인해주세요!")
-                    Log.e("INSERT ERROR", response.message())
-                }
+                is ApiResponse.Failure.Error -> { error(response.errorMessage) }
+                is ApiResponse.Failure.Exception -> { error("통신 상태를 확인해주세요!") }
             }
         }
     }
-
-    private fun finishActivity() {
-        AddViewModel.finishEvent.value = true
-    }
-
-    fun getAll(): LiveData<List<Delivery>> = deliveryDao.getAll()
 
     fun update(delivery: Delivery, error: (String) -> Unit) {
         deliveryClient.fetchDelivery(delivery.carrierId, delivery.trackId) { response ->
             when (response) {
                 is ApiResponse.Success -> {
                     response.data?.let { data ->
-                        deliveryDao.updateItem(updateConverter(delivery, data))
+                        deliveryDao.updateItem(convertNewDeliveryItem(delivery, data))
                     }
                     error("업데이트 완료!")
                 }
-                is ApiResponse.Failure.Error -> {
-                    error(response.errorMessage)
-                }
-                is ApiResponse.Failure.Exception -> {
-                    error("통신 상태를 확인해주세요!")
-                    println(response.message())
-                }
+                is ApiResponse.Failure.Error -> { error(response.errorMessage) }
+                is ApiResponse.Failure.Exception -> { error("통신 상태를 확인해주세요!") }
             }
         }
     }
 
-    fun rollback(delivery: Delivery) {
-        deliveryDao.insertItem(delivery)
-    }
+    fun rollback(delivery: Delivery) = deliveryDao.insertItem(delivery)
 
-    fun delete(delivery: Delivery) {
-        deliveryDao.deleteItem(delivery)
-    }
+    fun delete(delivery: Delivery) = deliveryDao.deleteItem(delivery)
 
-    private fun convertCarrierId(inputCarrierName: String) =
-        carrierIdMap[inputCarrierName].toString()
+    fun getAll(): LiveData<List<Delivery>> = deliveryDao.getAll()
 
     override fun mapFrom(by: DeliveryResponse) =
         Delivery(
@@ -96,7 +69,7 @@ constructor(
             fromName = by.from.name,
             fromTime = by.from.time,
             toName = by.to.name,
-            toTime = decideToTime(by.to.time),
+            toTime = decideByTime(by.to.time),
             carrierId = inputCarrierId,
             carrierName = by.carrier.name,
             productName = inputProductName,

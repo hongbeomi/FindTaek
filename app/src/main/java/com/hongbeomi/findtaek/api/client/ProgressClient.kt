@@ -8,6 +8,7 @@ import com.hongbeomi.findtaek.models.network.ProgressResponse
 /**
  * @author hongbeomi
  */
+
 class ProgressClient (private val service: DeliveryService) {
 
     fun fetchDelivery(carrierId: String, trackId: String,

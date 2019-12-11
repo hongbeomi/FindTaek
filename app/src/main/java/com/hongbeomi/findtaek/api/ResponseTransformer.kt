@@ -6,6 +6,7 @@ import retrofit2.Callback
 /**
  * @author hongbeomi
  */
+
 fun <T> Call<T>.async(onResult: (response: ApiResponse<T>) -> Unit) {
     enqueue(object : Callback<T> {
         override fun onResponse(call: Call<T>, response: retrofit2.Response<T>) {
