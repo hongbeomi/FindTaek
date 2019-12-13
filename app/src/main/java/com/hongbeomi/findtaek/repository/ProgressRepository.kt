@@ -3,10 +3,12 @@ package com.hongbeomi.findtaek.repository
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.hongbeomi.findtaek.api.ApiResponse
-import com.hongbeomi.findtaek.api.client.ProgressClient
+import com.hongbeomi.findtaek.api.client.DeliveryClient
+//import com.hongbeomi.findtaek.api.client.ProgressClient
 import com.hongbeomi.findtaek.api.message
 import com.hongbeomi.findtaek.models.entity.Progress
-import com.hongbeomi.findtaek.models.network.ProgressResponse
+import com.hongbeomi.findtaek.models.network.DeliveryResponse
+//import com.hongbeomi.findtaek.models.network.ProgressResponse
 import com.hongbeomi.findtaek.repository.util.Mapper
 
 /**
@@ -14,8 +16,8 @@ import com.hongbeomi.findtaek.repository.util.Mapper
  */
 
 class ProgressRepository
-constructor(private val client: ProgressClient) :
-    Mapper<ProgressResponse.Progresses, Progress> {
+constructor(private val client: DeliveryClient) :
+    Mapper<DeliveryResponse.Progresses, Progress> {
 
     private var progressList: ArrayList<Progress> = arrayListOf()
 
@@ -42,7 +44,7 @@ constructor(private val client: ProgressClient) :
         return mutableLiveProgress
     }
 
-    override fun mapFrom(by: ProgressResponse.Progresses): Progress =
+    override fun mapFrom(by: DeliveryResponse.Progresses): Progress =
         Progress(
             by.time,
             by.status.text,

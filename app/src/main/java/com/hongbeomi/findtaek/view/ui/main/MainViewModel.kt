@@ -36,16 +36,16 @@ constructor(private val repository: DeliveryRepository) :
     }
 
     fun update() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                for (item in liveItemList.value!!) {
+        try {
+            for (item in liveItemList.value!!) {
+                viewModelScope.launch(Dispatchers.IO) {
                     repository.update(item) {
                         showToast(it)
                     }
                 }
-            } catch (e: NullPointerException) {
-                showToast("리스트가 비었습니다!")
             }
+        } catch (e: NullPointerException) {
+            showToast("리스트가 비었습니다!")
         }
     }
 

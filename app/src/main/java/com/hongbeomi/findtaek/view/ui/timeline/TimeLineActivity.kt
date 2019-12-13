@@ -29,8 +29,10 @@ class TimeLineActivity: BaseActivity() {
 
         initRecyclerView(timeline_recyclerView, adapter)
 
-        timeLineViewModel.getProgress(intent.getStringExtra(CARRIER_ID), intent.getStringExtra(TRACK_ID))
-            .observe(this, Observer<ArrayList<Progress>> { progress ->
+        timeLineViewModel.getProgress(
+            intent.getStringExtra(CARRIER_ID),
+            intent.getStringExtra(TRACK_ID)
+        ).observe(this, Observer<ArrayList<Progress>> { progress ->
             adapter.setItems(progress)
         })
     }

@@ -1,14 +1,13 @@
 package com.hongbeomi.findtaek.api
 
 import com.google.gson.Gson
-import com.google.gson.JsonObject
 import com.hongbeomi.findtaek.models.network.ErrorResponse
-import retrofit2.HttpException
 import retrofit2.Response
 
 /**
  * @author hongbeomi
  */
+
 sealed class ApiResponse<out T> {
 
     class Success<T>(response: Response<T>) : ApiResponse<T>() {
@@ -24,7 +23,6 @@ sealed class ApiResponse<out T> {
                 )
 
             val errorMessage: String = errorResponse.message
-
             val code: Int = response.code()
             override fun toString(): String = "[Api.Failure $code]: $errorMessage"
         }

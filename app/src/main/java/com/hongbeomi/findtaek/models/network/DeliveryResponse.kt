@@ -17,9 +17,9 @@ class DeliveryResponse(
     @SerializedName("state")
     @Expose
     val state: State,
-//    @SerializedName("progresses")
-//    @Expose
-//    val progresses: ArrayList<Progresses>,
+    @SerializedName("progresses")
+    @Expose
+    val progresses: ArrayList<Progresses>,
     @SerializedName("carrier")
     @Expose
     val carrier: Carrier
@@ -46,32 +46,32 @@ class DeliveryResponse(
         val text: String
     )
 
-//    data class Progresses(
-//        @SerializedName("location")
-//        @Expose
-//        val location: Location,
-//        @SerializedName("status")
-//        @Expose
-//        val status: Status,
-//        @SerializedName("time")
-//        @Expose
-//        val time: String,
-//        @SerializedName("description")
-//        @Expose
-//        val description: String
-//    ) {
-//        data class Location(
-//            @SerializedName("name")
-//            @Expose
-//            val name: String
-//        )
-//
-//        data class Status(
-//            @SerializedName("text")
-//            @Expose
-//            val text: String
-//        )
-//    }
+    data class Progresses(
+        @SerializedName("location")
+        @Expose
+        val location: Location,
+        @SerializedName("status")
+        @Expose
+        val status: Status,
+        @SerializedName("time")
+        @Expose
+        val time: String,
+        @SerializedName("description")
+        @Expose
+        val description: String
+    ) {
+        data class Location(
+            @SerializedName("name")
+            @Expose
+            val name: String
+        )
+
+        data class Status(
+            @SerializedName("text")
+            @Expose
+            val text: String
+        )
+    }
 
     data class Carrier(
         @SerializedName("name")

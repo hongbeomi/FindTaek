@@ -4,7 +4,6 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.*
 import com.hongbeomi.findtaek.util.event.FinishActivityEvent
 import com.hongbeomi.findtaek.core.BaseViewModel
-import com.hongbeomi.findtaek.exception.InvalidInputException
 import com.hongbeomi.findtaek.repository.DeliveryRepository
 import kotlinx.coroutines.*
 
@@ -31,11 +30,10 @@ constructor(private val repository: DeliveryRepository) : BaseViewModel() {
         if (productName.get()?.trim().isNullOrBlank() or
             carrierName.get()?.trim().isNullOrBlank() or
             trackId.get()?.trim().isNullOrBlank()
-        ) throw InvalidInputException("비어 있는 항목이 있습니다!")
+        ) throw Exception("비어 있는 항목이 있습니다!")
     }
 
-    // TODO 디자인 받으면 코드 구현 필요
-    fun insertDeliveryBtnClick() {
+    fun insertButtonClick() {
         try {
             checkInputNullOrBlank()
             viewModelScope.launch(Dispatchers.IO) {
@@ -43,7 +41,7 @@ constructor(private val repository: DeliveryRepository) : BaseViewModel() {
                     showToast(it)
                 }
             }
-        } catch (e: InvalidInputException) {
+        } catch (e: Exception) {
             showToast(e.message.toString())
         }
     }

@@ -85,7 +85,6 @@ fun swipeRefreshRecyclerView(swipeRefreshLayout: SwipeRefreshLayout, mainViewMod
         setOnRefreshListener {
             mainViewModel.update()
             swipeRefreshLayout.isRefreshing = false
-
         }
     }
 }

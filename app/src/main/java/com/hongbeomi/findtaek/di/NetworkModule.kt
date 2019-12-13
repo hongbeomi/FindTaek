@@ -2,7 +2,6 @@ package com.hongbeomi.findtaek.di
 
 import com.google.gson.GsonBuilder
 import com.hongbeomi.findtaek.api.client.DeliveryClient
-import com.hongbeomi.findtaek.api.client.ProgressClient
 import com.hongbeomi.findtaek.api.service.DeliveryService
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -51,6 +50,6 @@ val networkModule = module {
     single { get<Retrofit>().create(DeliveryService::class.java) }
 
     single { DeliveryClient(get()) }
-    single { ProgressClient(get()) }
+//    single { ProgressClient(get()) }
 
 }

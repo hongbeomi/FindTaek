@@ -8,11 +8,14 @@ import com.hongbeomi.findtaek.models.network.DeliveryResponse
 /**
  * @author hongbeomi
  */
+
 class DeliveryClient(private val service: DeliveryService) {
 
-    fun fetchDelivery(carrierId: String, trackId: String,
-                       onResult: (response: ApiResponse<DeliveryResponse>) -> Unit) {
-        service.getList(carrierId, trackId).async(onResult)
+    fun fetchDelivery(
+        carrierId: String, trackId: String,
+        onResult: (response: ApiResponse<DeliveryResponse>) -> Unit
+    ) {
+        service.getData(carrierId, trackId).async(onResult)
     }
 
 }

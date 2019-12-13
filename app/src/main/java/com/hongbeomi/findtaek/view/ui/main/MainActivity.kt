@@ -67,6 +67,7 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {
         val deletedItem = adapter.getItemPosition(position)
+
         mainViewModel.delete(deletedItem)
 
         Snackbar.make(coordinator, "물품 삭제완료", Snackbar.LENGTH_LONG)
