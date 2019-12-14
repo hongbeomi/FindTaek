@@ -58,7 +58,7 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/button_fab"
         android:src="@drawable/ic_add_white_48dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

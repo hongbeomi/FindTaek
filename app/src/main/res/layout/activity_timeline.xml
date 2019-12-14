@@ -34,7 +34,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/timeline_recyclerView"
+        android:id="@+id/recycler_timeline"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"

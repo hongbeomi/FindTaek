@@ -42,6 +42,13 @@ class TimeLineAdapter :
         holder.bind(items[position])
     }
 
+    override fun getItemCount() = items.size
+
+    fun setItems(items: ArrayList<ProgressesModel>){
+        this.items = items
+        notifyDataSetChanged()
+    }
+
     private fun setMarker(holder: TimeLineViewHolder) {
         holder.timeline.marker =
             VectorDrawableUtils.getDrawable(
@@ -50,8 +57,6 @@ class TimeLineAdapter :
                 ContextCompat.getColor(holder.itemView.context, android.R.color.holo_blue_light)
             )
     }
-
-    override fun getItemCount() = items.size
 
     inner class TimeLineViewHolder(itemView: View, viewType: Int) :
         RecyclerView.ViewHolder(itemView), LayoutContainer {
@@ -68,11 +73,6 @@ class TimeLineAdapter :
                 progress_status_text.text = statusText
             }
         }
-    }
-
-    fun setItems(items: ArrayList<ProgressesModel>){
-        this.items = items
-        notifyDataSetChanged()
     }
 
 }

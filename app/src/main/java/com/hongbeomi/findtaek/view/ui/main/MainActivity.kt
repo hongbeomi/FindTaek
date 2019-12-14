@@ -12,8 +12,8 @@ import com.hongbeomi.findtaek.extension.sendFabButtonCoordinates
 import com.hongbeomi.findtaek.extension.swipeRefreshRecyclerView
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.util.RecyclerItemTouchHelper
-import com.hongbeomi.findtaek.util.TimeLineActivity.CARRIER_ID
-import com.hongbeomi.findtaek.util.TimeLineActivity.TRACK_ID
+import com.hongbeomi.findtaek.util.TimeLineActivity.EXTRA_CARRIER_ID
+import com.hongbeomi.findtaek.util.TimeLineActivity.EXTRA_TRACK_ID
 import com.hongbeomi.findtaek.view.adapter.MainAdapter
 import com.hongbeomi.findtaek.view.ui.timeline.TimeLineActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,8 +39,8 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
 
         adapter = MainAdapter { delivery ->
             startActivity<TimeLineActivity>(
-                TRACK_ID to delivery.trackId,
-                CARRIER_ID to delivery.carrierId
+                EXTRA_TRACK_ID to delivery.trackId,
+                EXTRA_CARRIER_ID to delivery.carrierId
             )
         }
 
@@ -59,7 +59,7 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
 
         swipeRefreshRecyclerView(swipeView, mainViewModel)
 
-        fab.setOnClickListener { v -> sendFabButtonCoordinates(v) }
+        button_fab.setOnClickListener { v -> sendFabButtonCoordinates(v) }
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {

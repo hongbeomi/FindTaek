@@ -23,17 +23,31 @@ constructor(
     private lateinit var inputTrackId: String
     var id: Long? = null
 
+    override fun mapFrom(by: DeliveryResponse) =
+        Delivery(
+            id = id,
+            fromName = by.from.name,
+            fromTime = by.from.time,
+            toName = by.to.name,
+            toTime = determineTime(by.to.time),
+            carrierId = inputCarrierId,
+            carrierName = by.carrier.name,
+            productName = inputProductName,
+            trackId = inputTrackId,
+            status = by.state.text
+        )
+
     fun insert(
-        product_name: String, carrier_name: String, track_Id: String,
+        productName: String, carrierName: String, trackId: String,
         error: (String) -> Unit
     ) {
-        deliveryClient.fetchDelivery(convertCarrierId(carrier_name), track_Id) { response ->
+        deliveryClient.fetchDelivery(convertCarrierId(carrierName), trackId) { response ->
             when (response) {
                 is ApiResponse.Success -> {
                     response.data?.let {
-                        inputProductName = product_name
-                        inputTrackId = track_Id
-                        inputCarrierId = convertCarrierId(carrier_name)
+                        inputProductName = productName
+                        inputTrackId = trackId
+                        inputCarrierId = convertCarrierId(carrierName)
                         deliveryDao.insertItem(mapFrom(response.data))
                         finishActivity()
                     }
@@ -72,19 +86,5 @@ constructor(
     fun delete(delivery: Delivery) = deliveryDao.deleteItem(delivery)
 
     fun getAll(): LiveData<List<Delivery>> = deliveryDao.getAll()
-
-    override fun mapFrom(by: DeliveryResponse) =
-        Delivery(
-            id = id,
-            fromName = by.from.name,
-            fromTime = by.from.time,
-            toName = by.to.name,
-            toTime = determineTime(by.to.time),
-            carrierId = inputCarrierId,
-            carrierName = by.carrier.name,
-            productName = inputProductName,
-            trackId = inputTrackId,
-            status = by.state.text
-        )
 
 }

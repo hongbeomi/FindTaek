@@ -26,12 +26,6 @@ constructor(private val repository: DeliveryRepository) : BaseViewModel() {
         addSource(trackId) { value = isValid() }
     }
 
-    private fun isValid(): Boolean {
-        return productName.value?.length!! > 0 &&
-                carrierName.value?.length!! > 0 &&
-                trackId.value?.length!! > 0
-    }
-
     fun observeFinish(lifecycleOwner: LifecycleOwner, observer: (Boolean) -> Unit) {
         finishEvent.observe(lifecycleOwner, observer)
     }
@@ -42,6 +36,12 @@ constructor(private val repository: DeliveryRepository) : BaseViewModel() {
                 showToast(it)
             }
         }
+    }
+
+    private fun isValid(): Boolean {
+        return productName.value?.length!! > 0 &&
+                carrierName.value?.length!! > 0 &&
+                trackId.value?.length!! > 0
     }
 
 }

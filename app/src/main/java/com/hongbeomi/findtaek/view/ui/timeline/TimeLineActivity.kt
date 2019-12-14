@@ -5,8 +5,8 @@ import androidx.lifecycle.Observer
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.core.BaseActivity
 import com.hongbeomi.findtaek.models.entity.ProgressesModel
-import com.hongbeomi.findtaek.util.TimeLineActivity.CARRIER_ID
-import com.hongbeomi.findtaek.util.TimeLineActivity.TRACK_ID
+import com.hongbeomi.findtaek.util.TimeLineActivity.EXTRA_CARRIER_ID
+import com.hongbeomi.findtaek.util.TimeLineActivity.EXTRA_TRACK_ID
 import com.hongbeomi.findtaek.view.adapter.TimeLineAdapter
 import kotlinx.android.synthetic.main.activity_timeline.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -27,11 +27,11 @@ class TimeLineActivity: BaseActivity() {
         timeLineViewModel = getViewModel()
         adapter = TimeLineAdapter()
 
-        initRecyclerView(timeline_recyclerView, adapter)
+        initRecyclerView(recycler_timeline, adapter)
 
         timeLineViewModel.getProgress(
-            intent.getStringExtra(CARRIER_ID),
-            intent.getStringExtra(TRACK_ID)
+            intent.getStringExtra(EXTRA_CARRIER_ID),
+            intent.getStringExtra(EXTRA_TRACK_ID)
         ).observe(this, Observer<ArrayList<ProgressesModel>> { progress ->
             adapter.setItems(progress)
         })

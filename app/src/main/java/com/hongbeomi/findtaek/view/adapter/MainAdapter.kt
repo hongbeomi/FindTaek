@@ -32,6 +32,14 @@ class MainAdapter(val ItemClick: (Delivery) -> Unit) :
     override fun onBindViewHolder(mainViewHolder: MainViewHolder, position: Int) =
         mainViewHolder.bind(itemList[position])
 
+
+    fun setItemList(itemList: List<Delivery>) {
+        this.itemList = itemList
+        notifyDataSetChanged()
+    }
+
+    fun getItemPosition(position: Int): Delivery = itemList[position]
+
     inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         LayoutContainer {
 
@@ -45,7 +53,7 @@ class MainAdapter(val ItemClick: (Delivery) -> Unit) :
                 to_name.text = toName
                 status_textView.text = status
                 product_name.text = productName
-                product_num.text = trackId
+                track_num.text = trackId
             }
             containerView?.setOnClickListener {
                 ItemClick(delivery)
@@ -53,12 +61,5 @@ class MainAdapter(val ItemClick: (Delivery) -> Unit) :
         }
 
     }
-
-    fun setItemList(itemList: List<Delivery>) {
-        this.itemList = itemList
-        notifyDataSetChanged()
-    }
-
-    fun getItemPosition(position: Int): Delivery = itemList[position]
 
 }

@@ -46,6 +46,11 @@ class AddActivity : AppCompatActivity() {
         setDropDownMenu()
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        unRevealActivity(addActivityLayout, revealX, revealY)
+    }
+
     private fun receiveIntentFromMainActivity(savedInstanceState: Bundle?) {
         if (savedInstanceState == null && isMinVersionLOLLIPOP() &&
             intent.hasExtra(EXTRA_CIRCULAR_REVEAL_X) &&
@@ -82,11 +87,6 @@ class AddActivity : AppCompatActivity() {
                 exposed_dropdown.isEnabled = false
             }
         }
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        unRevealActivity(addActivityLayout, revealX, revealY)
     }
 
 }

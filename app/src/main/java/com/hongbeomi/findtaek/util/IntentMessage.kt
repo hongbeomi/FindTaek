@@ -10,6 +10,6 @@ object AddActivity {
 }
 
 object TimeLineActivity {
-    const val TRACK_ID = "TRACK_ID"
-    const val CARRIER_ID = "CARRIER_ID"
+    const val EXTRA_TRACK_ID = "EXTRA_TRACK_ID"
+    const val EXTRA_CARRIER_ID = "EXTRA_CARRIER_ID"
 }
