@@ -11,6 +11,7 @@ import com.hongbeomi.findtaek.repository.util.*
 /**
  * @author hongbeomi
  */
+
 class DeliveryRepository
 constructor(
     private val deliveryDao: DeliveryDao,
@@ -23,21 +24,26 @@ constructor(
     var id: Long? = null
 
     fun insert(
-        product_name: String,
-        carrier_name: String,
-        track_Id: String,
-        error: (String) -> Unit) {
+        product_name: String, carrier_name: String, track_Id: String,
+        error: (String) -> Unit
+    ) {
         deliveryClient.fetchDelivery(convertCarrierId(carrier_name), track_Id) { response ->
             when (response) {
                 is ApiResponse.Success -> {
-                    inputProductName = product_name
-                    inputTrackId = track_Id
-                    inputCarrierId = convertCarrierId(carrier_name)
-                    deliveryDao.insertItem(mapFrom(response.data!!))
-                    finishActivity()
+                    response.data?.let {
+                        inputProductName = product_name
+                        inputTrackId = track_Id
+                        inputCarrierId = convertCarrierId(carrier_name)
+                        deliveryDao.insertItem(mapFrom(response.data))
+                        finishActivity()
+                    }
                 }
-                is ApiResponse.Failure.Error -> { error(response.errorMessage) }
-                is ApiResponse.Failure.Exception -> { error("통신 상태를 확인해주세요!") }
+                is ApiResponse.Failure.Error -> {
+                    error(response.errorMessage)
+                }
+                is ApiResponse.Failure.Exception -> {
+                    error("통신 상태를 확인해주세요!")
+                }
             }
         }
     }
@@ -47,12 +53,16 @@ constructor(
             when (response) {
                 is ApiResponse.Success -> {
                     response.data?.let { data ->
-                        deliveryDao.updateItem(convertNewDeliveryItem(delivery, data))
+                        deliveryDao.updateItem(makeUpdateDelivery(delivery, data))
                     }
                     error("업데이트 완료!")
                 }
-                is ApiResponse.Failure.Error -> { error(response.errorMessage) }
-                is ApiResponse.Failure.Exception -> { error("통신 상태를 확인해주세요!") }
+                is ApiResponse.Failure.Error -> {
+                    error(response.errorMessage)
+                }
+                is ApiResponse.Failure.Exception -> {
+                    error("통신 상태를 확인해주세요!")
+                }
             }
         }
     }
@@ -69,7 +79,7 @@ constructor(
             fromName = by.from.name,
             fromTime = by.from.time,
             toName = by.to.name,
-            toTime = decideByTime(by.to.time),
+            toTime = determineTime(by.to.time),
             carrierId = inputCarrierId,
             carrierName = by.carrier.name,
             productName = inputProductName,

@@ -8,7 +8,7 @@ import com.hongbeomi.findtaek.models.NetworkResponseModel
  * @author hongbeomi
  */
 
-class DeliveryResponse(
+data class DeliveryResponse(
     @SerializedName("from")
     val from: From,
     @SerializedName("to")

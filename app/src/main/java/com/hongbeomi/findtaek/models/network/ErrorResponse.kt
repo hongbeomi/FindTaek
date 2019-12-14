@@ -8,6 +8,8 @@ import com.hongbeomi.findtaek.models.NetworkResponseModel
  */
 
 class ErrorResponse(
+
     @SerializedName("message")
     val message: String
+
 ): NetworkResponseModel

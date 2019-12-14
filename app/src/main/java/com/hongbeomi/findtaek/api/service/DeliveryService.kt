@@ -19,11 +19,4 @@ interface DeliveryService {
         @Path("track_id") trackId: String
     ): Call<DeliveryResponse>
 
-//    @Headers("Content-Type: application/json")
-//    @GET("carriers/{carrier_id}/tracks/{track_id}")
-//    fun getProgressList(
-//        @Path("carrier_id") carrierId: String,
-//        @Path("track_id") trackId: String
-//    ): Call<ProgressResponse>
-
 }

@@ -4,7 +4,7 @@ package com.hongbeomi.findtaek.util
  * @author hongbeomi
  */
 
-val carrierIdMap = mapOf(
+val carrierIdMap = hashMapOf(
     "DHL" to "de.dhl",
     "천일택배" to "kr.chunilps",
     "CJ대한통운" to "kr.cjlogistics",

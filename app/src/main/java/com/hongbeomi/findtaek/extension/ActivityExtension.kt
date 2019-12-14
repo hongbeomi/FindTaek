@@ -27,7 +27,8 @@ fun isMinVersionLOLLIPOP() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIP
 
 fun AppCompatActivity.revealActivity(layout: LinearLayout, x: Int, y: Int) {
     if (isMinVersionLOLLIPOP()) {
-        val finalRadius: Float = (max(addActivityLayout.width, addActivityLayout.height) * 1.1).toFloat()
+        val finalRadius: Float =
+            (max(addActivityLayout.width, addActivityLayout.height) * 1.1).toFloat()
         val circularReveal = ViewAnimationUtils.createCircularReveal(
             layout, x, y, 0F, finalRadius
         )
@@ -44,7 +45,8 @@ fun AppCompatActivity.revealActivity(layout: LinearLayout, x: Int, y: Int) {
 
 fun AppCompatActivity.unRevealActivity(layout: LinearLayout, x: Int, y: Int) {
     if (isMinVersionLOLLIPOP()) {
-        val finalRadius: Float = (max(addActivityLayout.width, addActivityLayout.height) * 1.1).toFloat()
+        val finalRadius: Float =
+            (max(addActivityLayout.width, addActivityLayout.height) * 1.1).toFloat()
         val circularReveal = ViewAnimationUtils.createCircularReveal(
             layout, x, y, finalRadius, 0F
         )
@@ -63,9 +65,9 @@ fun AppCompatActivity.unRevealActivity(layout: LinearLayout, x: Int, y: Int) {
     }
 }
 
-fun AppCompatActivity.sendFabButtonLocation(view: View) {
+fun AppCompatActivity.sendFabButtonCoordinates(view: View) {
     val options: ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-        this , view, "transition"
+        this, view, "transition"
     )
     val revealX = (view.x + view.width / 2).toInt()
     val revealY = (view.y + view.height / 2).toInt()

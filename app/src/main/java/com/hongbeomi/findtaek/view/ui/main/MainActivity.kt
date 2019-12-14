@@ -8,18 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.core.BaseActivity
+import com.hongbeomi.findtaek.extension.sendFabButtonCoordinates
+import com.hongbeomi.findtaek.extension.swipeRefreshRecyclerView
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.util.RecyclerItemTouchHelper
-import com.hongbeomi.findtaek.extension.sendFabButtonLocation
-import com.hongbeomi.findtaek.extension.swipeRefreshRecyclerView
 import com.hongbeomi.findtaek.util.TimeLineActivity.CARRIER_ID
 import com.hongbeomi.findtaek.util.TimeLineActivity.TRACK_ID
 import com.hongbeomi.findtaek.view.adapter.MainAdapter
 import com.hongbeomi.findtaek.view.ui.timeline.TimeLineActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -62,7 +59,7 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
 
         swipeRefreshRecyclerView(swipeView, mainViewModel)
 
-        fab.setOnClickListener { v -> sendFabButtonLocation(v) }
+        fab.setOnClickListener { v -> sendFabButtonCoordinates(v) }
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {

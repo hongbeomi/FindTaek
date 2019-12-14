@@ -9,13 +9,13 @@ import com.hongbeomi.findtaek.view.ui.add.AddViewModel
  * @author hongbeomi
  */
 
-fun convertNewDeliveryItem(delivery: Delivery, data: DeliveryResponse) =
+fun makeUpdateDelivery(delivery: Delivery, data: DeliveryResponse) =
     Delivery(
         id = delivery.id,
         fromName = data.from.name,
         fromTime = data.from.time,
         toName = data.to.name,
-        toTime = decideByTime(data.to.time),
+        toTime = determineTime(data.to.time),
         carrierId = delivery.carrierId,
         carrierName = data.carrier.name,
         productName = delivery.productName,
@@ -23,7 +23,9 @@ fun convertNewDeliveryItem(delivery: Delivery, data: DeliveryResponse) =
         status = data.state.text
     )
 
-fun decideByTime(toTimeData: String) =
+// TODO 빈 데이터가 오는지 null로 오는지 확인 필요
+
+fun determineTime(toTimeData: String) =
     if (isNullOrEmptyByTime(toTimeData)) "정보없음" else toTimeData.substring(0, 10)
 
 fun isNullOrEmptyByTime(toTimeData: String?) = toTimeData.isNullOrEmpty()

@@ -1,6 +1,5 @@
 package com.hongbeomi.findtaek.view.ui.add
 
-import androidx.databinding.ObservableField
 import androidx.lifecycle.*
 import com.hongbeomi.findtaek.util.event.FinishActivityEvent
 import com.hongbeomi.findtaek.core.BaseViewModel
@@ -18,31 +17,30 @@ constructor(private val repository: DeliveryRepository) : BaseViewModel() {
         val finishEvent = FinishActivityEvent()
     }
 
-    val productName = ObservableField<String>()
-    val carrierName = ObservableField<String>()
-    val trackId = ObservableField<String>()
+    val productName = MutableLiveData<String>("")
+    val carrierName = MutableLiveData<String>("")
+    val trackId = MutableLiveData<String>("")
+    var valid = MediatorLiveData<Boolean>().apply {
+        addSource(productName) { value = isValid() }
+        addSource(carrierName) { value = isValid() }
+        addSource(trackId) { value = isValid() }
+    }
+
+    private fun isValid(): Boolean {
+        return productName.value?.length!! > 0 &&
+                carrierName.value?.length!! > 0 &&
+                trackId.value?.length!! > 0
+    }
 
     fun observeFinish(lifecycleOwner: LifecycleOwner, observer: (Boolean) -> Unit) {
         finishEvent.observe(lifecycleOwner, observer)
     }
 
-    private fun checkInputNullOrBlank() {
-        if (productName.get()?.trim().isNullOrBlank() or
-            carrierName.get()?.trim().isNullOrBlank() or
-            trackId.get()?.trim().isNullOrBlank()
-        ) throw Exception("비어 있는 항목이 있습니다!")
-    }
-
     fun insertButtonClick() {
-        try {
-            checkInputNullOrBlank()
-            viewModelScope.launch(Dispatchers.IO) {
-                repository.insert("맥북", "CJ대한통운", "348621627991") {
-                    showToast(it)
-                }
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insert("맥북", "CJ대한통운", "348621627991") {
+                showToast(it)
             }
-        } catch (e: Exception) {
-            showToast(e.message.toString())
         }
     }
 
