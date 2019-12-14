@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.vipulasri.timelineview.TimelineView
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.util.VectorDrawableUtils
-import com.hongbeomi.findtaek.models.entity.Progress
+import com.hongbeomi.findtaek.models.entity.ProgressesModel
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_timeline.*
 
@@ -20,7 +20,7 @@ class TimeLineAdapter :
     RecyclerView.Adapter<TimeLineAdapter.TimeLineViewHolder>() {
 
     private lateinit var layoutInflater: LayoutInflater
-    private var items: ArrayList<Progress> = arrayListOf()
+    private var items: ArrayList<ProgressesModel> = arrayListOf()
 
     override fun getItemViewType(position: Int): Int {
         return TimelineView.getTimeLineViewType(position, itemCount)
@@ -60,8 +60,8 @@ class TimeLineAdapter :
 
         override val containerView: View?
             get() = itemView
-        fun bind(progress: Progress) {
-            progress.apply {
+        fun bind(progressesModel: ProgressesModel) {
+            progressesModel.apply {
                 progress_time.text = time
                 progress_description.text = description
                 progress_location_name.text = locationName
@@ -70,7 +70,7 @@ class TimeLineAdapter :
         }
     }
 
-    fun setItems(items: ArrayList<Progress>){
+    fun setItems(items: ArrayList<ProgressesModel>){
         this.items = items
         notifyDataSetChanged()
     }

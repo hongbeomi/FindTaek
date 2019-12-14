@@ -38,7 +38,7 @@ constructor(private val repository: DeliveryRepository) : BaseViewModel() {
 
     fun insertButtonClick() {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insert("맥북", "CJ대한통운", "348621627991") {
+            repository.insert("맥", "CJ대한통운", "344054765256") {
                 showToast(it)
             }
         }

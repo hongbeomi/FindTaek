@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.core.BaseActivity
-import com.hongbeomi.findtaek.models.entity.Progress
+import com.hongbeomi.findtaek.models.entity.ProgressesModel
 import com.hongbeomi.findtaek.util.TimeLineActivity.CARRIER_ID
 import com.hongbeomi.findtaek.util.TimeLineActivity.TRACK_ID
 import com.hongbeomi.findtaek.view.adapter.TimeLineAdapter
@@ -32,7 +32,7 @@ class TimeLineActivity: BaseActivity() {
         timeLineViewModel.getProgress(
             intent.getStringExtra(CARRIER_ID),
             intent.getStringExtra(TRACK_ID)
-        ).observe(this, Observer<ArrayList<Progress>> { progress ->
+        ).observe(this, Observer<ArrayList<ProgressesModel>> { progress ->
             adapter.setItems(progress)
         })
     }
