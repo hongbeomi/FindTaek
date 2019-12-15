@@ -69,7 +69,7 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
 
         Snackbar.make(coordinator, "물품 삭제완료", Snackbar.LENGTH_LONG)
             .setAction("취소") {
-                    mainViewModel.rollback(deletedItem)
+                mainViewModel.rollback(deletedItem)
             }
             .setActionTextColor(Color.YELLOW)
             .show()
