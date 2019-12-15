@@ -71,6 +71,7 @@
 ## 🙌 Thanks
 
 - [**TimeLineView**] Vipulasri - https://github.com/vipulasri/Timeline-View
+- [**MVVM Reference**] skydoves - https://github.com/skydoves
 
 <br>
 
