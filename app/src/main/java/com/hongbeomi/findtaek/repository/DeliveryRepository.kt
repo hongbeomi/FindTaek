@@ -8,6 +8,7 @@ import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.models.network.DeliveryResponse
 import com.hongbeomi.findtaek.repository.util.*
 import com.hongbeomi.findtaek.util.event.hideLoading
+import com.hongbeomi.findtaek.view.ui.add.AddViewModel.Companion.finishEvent
 
 /**
  * @author hongbeomi
@@ -51,7 +52,7 @@ constructor(
                         inputCarrierId = carrierId
                         deliveryDao.insertItem(mapFrom(response.data))
                         hideLoading()
-                        finishActivity()
+                        finishEvent.value = true
                     }
                 }
                 is ApiResponse.Failure.Error -> {

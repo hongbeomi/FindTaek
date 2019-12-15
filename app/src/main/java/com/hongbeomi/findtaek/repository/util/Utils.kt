@@ -3,7 +3,6 @@ package com.hongbeomi.findtaek.repository.util
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.models.network.DeliveryResponse
 import com.hongbeomi.findtaek.util.carrierIdMap
-import com.hongbeomi.findtaek.view.ui.add.AddViewModel
 
 /**
  * @author hongbeomi
@@ -29,5 +28,3 @@ fun determineTime(toTimeData: String) =
 fun isNullOrEmptyByTime(toTimeData: String?) = toTimeData.isNullOrEmpty()
 
 fun convertCarrierId(inputCarrierName: String) = carrierIdMap[inputCarrierName]
-
-fun finishActivity() { AddViewModel.finishEvent.value = true }
