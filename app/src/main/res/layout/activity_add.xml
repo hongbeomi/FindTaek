@@ -1,89 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="vm"
             type="com.hongbeomi.findtaek.view.ui.add.AddViewModel" />
-        <import type="com.hongbeomi.findtaek.view.ui.add.AddActivity"/>
-        <import type="com.hongbeomi.findtaek.util.CarrierIdMapKt"/>
+        <variable
+            name="event"
+            type="com.hongbeomi.findtaek.util.event.LoadingEventKt"/>
+        <import type="com.hongbeomi.findtaek.view.ui.add.AddActivity" />
+        <import type="com.hongbeomi.findtaek.util.CarrierIdMapKt" />
+
     </data>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@android:color/background_light"
-    android:id="@+id/addActivityLayout"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="120dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/addActivityLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/background_light"
+            android:orientation="vertical">
 
-        <TextView
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="120dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/product_name_item" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@={vm.productName}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="120dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/product_num_item" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:inputType="number"
+                    android:text="@={vm.trackId}" />
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dropdown_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="택배사">
+
+                <com.google.android.material.textview.MaterialAutoCompleteTextView
+                    android:id="@+id/exposed_dropdown"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:ellipsize="end"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:text="@={vm.carrierName}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="120dp"
+                android:enabled="@{vm.valid}"
+                android:onClick="@{() -> vm.insertButtonClick()}"
+                android:text="@string/add_delivery_item" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:visibility="@{event.isLoading}"
+            android:indeterminateTint="@android:color/holo_red_dark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/product_name_item" />
-
-        <EditText
-            android:text="@={vm.productName}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="120dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/product_num_item"/>
-
-        <EditText
-            android:text="@={vm.trackId}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:inputType="number"/>
-    </LinearLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_gravity="center_horizontal"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:layout_width="wrap_content"
-        android:id="@+id/dropdown_layout"
-        android:layout_height="wrap_content"
-        android:hint="택배사">
-
-        <com.google.android.material.textview.MaterialAutoCompleteTextView
-            android:text="@={vm.carrierName}"
-            android:id="@+id/exposed_dropdown"
-            android:inputType="text"
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:cursorVisible="false"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <Button
-        android:onClick="@{() -> vm.insertButtonClick()}"
-        android:enabled="@{vm.valid}"
-        android:layout_marginTop="120dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_delivery_item" />
-
-</LinearLayout>
+            android:layout_gravity="center"/>
+    </FrameLayout>
 </layout>

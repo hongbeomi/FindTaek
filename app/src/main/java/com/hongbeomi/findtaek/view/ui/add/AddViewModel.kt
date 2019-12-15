@@ -1,9 +1,12 @@
 package com.hongbeomi.findtaek.view.ui.add
 
+import android.view.View
 import androidx.lifecycle.*
 import com.hongbeomi.findtaek.util.event.FinishActivityEvent
 import com.hongbeomi.findtaek.core.BaseViewModel
 import com.hongbeomi.findtaek.repository.DeliveryRepository
+import com.hongbeomi.findtaek.util.event.showLoading
+//import com.hongbeomi.findtaek.util.event.showLoading
 import kotlinx.coroutines.*
 
 /**
@@ -26,23 +29,22 @@ constructor(private val repository: DeliveryRepository) : BaseViewModel() {
         addSource(trackId) { value = isValid() }
     }
 
-    fun observeFinish(lifecycleOwner: LifecycleOwner, observer: (Boolean) -> Unit) {
+    fun observeFinish(lifecycleOwner: LifecycleOwner, observer: (Boolean) -> Unit) =
         finishEvent.observe(lifecycleOwner, observer)
-    }
 
     fun insertButtonClick() {
+        showLoading()
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insert("맥", "CJ대한통운", "344054765256") {
+            repository.insert("맥", carrierName.value.toString(), "344054765256") {
                 showToast(it)
             }
         }
     }
 
-    private fun isValid(): Boolean {
-        return productName.value?.length!! > 0 &&
+    private fun isValid() =
+        productName.value?.length!! > 0 &&
                 carrierName.value?.length!! > 0 &&
                 trackId.value?.length!! > 0
-    }
 
 }
 

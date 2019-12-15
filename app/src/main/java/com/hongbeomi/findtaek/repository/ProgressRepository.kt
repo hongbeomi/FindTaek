@@ -24,7 +24,7 @@ constructor(private val client: DeliveryClient) :
     fun loadProgressList(
         carrierId: String, trackId: String, error: (String) -> Unit
     ): MutableLiveData<ArrayList<ProgressesModel>> {
-        val mutableLiveProgressesModelList = MutableLiveData<ArrayList<ProgressesModel>>()
+        val mutableLiveData = MutableLiveData<ArrayList<ProgressesModel>>()
         client.fetchDelivery(carrierId, trackId) { response ->
             when (response) {
                 is ApiResponse.Success -> {
@@ -32,16 +32,16 @@ constructor(private val client: DeliveryClient) :
                     response.data?.progresses?.forEach {
                         progressesModelList.add(mapFrom(it))
                     }
-                    mutableLiveProgressesModelList.postValue(progressesModelList)
+                    mutableLiveData.postValue(progressesModelList)
                 }
-                is ApiResponse.Failure.Error -> error(response.message())
+                is ApiResponse.Failure.Error -> error(response.errorMessage)
                 is ApiResponse.Failure.Exception -> {
                     error("통신 상태를 확인해주세요!")
-                    Log.e("Progress ERROR", response.message())
+                    Log.e("LoadProgress ERROR", response.message())
                 }
             }
         }
-        return mutableLiveProgressesModelList
+        return mutableLiveData
     }
 
     override fun mapFrom(by: DeliveryResponse.Progresses): ProgressesModel =

@@ -7,6 +7,7 @@ import com.hongbeomi.findtaek.db.DeliveryDao
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.models.network.DeliveryResponse
 import com.hongbeomi.findtaek.repository.util.*
+import com.hongbeomi.findtaek.util.event.hideLoading
 
 /**
  * @author hongbeomi
@@ -38,24 +39,31 @@ constructor(
         )
 
     fun insert(
-        productName: String, carrierName: String, trackId: String,
-        error: (String) -> Unit
+        productName: String, carrierName: String, trackId: String, error: (String) -> Unit
     ) {
-        deliveryClient.fetchDelivery(convertCarrierId(carrierName), trackId) { response ->
+        val carrierId = convertCarrierId(carrierName).toString()
+        deliveryClient.fetchDelivery(carrierId, trackId) { response ->
             when (response) {
                 is ApiResponse.Success -> {
                     response.data?.let {
                         inputProductName = productName
                         inputTrackId = trackId
-                        inputCarrierId = convertCarrierId(carrierName)
+                        inputCarrierId = carrierId
                         deliveryDao.insertItem(mapFrom(response.data))
+                        hideLoading()
                         finishActivity()
                     }
                 }
                 is ApiResponse.Failure.Error -> {
-                    error(response.errorMessage)
+                    hideLoading()
+                    when (carrierId) {
+                        "null" -> error(response.errorMessage)
+                        else -> error("해당 번호에 대한 배송정보가 없습니다.")
+                    }
                 }
+
                 is ApiResponse.Failure.Exception -> {
+                    hideLoading()
                     error("통신 상태를 확인해주세요!")
                 }
             }
@@ -71,12 +79,8 @@ constructor(
                     }
                     error("업데이트 완료!")
                 }
-                is ApiResponse.Failure.Error -> {
-                    error(response.errorMessage)
-                }
-                is ApiResponse.Failure.Exception -> {
-                    error("통신 상태를 확인해주세요!")
-                }
+                is ApiResponse.Failure.Error -> error(response.errorMessage)
+                is ApiResponse.Failure.Exception -> error("통신 상태를 확인해주세요!")
             }
         }
     }
