@@ -34,13 +34,12 @@ class RecyclerItemTouchHelper(
         c: Canvas, recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float,
         actionState: Int, isCurrentlyActive: Boolean
-    ) =
-        (viewHolder as MainAdapter.MainViewHolder).viewForeground.let {
-            ItemTouchHelper.Callback.getDefaultUIUtil().onDrawOver(
-                c, recyclerView, it, dX, dY,
-                actionState, isCurrentlyActive
-            )
-        }
+    ) = (viewHolder as MainAdapter.MainViewHolder).viewForeground.let {
+        ItemTouchHelper.Callback.getDefaultUIUtil().onDrawOver(
+            c, recyclerView, it, dX, dY,
+            actionState, isCurrentlyActive
+        )
+    }
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) =
         (viewHolder as MainAdapter.MainViewHolder).viewForeground.let {
@@ -61,9 +60,9 @@ class RecyclerItemTouchHelper(
         )
     }
 
-    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) =
         listener.onSwiped(viewHolder, direction, viewHolder.adapterPosition)
-    }
+
 
     interface RecyclerItemTouchHelperListener {
         fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int)
