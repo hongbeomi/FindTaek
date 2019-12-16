@@ -9,7 +9,7 @@
             type="com.hongbeomi.findtaek.view.ui.add.AddViewModel" />
         <variable
             name="event"
-            type="com.hongbeomi.findtaek.util.event.LoadingEventKt"/>
+            type="com.hongbeomi.findtaek.view.util.event.LoadingEventKt"/>
         <import type="com.hongbeomi.findtaek.view.ui.add.AddActivity" />
 
     </data>

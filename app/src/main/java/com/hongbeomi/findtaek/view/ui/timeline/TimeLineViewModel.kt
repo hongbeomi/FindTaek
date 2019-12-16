@@ -17,7 +17,7 @@ class TimeLineViewModel(private val repository: ProgressRepository) : BaseViewMo
 
     fun getAllTimeLine(carrierId: String, trackId: String): MutableLiveData<ArrayList<TimeLine>> {
         viewModelScope.launch {
-            mutableLiveProgress = repository.loadProgressList(carrierId, trackId) {
+            mutableLiveProgress = repository.loadProgressData(carrierId, trackId) {
                 showToast(it)
             }
         }

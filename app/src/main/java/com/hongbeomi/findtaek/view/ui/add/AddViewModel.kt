@@ -1,10 +1,10 @@
 package com.hongbeomi.findtaek.view.ui.add
 
 import androidx.lifecycle.*
-import com.hongbeomi.findtaek.util.event.FinishActivityEvent
+import com.hongbeomi.findtaek.view.util.event.FinishActivityEvent
 import com.hongbeomi.findtaek.core.BaseViewModel
 import com.hongbeomi.findtaek.repository.DeliveryRepository
-import com.hongbeomi.findtaek.util.event.showLoading
+import com.hongbeomi.findtaek.view.util.event.showLoading
 import kotlinx.coroutines.*
 
 /**

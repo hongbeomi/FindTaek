@@ -1,4 +1,4 @@
-package com.hongbeomi.findtaek.util
+package com.hongbeomi.findtaek.view.util
 
 /**
  * @author hongbeomi

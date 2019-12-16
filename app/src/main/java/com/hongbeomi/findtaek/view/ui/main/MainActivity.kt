@@ -11,9 +11,9 @@ import com.hongbeomi.findtaek.core.BaseActivity
 import com.hongbeomi.findtaek.extension.sendFabButtonCoordinates
 import com.hongbeomi.findtaek.extension.swipeRefreshRecyclerView
 import com.hongbeomi.findtaek.models.entity.Delivery
-import com.hongbeomi.findtaek.util.RecyclerItemTouchHelper
-import com.hongbeomi.findtaek.util.TimeLineActivity.EXTRA_CARRIER_ID
-import com.hongbeomi.findtaek.util.TimeLineActivity.EXTRA_TRACK_ID
+import com.hongbeomi.findtaek.view.util.RecyclerItemTouchHelper
+import com.hongbeomi.findtaek.view.util.TimeLineActivity.EXTRA_CARRIER_ID
+import com.hongbeomi.findtaek.view.util.TimeLineActivity.EXTRA_TRACK_ID
 import com.hongbeomi.findtaek.view.adapter.MainAdapter
 import com.hongbeomi.findtaek.view.ui.timeline.TimeLineActivity
 import kotlinx.android.synthetic.main.activity_main.*

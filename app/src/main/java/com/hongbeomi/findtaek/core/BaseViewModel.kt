@@ -2,7 +2,7 @@ package com.hongbeomi.findtaek.core
 
 
 import androidx.lifecycle.*
-import com.hongbeomi.findtaek.util.event.ToastMessageEvent
+import com.hongbeomi.findtaek.view.util.event.ToastMessageEvent
 
 /**
  * @author hongbeomi

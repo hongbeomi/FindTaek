@@ -48,13 +48,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
         android:id="@+id/view_swipe">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/view_recycler"
         android:layout_width="match_parent"
         tools:listitem="@layout/item_main"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

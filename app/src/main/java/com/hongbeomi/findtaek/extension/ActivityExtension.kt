@@ -1,6 +1,5 @@
 package com.hongbeomi.findtaek.extension
 
-import android.R
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.os.Build
@@ -17,8 +16,8 @@ import com.hongbeomi.findtaek.view.ui.add.AddActivity
 import kotlinx.android.synthetic.main.activity_add.*
 import org.jetbrains.anko.intentFor
 import kotlin.math.max
-import com.hongbeomi.findtaek.util.AddActivity.EXTRA_CIRCULAR_REVEAL_X
-import com.hongbeomi.findtaek.util.AddActivity.EXTRA_CIRCULAR_REVEAL_Y
+import com.hongbeomi.findtaek.view.util.AddActivity.EXTRA_CIRCULAR_REVEAL_X
+import com.hongbeomi.findtaek.view.util.AddActivity.EXTRA_CIRCULAR_REVEAL_Y
 import com.hongbeomi.findtaek.view.ui.add.AddActivity.Companion.revealX
 import com.hongbeomi.findtaek.view.ui.add.AddActivity.Companion.revealY
 import com.hongbeomi.findtaek.view.ui.main.MainViewModel
@@ -109,7 +108,7 @@ fun AppCompatActivity.receiveIntentFromMainActivity(savedInstanceState: Bundle?)
 
 fun swipeRefreshRecyclerView(swipeRefreshLayout: SwipeRefreshLayout, mainViewModel: MainViewModel) {
     swipeRefreshLayout.apply {
-        setColorSchemeResources(R.color.holo_blue_light)
+        setColorSchemeResources(android.R.color.holo_blue_light)
         setOnRefreshListener {
             mainViewModel.update()
             swipeRefreshLayout.isRefreshing = false

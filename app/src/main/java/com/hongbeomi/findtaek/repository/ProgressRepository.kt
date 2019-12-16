@@ -17,7 +17,7 @@ constructor(private val client: DeliveryClient) :
 
     private var timeLineList: ArrayList<TimeLine> = arrayListOf()
 
-    fun loadProgressList(
+    fun loadProgressData(
         carrierId: String,
         trackId: String,
         error: (String) -> Unit

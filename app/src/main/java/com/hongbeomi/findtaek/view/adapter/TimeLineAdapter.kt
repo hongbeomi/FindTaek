@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.github.vipulasri.timelineview.TimelineView
 import com.hongbeomi.findtaek.R
-import com.hongbeomi.findtaek.util.VectorDrawableUtils
+import com.hongbeomi.findtaek.view.util.VectorDrawableUtils
 import com.hongbeomi.findtaek.models.entity.TimeLine
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_timeline.*
