@@ -48,9 +48,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:id="@+id/swipeView">
+        android:id="@+id/view_swipe">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/view_recycler"
         android:layout_width="match_parent"
         tools:listitem="@layout/item_main"
         android:layout_height="match_parent"
@@ -66,7 +66,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         app:fabSize="normal"
-        app:layout_anchor="@id/recyclerView"
+        app:layout_anchor="@id/view_recycler"
         app:layout_anchorGravity="bottom|right|end"
         app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"
         app:rippleColor="#FFFFFF" />

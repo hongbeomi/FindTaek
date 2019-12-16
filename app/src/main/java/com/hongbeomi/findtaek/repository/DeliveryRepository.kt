@@ -51,12 +51,10 @@ constructor(
                         inputTrackId = trackId
                         inputCarrierId = carrierId
                         deliveryDao.insertItem(mapFrom(response.data))
-                        hideLoading()
                         finishEvent.value = true
                     }
                 }
                 is ApiResponse.Failure.Error -> {
-                    hideLoading()
                     when (carrierId) {
                         "null" -> error(response.errorMessage)
                         else -> error("해당 번호에 대한 배송정보가 없습니다.")
@@ -64,10 +62,10 @@ constructor(
                 }
 
                 is ApiResponse.Failure.Exception -> {
-                    hideLoading()
                     error("통신 상태를 확인해주세요!")
                 }
             }
+            hideLoading()
         }
     }
 

@@ -41,7 +41,7 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
                 EXTRA_CARRIER_ID to delivery.carrierId
             )
         }
-        initRecyclerView(recyclerView, adapter)
+        initRecyclerView(view_recycler, adapter)
 
         mainViewModel.also {
             it.observeToast(this) { message -> toast(message) }
@@ -51,10 +51,10 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
         }
 
         RecyclerItemTouchHelper(0, ItemTouchHelper.RIGHT, this).let {
-            ItemTouchHelper(it).attachToRecyclerView(recyclerView)
+            ItemTouchHelper(it).attachToRecyclerView(view_recycler)
         }
 
-        swipeRefreshRecyclerView(swipeView, mainViewModel)
+        swipeRefreshRecyclerView(view_swipe, mainViewModel)
 
         button_fab.setOnClickListener { v -> sendFabButtonCoordinates(v) }
     }

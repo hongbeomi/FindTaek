@@ -35,10 +35,7 @@ constructor(private val client: DeliveryClient) :
                     mutableLiveData.postValue(timeLineList)
                 }
                 is ApiResponse.Failure.Error -> error(response.errorMessage)
-                is ApiResponse.Failure.Exception -> {
-                    error("통신 상태를 확인해주세요!")
-                    Log.e("LoadProgress ERROR", response.message())
-                }
+                is ApiResponse.Failure.Exception -> error("통신 상태를 확인해주세요!")
             }
         }
         return mutableLiveData
