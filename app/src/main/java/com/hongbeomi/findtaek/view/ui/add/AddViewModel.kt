@@ -33,7 +33,11 @@ constructor(private val repository: DeliveryRepository) : BaseViewModel() {
     fun insertButtonClick() {
         showLoading()
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insert("맥", carrierName.value.toString(), "344054765256") {
+            repository.loadDeliveryDataAndInsert(
+                "맥",
+                carrierName.value.toString(),
+                "344054765256"
+            ) {
                 showToast(it)
             }
         }

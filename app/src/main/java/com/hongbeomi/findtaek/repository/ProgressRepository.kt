@@ -18,9 +18,12 @@ constructor(private val client: DeliveryClient) :
     private var timeLineList: ArrayList<TimeLine> = arrayListOf()
 
     fun loadProgressList(
-        carrierId: String, trackId: String, error: (String) -> Unit
+        carrierId: String,
+        trackId: String,
+        error: (String) -> Unit
     ): MutableLiveData<ArrayList<TimeLine>> {
         val mutableLiveData = MutableLiveData<ArrayList<TimeLine>>()
+
         client.fetchDelivery(carrierId, trackId) { response ->
             when (response) {
                 is ApiResponse.Success -> {

@@ -32,7 +32,6 @@ class MainAdapter(val ItemClick: (Delivery) -> Unit) :
     override fun onBindViewHolder(mainViewHolder: MainViewHolder, position: Int) =
         mainViewHolder.bind(itemList[position])
 
-
     fun setItemList(itemList: List<Delivery>) {
         this.itemList = itemList
         notifyDataSetChanged()

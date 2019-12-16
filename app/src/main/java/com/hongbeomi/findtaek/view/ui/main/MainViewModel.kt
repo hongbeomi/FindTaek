@@ -39,7 +39,7 @@ constructor(private val repository: DeliveryRepository) :
         try {
             for (item in liveItemList.value!!) {
                 viewModelScope.launch(Dispatchers.IO) {
-                    repository.update(item) {
+                    repository.loadDeliveryDataAndUpdate(item) {
                         showToast(it)
                     }
                 }

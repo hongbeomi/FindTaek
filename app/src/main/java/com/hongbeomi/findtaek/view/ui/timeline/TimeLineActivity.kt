@@ -14,7 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 /**
  * @author hongbeomi
  */
-class TimeLineActivity: BaseActivity() {
+class TimeLineActivity : BaseActivity() {
 
     private lateinit var timeLineViewModel: TimeLineViewModel
     private lateinit var adapter: TimeLineAdapter

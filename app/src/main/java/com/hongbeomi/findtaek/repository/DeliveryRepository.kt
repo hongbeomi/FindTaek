@@ -40,8 +40,11 @@ constructor(
             status = by.state.text
         )
 
-    fun insert(
-        productName: String, carrierName: String, trackId: String, error: (String) -> Unit
+    fun loadDeliveryDataAndInsert(
+        productName: String,
+        carrierName: String,
+        trackId: String,
+        error: (String) -> Unit
     ) {
         val carrierId = CarrierIdMap().convertId(carrierName)
         deliveryClient.fetchDelivery(carrierId, trackId) { response ->
@@ -61,7 +64,6 @@ constructor(
                         else -> error("해당 번호에 대한 배송정보가 없습니다.")
                     }
                 }
-
                 is ApiResponse.Failure.Exception -> {
                     error("통신 상태를 확인해주세요!")
                 }
@@ -70,7 +72,7 @@ constructor(
         }
     }
 
-    fun update(delivery: Delivery, error: (String) -> Unit) {
+    fun loadDeliveryDataAndUpdate(delivery: Delivery, error: (String) -> Unit) {
         deliveryClient.fetchDelivery(delivery.carrierId, delivery.trackId) { response ->
             when (response) {
                 is ApiResponse.Success -> {
