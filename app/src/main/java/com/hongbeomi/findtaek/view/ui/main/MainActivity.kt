@@ -34,16 +34,13 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
         mainViewModel = getViewModel()
-
         adapter = MainAdapter { delivery ->
             startActivity<TimeLineActivity>(
                 EXTRA_TRACK_ID to delivery.trackId,
                 EXTRA_CARRIER_ID to delivery.carrierId
             )
         }
-
         initRecyclerView(recyclerView, adapter)
 
         mainViewModel.also {

@@ -6,7 +6,7 @@ import com.hongbeomi.findtaek.api.ApiResponse
 import com.hongbeomi.findtaek.api.client.DeliveryClient
 //import com.hongbeomi.findtaek.api.client.ProgressClient
 import com.hongbeomi.findtaek.api.message
-import com.hongbeomi.findtaek.models.entity.ProgressesModel
+import com.hongbeomi.findtaek.models.entity.TimeLine
 import com.hongbeomi.findtaek.models.network.DeliveryResponse
 //import com.hongbeomi.findtaek.models.network.ProgressResponse
 import com.hongbeomi.findtaek.repository.util.Mapper
@@ -17,22 +17,22 @@ import com.hongbeomi.findtaek.repository.util.Mapper
 
 class ProgressRepository
 constructor(private val client: DeliveryClient) :
-    Mapper<DeliveryResponse.Progresses, ProgressesModel> {
+    Mapper<DeliveryResponse.Progresses, TimeLine> {
 
-    private var progressesModelList: ArrayList<ProgressesModel> = arrayListOf()
+    private var timeLineList: ArrayList<TimeLine> = arrayListOf()
 
     fun loadProgressList(
         carrierId: String, trackId: String, error: (String) -> Unit
-    ): MutableLiveData<ArrayList<ProgressesModel>> {
-        val mutableLiveData = MutableLiveData<ArrayList<ProgressesModel>>()
+    ): MutableLiveData<ArrayList<TimeLine>> {
+        val mutableLiveData = MutableLiveData<ArrayList<TimeLine>>()
         client.fetchDelivery(carrierId, trackId) { response ->
             when (response) {
                 is ApiResponse.Success -> {
-                    progressesModelList.clear()
+                    timeLineList.clear()
                     response.data?.progresses?.forEach {
-                        progressesModelList.add(mapFrom(it))
+                        timeLineList.add(mapFrom(it))
                     }
-                    mutableLiveData.postValue(progressesModelList)
+                    mutableLiveData.postValue(timeLineList)
                 }
                 is ApiResponse.Failure.Error -> error(response.errorMessage)
                 is ApiResponse.Failure.Exception -> {
@@ -44,8 +44,8 @@ constructor(private val client: DeliveryClient) :
         return mutableLiveData
     }
 
-    override fun mapFrom(by: DeliveryResponse.Progresses): ProgressesModel =
-        ProgressesModel(
+    override fun mapFrom(by: DeliveryResponse.Progresses): TimeLine =
+        TimeLine(
             by.time,
             by.status.text,
             by.location.name,

@@ -4,7 +4,7 @@ package com.hongbeomi.findtaek.models.entity
  * @author hongbeomi
  */
 
-data class ProgressesModel (
+data class TimeLine (
     val time: String,
     val statusText: String,
     val locationName: String,

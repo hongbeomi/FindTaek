@@ -1,6 +1,5 @@
 package com.hongbeomi.findtaek.extension
 
-import android.R
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.os.Build
@@ -109,7 +108,7 @@ fun AppCompatActivity.receiveIntentFromMainActivity(savedInstanceState: Bundle?)
 
 fun swipeRefreshRecyclerView(swipeRefreshLayout: SwipeRefreshLayout, mainViewModel: MainViewModel) {
     swipeRefreshLayout.apply {
-        setColorSchemeResources(R.color.holo_blue_light)
+        setColorSchemeResources(android.R.color.holo_blue_light)
         setOnRefreshListener {
             mainViewModel.update()
             swipeRefreshLayout.isRefreshing = false

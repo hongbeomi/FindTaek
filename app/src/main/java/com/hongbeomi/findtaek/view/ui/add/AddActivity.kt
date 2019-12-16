@@ -40,7 +40,7 @@ class AddActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         receiveIntentFromMainActivity(savedInstanceState)
-        setDropDownMenu()
+        initDropDownMenu()
     }
 
     override fun onBackPressed() {
@@ -48,7 +48,7 @@ class AddActivity : AppCompatActivity() {
         unRevealActivity(addActivityLayout, revealX, revealY)
     }
 
-    private fun setDropDownMenu() {
+    private fun initDropDownMenu() {
         val adapter: ArrayAdapter<String> = ArrayAdapter(
             this,
             R.layout.dropdown_menu_popup_item,
