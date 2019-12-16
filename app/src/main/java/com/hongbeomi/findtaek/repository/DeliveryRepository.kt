@@ -43,7 +43,6 @@ constructor(
     fun insert(
         productName: String, carrierName: String, trackId: String, error: (String) -> Unit
     ) {
-//        val carrierId = convertCarrierId(carrierName).toString()
         val carrierId = CarrierIdMap().convertId(carrierName)
         deliveryClient.fetchDelivery(carrierId, trackId) { response ->
             when (response) {

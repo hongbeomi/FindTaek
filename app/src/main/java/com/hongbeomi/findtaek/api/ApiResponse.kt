@@ -36,16 +36,17 @@ sealed class ApiResponse<out T> {
     companion object {
         fun <T> error(ex: Throwable) = Failure.Exception<T>(ex)
 
-        fun <T> of(f: () -> Response<T>): ApiResponse<T> = try {
-            val response = f()
-            if (response.isSuccessful) {
-                Success(response)
-            } else {
-                Failure.Error(response)
+        fun <T> of(f: () -> Response<T>): ApiResponse<T> =
+            try {
+                val response = f()
+                if (response.isSuccessful) {
+                    Success(response)
+                } else {
+                    Failure.Error(response)
+                }
+            } catch (ex: Exception) {
+                Failure.Exception(ex)
             }
-        } catch (ex: Exception) {
-            Failure.Exception(ex)
-        }
     }
 
 }

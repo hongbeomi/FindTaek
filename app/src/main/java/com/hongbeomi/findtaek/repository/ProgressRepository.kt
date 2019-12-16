@@ -1,14 +1,10 @@
 package com.hongbeomi.findtaek.repository
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.hongbeomi.findtaek.api.ApiResponse
 import com.hongbeomi.findtaek.api.client.DeliveryClient
-//import com.hongbeomi.findtaek.api.client.ProgressClient
-import com.hongbeomi.findtaek.api.message
 import com.hongbeomi.findtaek.models.entity.TimeLine
 import com.hongbeomi.findtaek.models.network.DeliveryResponse
-//import com.hongbeomi.findtaek.models.network.ProgressResponse
 import com.hongbeomi.findtaek.repository.util.Mapper
 
 /**

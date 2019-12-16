@@ -1,5 +1,9 @@
 package com.hongbeomi.findtaek.util
 
+/**
+ * @author hongbeomi
+ */
+
 class CarrierIdMap {
 
     private val carrierIdMap = hashMapOf(
