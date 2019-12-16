@@ -8,11 +8,10 @@ import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.databinding.ActivityAddBinding
 import com.hongbeomi.findtaek.extension.receiveIntentFromMainActivity
 import com.hongbeomi.findtaek.extension.unRevealActivity
-import com.hongbeomi.findtaek.util.carrierIdMap
+import com.hongbeomi.findtaek.util.CarrierIdMap
 import kotlinx.android.synthetic.main.activity_add.*
 import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.getViewModel
-
 
 /**
  * @author hongbeomi
@@ -52,7 +51,7 @@ class AddActivity : AppCompatActivity() {
         val adapter: ArrayAdapter<String> = ArrayAdapter(
             this,
             R.layout.dropdown_menu_popup_item,
-            carrierIdMap.keys.toTypedArray()
+            CarrierIdMap().getKeys().toTypedArray()
         )
 
         exposed_dropdown.apply {

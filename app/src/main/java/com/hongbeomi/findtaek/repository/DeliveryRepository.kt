@@ -7,6 +7,7 @@ import com.hongbeomi.findtaek.db.DeliveryDao
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.models.network.DeliveryResponse
 import com.hongbeomi.findtaek.repository.util.*
+import com.hongbeomi.findtaek.util.CarrierIdMap
 import com.hongbeomi.findtaek.util.event.hideLoading
 import com.hongbeomi.findtaek.view.ui.add.AddViewModel.Companion.finishEvent
 
@@ -42,7 +43,8 @@ constructor(
     fun insert(
         productName: String, carrierName: String, trackId: String, error: (String) -> Unit
     ) {
-        val carrierId = convertCarrierId(carrierName).toString()
+//        val carrierId = convertCarrierId(carrierName).toString()
+        val carrierId = CarrierIdMap().convertId(carrierName)
         deliveryClient.fetchDelivery(carrierId, trackId) { response ->
             when (response) {
                 is ApiResponse.Success -> {
