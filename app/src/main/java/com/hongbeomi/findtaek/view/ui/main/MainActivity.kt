@@ -47,25 +47,16 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
         initRecyclerView(view_recycler, adapter)
 
         mainViewModel.also {
-
             it.observeToast(this) { message -> toast(message) }
             it.getAll().observe(this, Observer<List<Delivery>> { deliveryList ->
                 adapter.setItemList(deliveryList)
 
-
-
-
                 if (initEvent.value == null) {
                     initEvent.value = true
                 }
-
-
                 initEvent.value ?: run {
                      initEvent.value = true
                 }
-
-
-
             })
             it.observeInit(this) {
                 mainViewModel.update()

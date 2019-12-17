@@ -75,6 +75,12 @@
 
 <br>
 
+## 🌟 Find this project useful? 
+
+Support it by joining [stargazers](https://github.com/hongbeomi/FindTaek/stargazers) for this repository
+
+<br>
+
 ## 📝 License
 
 ```
