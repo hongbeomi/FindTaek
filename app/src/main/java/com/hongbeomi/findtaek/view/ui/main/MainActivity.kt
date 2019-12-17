@@ -11,11 +11,12 @@ import com.hongbeomi.findtaek.core.BaseActivity
 import com.hongbeomi.findtaek.extension.sendFabButtonCoordinates
 import com.hongbeomi.findtaek.extension.swipeRefreshRecyclerView
 import com.hongbeomi.findtaek.models.entity.Delivery
+import com.hongbeomi.findtaek.view.adapter.MainAdapter
+import com.hongbeomi.findtaek.view.ui.main.MainViewModel.Companion.initEvent
+import com.hongbeomi.findtaek.view.ui.timeline.TimeLineActivity
 import com.hongbeomi.findtaek.view.util.RecyclerItemTouchHelper
 import com.hongbeomi.findtaek.view.util.TimeLineActivity.EXTRA_CARRIER_ID
 import com.hongbeomi.findtaek.view.util.TimeLineActivity.EXTRA_TRACK_ID
-import com.hongbeomi.findtaek.view.adapter.MainAdapter
-import com.hongbeomi.findtaek.view.ui.timeline.TimeLineActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -35,19 +36,40 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         mainViewModel = getViewModel()
+
         adapter = MainAdapter { delivery ->
             startActivity<TimeLineActivity>(
                 EXTRA_TRACK_ID to delivery.trackId,
                 EXTRA_CARRIER_ID to delivery.carrierId
             )
         }
+
         initRecyclerView(view_recycler, adapter)
 
         mainViewModel.also {
+
             it.observeToast(this) { message -> toast(message) }
             it.getAll().observe(this, Observer<List<Delivery>> { deliveryList ->
                 adapter.setItemList(deliveryList)
+
+
+
+
+                if (initEvent.value == null) {
+                    initEvent.value = true
+                }
+
+
+                initEvent.value ?: run {
+                     initEvent.value = true
+                }
+
+
+
             })
+            it.observeInit(this) {
+                mainViewModel.update()
+            }
         }
 
         RecyclerItemTouchHelper(0, ItemTouchHelper.RIGHT, this).let {
@@ -57,6 +79,11 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
         swipeRefreshRecyclerView(view_swipe, mainViewModel)
 
         button_fab.setOnClickListener { v -> sendFabButtonCoordinates(v) }
+    }
+
+    override fun onPause() {
+        initEvent.value = null
+        super.onPause()
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {

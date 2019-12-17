@@ -50,6 +50,5 @@ val networkModule = module {
     single { get<Retrofit>().create(DeliveryService::class.java) }
 
     single { DeliveryClient(get()) }
-//    single { ProgressClient(get()) }
 
 }

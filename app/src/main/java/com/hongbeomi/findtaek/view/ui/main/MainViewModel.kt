@@ -1,12 +1,13 @@
 package com.hongbeomi.findtaek.view.ui.main
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.core.BaseViewModel
 import com.hongbeomi.findtaek.repository.DeliveryRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.hongbeomi.findtaek.view.util.event.InitListEvent
+import kotlinx.coroutines.*
 
 /**
  * @author hongbeomi
@@ -15,6 +16,10 @@ import kotlinx.coroutines.launch
 class MainViewModel
 constructor(private val repository: DeliveryRepository) :
     BaseViewModel() {
+
+    companion object {
+        val initEvent = InitListEvent()
+    }
 
     lateinit var liveItemList: LiveData<List<Delivery>>
 
@@ -48,6 +53,9 @@ constructor(private val repository: DeliveryRepository) :
             showToast("리스트가 비었습니다!")
         }
     }
+
+    fun observeInit(lifecycleOwner: LifecycleOwner, observer: (Boolean) -> Unit) =
+        initEvent.observe(lifecycleOwner, observer)
 
 }
 

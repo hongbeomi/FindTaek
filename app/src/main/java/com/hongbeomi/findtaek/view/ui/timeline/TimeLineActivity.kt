@@ -14,6 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 /**
  * @author hongbeomi
  */
+
 class TimeLineActivity : BaseActivity() {
 
     private lateinit var timeLineViewModel: TimeLineViewModel
@@ -32,8 +33,8 @@ class TimeLineActivity : BaseActivity() {
         timeLineViewModel.getAllTimeLine(
             intent.getStringExtra(EXTRA_CARRIER_ID),
             intent.getStringExtra(EXTRA_TRACK_ID)
-        ).observe(this, Observer<ArrayList<TimeLine>> { progress ->
-            adapter.setItems(progress)
+        ).observe(this, Observer<ArrayList<TimeLine>> { timeline ->
+            adapter.setItems(timeline)
         })
     }
 
