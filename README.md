@@ -8,7 +8,7 @@
 
 ## ✨ Features
 
-![kotlin](https://img.shields.io/badge/kotlin-black?logo=kotlin) ![api](https://img.shields.io/badge/API-19%2B-green) ![license](https://img.shields.io/github/license/hongbeomi/FindTaek?color=blue) ![hit](https://img.shields.io/github/search/hongbeomi/FindTaek/app?color=red&label=hits)
+![kotlin](https://img.shields.io/badge/kotlin-black?logo=kotlin) ![api](https://img.shields.io/badge/API-19%2B-green) ![license](https://img.shields.io/github/license/hongbeomi/FindTaek?color=blue) 
 
 <br>
 
