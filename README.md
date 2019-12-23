@@ -24,6 +24,12 @@
 
 <br>
 
+## 📝 Development Record
+
+- [Medium Blog](https://medium.com/@hongbeomi/findtaek-app-개발기-1-4223daf676bf)
+
+<br>
+
 ## 🛠  Architecture - MVVM
 
 ![mvvm](https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/mvvm.png)

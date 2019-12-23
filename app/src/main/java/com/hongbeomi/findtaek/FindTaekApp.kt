@@ -7,6 +7,7 @@ import org.koin.android.ext.android.startKoin
 /**
  * @author hongbeomi
  */
+
 class FindTaekApp : Application() {
 
     override fun onCreate() {
