@@ -18,7 +18,7 @@
 
 <br>
 
-## 📱 Demo
+## 📱 Preview
 
 - Upload 예정
 
