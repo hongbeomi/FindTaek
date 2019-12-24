@@ -8,15 +8,15 @@
 
 ## ✨ Features
 
-![kotlin](https://img.shields.io/badge/kotlin-black?logo=kotlin) ![api](https://img.shields.io/badge/API-19%2B-green?logo=android) ![license](https://img.shields.io/github/license/hongbeomi/FindTaek?color=blue&logo=apache) ![build](https://img.shields.io/github/workflow/status/hongbeomi/FindTaek/Android CI/master)
+![kotlin](https://img.shields.io/badge/kotlin-black?logo=kotlin) ![api](https://img.shields.io/badge/API-19%2B-green?logo=android) ![license](https://img.shields.io/github/license/hongbeomi/FindTaek?color=blue&logo=apache) ![build](https://img.shields.io/github/workflow/status/hongbeomi/FindTaek/Android%20CI/master)
 
 <br>
 
 **+ 버튼을 눌러서 직접 택배를 추가할 수 있습니다.**
 
-**물품을 아래로 당겨서 상태를 수동으로 업데이트 할 수 있습니다.**g
+**물품을 아래로 당겨서 상태를 수동으로 업데이트 할 수 있습니다.**
 
-**물품을 오른쪽으로 밀어서 항목을 삭제하거나 되돌릴 수 있습니다.**
+**물품을 오른쪽으로 밀어서 항목g을 삭제하거나 되돌릴 수 있습니다.**
 
 **앱을 사용할 때 자동으로 상태가 업데이트 됩니다.**
 
