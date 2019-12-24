@@ -8,7 +8,7 @@
 
 ## ✨ Features
 
-![kotlin](https://img.shields.io/badge/kotlin-black?logo=kotlin) ![api](https://img.shields.io/badge/API-19%2B-green) ![license](https://img.shields.io/github/license/hongbeomi/FindTaek?color=blue) ![build](https://img.shields.io/github/workflow/status/hongbeomi/FindTaek/Android CI/master)
+![kotlin](https://img.shields.io/badge/kotlin-black?logo=kotlin) ![api](https://img.shields.io/badge/API-19%2B-green?logo=android) ![license](https://img.shields.io/github/license/hongbeomi/FindTaek?color=blue&logo=apache) ![build](https://img.shields.io/github/workflow/status/hongbeomi/FindTaek/Android CI/master)
 
 <br>
 
