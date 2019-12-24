@@ -23,24 +23,24 @@ constructor(private val repository: DeliveryRepository) :
 
     lateinit var liveItemList: LiveData<List<Delivery>>
 
-    fun getAll(): LiveData<List<Delivery>> {
-        liveItemList = repository.getAll()
+    fun getAllDelivery(): LiveData<List<Delivery>> {
+        liveItemList = repository.getAllByRepository()
         return liveItemList
     }
 
-    fun delete(delivery: Delivery) {
+    fun deleteDelivery(delivery: Delivery) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.delete(delivery)
+            repository.deleteByRepository(delivery)
         }
     }
 
-    fun rollback(delivery: Delivery) {
+    fun rollbackDelivery(delivery: Delivery) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.rollback(delivery)
+            repository.rollbackByRepository(delivery)
         }
     }
 
-    fun update() {
+    fun updateDelivery() {
         try {
             for (item in liveItemList.value!!) {
                 viewModelScope.launch(Dispatchers.IO) {

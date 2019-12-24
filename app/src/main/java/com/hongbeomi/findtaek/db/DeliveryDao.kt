@@ -15,12 +15,12 @@ interface DeliveryDao {
     fun getAll(): LiveData<List<Delivery>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertItem(delivery: Delivery)
+    fun insert(delivery: Delivery)
 
     @Update
-    fun updateItem(delivery: Delivery)
+    fun update(delivery: Delivery)
 
     @Delete
-    fun deleteItem(delivery: Delivery)
+    fun delete(delivery: Delivery)
 
 }

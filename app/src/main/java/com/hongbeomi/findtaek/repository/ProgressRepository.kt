@@ -3,7 +3,7 @@ package com.hongbeomi.findtaek.repository
 import androidx.lifecycle.MutableLiveData
 import com.hongbeomi.findtaek.api.ApiResponse
 import com.hongbeomi.findtaek.api.client.DeliveryClient
-import com.hongbeomi.findtaek.models.entity.TimeLine
+import com.hongbeomi.findtaek.models.entity.Progress
 import com.hongbeomi.findtaek.models.network.DeliveryResponse
 import com.hongbeomi.findtaek.repository.util.Mapper
 
@@ -13,25 +13,25 @@ import com.hongbeomi.findtaek.repository.util.Mapper
 
 class ProgressRepository
 constructor(private val client: DeliveryClient) :
-    Mapper<DeliveryResponse.Progresses, TimeLine> {
+    Mapper<DeliveryResponse.Progresses, Progress> {
 
-    private var timeLineList: ArrayList<TimeLine> = arrayListOf()
+    private var progressList: ArrayList<Progress> = arrayListOf()
 
     fun loadProgressData(
         carrierId: String,
         trackId: String,
         error: (String) -> Unit
-    ): MutableLiveData<ArrayList<TimeLine>> {
-        val mutableLiveData = MutableLiveData<ArrayList<TimeLine>>()
+    ): MutableLiveData<ArrayList<Progress>> {
+        val mutableLiveData = MutableLiveData<ArrayList<Progress>>()
 
         client.fetchDelivery(carrierId, trackId) { response ->
             when (response) {
                 is ApiResponse.Success -> {
-                    timeLineList.clear()
+                    progressList.clear()
                     response.data?.progresses?.forEach {
-                        timeLineList.add(mapFrom(it))
+                        progressList.add(mapFrom(it))
                     }
-                    mutableLiveData.postValue(timeLineList)
+                    mutableLiveData.postValue(progressList)
                 }
                 is ApiResponse.Failure.Error -> error(response.errorMessage)
                 is ApiResponse.Failure.Exception -> error("통신 상태를 확인해주세요!")
@@ -40,8 +40,8 @@ constructor(private val client: DeliveryClient) :
         return mutableLiveData
     }
 
-    override fun mapFrom(by: DeliveryResponse.Progresses): TimeLine =
-        TimeLine(
+    override fun mapFrom(by: DeliveryResponse.Progresses): Progress =
+        Progress(
             by.time,
             by.status.text,
             by.location.name,

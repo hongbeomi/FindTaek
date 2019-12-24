@@ -110,7 +110,7 @@ fun swipeRefreshRecyclerView(swipeRefreshLayout: SwipeRefreshLayout, mainViewMod
     swipeRefreshLayout.apply {
         setColorSchemeResources(android.R.color.holo_blue_light)
         setOnRefreshListener {
-            mainViewModel.update()
+            mainViewModel.updateDelivery()
             swipeRefreshLayout.isRefreshing = false
         }
     }

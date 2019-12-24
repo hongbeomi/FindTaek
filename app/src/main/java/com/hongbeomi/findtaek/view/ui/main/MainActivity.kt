@@ -48,7 +48,7 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
 
         mainViewModel.also {
             it.observeToast(this) { message -> toast(message) }
-            it.getAll().observe(this, Observer<List<Delivery>> { deliveryList ->
+            it.getAllDelivery().observe(this, Observer<List<Delivery>> { deliveryList ->
                 adapter.setItemList(deliveryList)
 
                 if (initEvent.value == null) {
@@ -59,7 +59,7 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
                 }
             })
             it.observeInit(this) {
-                mainViewModel.update()
+                mainViewModel.updateDelivery()
             }
         }
 
@@ -80,11 +80,11 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {
         val deletedItem = adapter.getItemPosition(position)
 
-        mainViewModel.delete(deletedItem)
+        mainViewModel.deleteDelivery(deletedItem)
 
         Snackbar.make(coordinator, "물품 삭제완료", Snackbar.LENGTH_LONG)
             .setAction("취소") {
-                mainViewModel.rollback(deletedItem)
+                mainViewModel.rollbackDelivery(deletedItem)
             }
             .setActionTextColor(Color.YELLOW)
             .show()

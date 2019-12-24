@@ -13,7 +13,7 @@ class FindTaekApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        startKoin(
+        startKoin (
             this, listOf(
                 networkModule,
                 roomModule,

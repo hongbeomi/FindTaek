@@ -52,9 +52,9 @@ constructor(
                 is ApiResponse.Success -> {
                     response.data?.let {
                         inputProductName = productName
-                        inputTrackId = trackId
                         inputCarrierId = carrierId
-                        deliveryDao.insertItem(mapFrom(response.data))
+                        inputTrackId = trackId
+                        deliveryDao.insert(mapFrom(response.data))
                         finishEvent.value = true
                     }
                 }
@@ -77,7 +77,7 @@ constructor(
             when (response) {
                 is ApiResponse.Success -> {
                     response.data?.let { data ->
-                        deliveryDao.updateItem(makeUpdateDelivery(delivery, data))
+                        deliveryDao.update(makeUpdateDelivery(delivery, data))
                     }
                     error("업데이트 완료!")
                 }
@@ -87,10 +87,10 @@ constructor(
         }
     }
 
-    fun rollback(delivery: Delivery) = deliveryDao.insertItem(delivery)
+    fun rollbackByRepository(delivery: Delivery) = deliveryDao.insert(delivery)
 
-    fun delete(delivery: Delivery) = deliveryDao.deleteItem(delivery)
+    fun deleteByRepository(delivery: Delivery) = deliveryDao.delete(delivery)
 
-    fun getAll(): LiveData<List<Delivery>> = deliveryDao.getAll()
+    fun getAllByRepository(): LiveData<List<Delivery>> = deliveryDao.getAll()
 
 }
