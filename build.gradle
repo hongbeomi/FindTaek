@@ -49,35 +49,6 @@ allprojects {
     }
 }
 
-subprojects {
-    configurations {
-        ktlint
-    }
-
-    dependencies {
-        ktlint 'com.github.shyiko:ktlint:0.2.0'
-    }
-
-    // 스타일을 검사하는 태스크
-    task ktlint(type: JavaExec) {
-        main = 'com.github.shyiko.ktlint.Main'
-        classpath = configurations.ktlint
-        args 'src/**/*.kt'
-    }
-
-    // 스타일을 검사하고 맞지 않는 부분을 수정해주는 태스크
-    task ktlintFormat(type: JavaExec) {
-        main = 'com.github.shyiko.ktlint.Main'
-        classpath = configurations.ktlint
-        args '-F', 'src/**/*.kt'
-    }
-
-    // 'check' 태스크가 실행될 때 'ktlint' 태스크가 함께 수행되도록 합니다.
-    afterEvaluate { project ->
-        check.dependsOn ktlint
-    }
-}
-
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
