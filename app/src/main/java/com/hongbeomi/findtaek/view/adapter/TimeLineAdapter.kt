@@ -44,7 +44,7 @@ class TimeLineAdapter :
 
     override fun getItemCount() = items.size
 
-    fun setItems(items: ArrayList<Progress>){
+    fun setItems(items: ArrayList<Progress>) {
         this.items = items
         notifyDataSetChanged()
     }

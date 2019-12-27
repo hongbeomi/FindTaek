@@ -1,6 +1,5 @@
 package com.hongbeomi.findtaek.core
 
-
 import androidx.lifecycle.*
 import com.hongbeomi.findtaek.view.util.event.ToastMessageEvent
 

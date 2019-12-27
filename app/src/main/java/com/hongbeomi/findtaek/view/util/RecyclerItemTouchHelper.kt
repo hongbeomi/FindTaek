@@ -21,7 +21,6 @@ class RecyclerItemTouchHelper(
         target: RecyclerView.ViewHolder
     ) = true
 
-
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
         viewHolder?.let { v ->
             (v as MainAdapter.MainViewHolder).viewForeground.let {
@@ -46,7 +45,6 @@ class RecyclerItemTouchHelper(
             ItemTouchHelper.Callback.getDefaultUIUtil().clearView(it)
         }
 
-
     override fun onChildDraw(
         c: Canvas, recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float,
@@ -62,7 +60,6 @@ class RecyclerItemTouchHelper(
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) =
         listener.onSwiped(viewHolder, direction, viewHolder.adapterPosition)
-
 
     interface RecyclerItemTouchHelperListener {
         fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int)

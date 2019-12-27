@@ -12,4 +12,4 @@ class ErrorResponse(
     @SerializedName("message")
     val message: String
 
-): NetworkResponseModel
+) : NetworkResponseModel
