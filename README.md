@@ -74,7 +74,7 @@
 
 <br>
 
-## 🔋 API
+## 🔋 APIg
 
 - [**Delivery Tracker**] shlee322 - https://github.com/shlee322/delivery-tracker 
 
@@ -83,7 +83,7 @@
 ## 🙌 Thanks
 
 - [**TimeLineView**] Vipulasri - https://github.com/vipulasri/Timeline-View
-- [**MVVM Reference**] skydoves - https://github.com/skydoves
+- [**MVVM Architecture Example**] skydoves - https://github.com/skydoves/TheMovies2
 
 <br>
 
