@@ -74,7 +74,7 @@
 
 <br>
 
-## 🔋 APIg
+## 🔋 API
 
 - [**Delivery Tracker**] shlee322 - https://github.com/shlee322/delivery-tracker 
 
