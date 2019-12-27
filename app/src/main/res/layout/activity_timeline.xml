@@ -23,7 +23,7 @@
             app:title="FindTaek">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_timeline"
+                android:id="@+id/timeline_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_margin="8dp"
@@ -34,7 +34,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_timeline"
+        android:id="@+id/timeline_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"

@@ -44,15 +44,15 @@ class MainAdapter(val ItemClick: (Delivery) -> Unit) :
 
         override val containerView: View?
             get() = itemView
-        val viewForeground: LinearLayout = view_foreground
+        val viewForeground: LinearLayout = foreground_view
         fun bind(delivery: Delivery) {
             delivery.apply {
-                carrier_name.text = carrierName
-                from_name.text = fromName
-                to_name.text = toName
-                status_textView.text = status
-                product_name.text = productName
-                track_num.text = trackId
+                carrier_name_text.text = carrierName
+                from_name_text.text = fromName
+                to_name_text.text = toName
+                status_text.text = status
+                product_name_text.text = productName
+                track_num_text.text = trackId
             }
             containerView?.setOnClickListener {
                 ItemClick(delivery)

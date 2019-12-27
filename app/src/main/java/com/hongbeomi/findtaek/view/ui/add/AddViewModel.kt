@@ -18,9 +18,9 @@ constructor(private val repository: DeliveryRepository) : BaseViewModel() {
         val finishEvent = FinishActivityEvent()
     }
 
-    val productName = MutableLiveData<String>("")
-    val carrierName = MutableLiveData<String>("")
-    val trackId = MutableLiveData<String>("")
+    val productName = MutableLiveData<String>()
+    val carrierName = MutableLiveData<String>()
+    val trackId = MutableLiveData<String>()
     var valid = MediatorLiveData<Boolean>().apply {
         addSource(productName) { value = isValid() }
         addSource(carrierName) { value = isValid() }

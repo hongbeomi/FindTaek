@@ -50,7 +50,7 @@ class TimeLineAdapter :
     }
 
     private fun setMarker(holder: TimeLineViewHolder) {
-        holder.timeline.marker =
+        holder.timeline_view.marker =
             VectorDrawableUtils.getDrawable(
                 holder.itemView.context,
                 R.drawable.ic_marker,
@@ -61,15 +61,15 @@ class TimeLineAdapter :
     inner class TimeLineViewHolder(itemView: View, viewType: Int) :
         RecyclerView.ViewHolder(itemView), LayoutContainer {
 
-        init { timeline.initLine(viewType) }
+        init { timeline_view.initLine(viewType) }
 
         override val containerView: View?
             get() = itemView
         fun bind(progress: Progress) {
             progress.apply {
-                progress_time.text = time
-                progress_description.text = description
-                progress_location_name.text = locationName
+                progress_time_text.text = time
+                progress_description_text.text = description
+                progress_location_name_text.text = locationName
                 progress_status_text.text = statusText
             }
         }

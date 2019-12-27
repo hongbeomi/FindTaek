@@ -15,7 +15,7 @@
         android:gravity="center_vertical">
 
         <ImageView
-            android:id="@+id/image_delete"
+            android:id="@+id/delete_image_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_delete_white_48dp"/>
@@ -31,7 +31,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/view_foreground"
+        android:id="@+id/foreground_view"
         android:background="@android:color/white"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -40,13 +40,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/carrier_name"
+            android:id="@+id/carrier_name_text"
             tools:text="택배사 이름"
             android:textColor="@android:color/black"
             android:textSize="20sp"/>
 
         <TextView
-            android:id="@+id/product_name"
+            android:id="@+id/product_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
@@ -54,7 +54,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/track_num"
+            android:id="@+id/track_num_text"
             tools:text="운송장번호"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
 
         <TextView
             tools:text="발송자"
-            android:id="@+id/from_name"
+            android:id="@+id/from_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
@@ -71,7 +71,7 @@
 
         <TextView
             tools:text="수신자"
-            android:id="@+id/to_name"
+            android:id="@+id/to_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
@@ -79,7 +79,7 @@
 
         <TextView
             tools:text="배송상황"
-            android:id="@+id/status_textView"
+            android:id="@+id/status_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"

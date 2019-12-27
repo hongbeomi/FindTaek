@@ -44,7 +44,7 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
             )
         }
 
-        initRecyclerView(view_recycler, adapter)
+        initRecyclerView(recycler_view, adapter)
 
         mainViewModel.also {
             it.observeToast(this) { message -> toast(message) }
@@ -64,12 +64,12 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
         }
 
         RecyclerItemTouchHelper(0, ItemTouchHelper.RIGHT, this).let {
-            ItemTouchHelper(it).attachToRecyclerView(view_recycler)
+            ItemTouchHelper(it).attachToRecyclerView(recycler_view)
         }
 
-        swipeRefreshRecyclerView(view_swipe, mainViewModel)
+        swipeRefreshRecyclerView(swipe_layout, mainViewModel)
 
-        button_fab.setOnClickListener { v -> sendFabButtonCoordinates(v) }
+        floating_button.setOnClickListener { v -> sendFabButtonCoordinates(v) }
     }
 
     override fun onPause() {

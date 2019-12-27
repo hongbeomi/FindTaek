@@ -23,12 +23,12 @@ class TimeLineActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_timeline)
-        setSupportActionBar(toolbar_timeline)
+        setSupportActionBar(timeline_toolbar)
 
         timeLineViewModel = getViewModel()
         adapter = TimeLineAdapter()
 
-        initRecyclerView(recycler_timeline, adapter)
+        initRecyclerView(timeline_recycler_view, adapter)
 
         timeLineViewModel.getAllProgress(
             intent.getStringExtra(EXTRA_CARRIER_ID),
