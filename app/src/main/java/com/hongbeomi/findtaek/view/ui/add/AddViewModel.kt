@@ -32,7 +32,7 @@ constructor(private val repository: DeliveryRepository) : BaseViewModel() {
 
     fun insertButtonClick() {
         showLoading()
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             repository.loadDeliveryDataAndInsert(
                 "맥",
                 carrierName.value.toString(),
@@ -44,9 +44,9 @@ constructor(private val repository: DeliveryRepository) : BaseViewModel() {
     }
 
     private fun isValid() =
-        productName.value?.length!! > 0 &&
-                carrierName.value?.length!! > 0 &&
-                trackId.value?.length!! > 0
+        !productName.value.isNullOrEmpty() &&
+                !carrierName.value.isNullOrEmpty() &&
+                !trackId.value.isNullOrEmpty()
 
 }
 

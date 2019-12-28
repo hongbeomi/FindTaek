@@ -17,6 +17,14 @@ constructor(private val client: DeliveryClient) :
 
     private var progressList: ArrayList<Progress> = arrayListOf()
 
+    override fun mapFrom(by: DeliveryResponse.Progresses): Progress =
+        Progress(
+            by.time,
+            by.status.text,
+            by.location.name,
+            by.description
+        )
+
     fun loadProgressData(
         carrierId: String,
         trackId: String,
@@ -39,13 +47,5 @@ constructor(private val client: DeliveryClient) :
         }
         return mutableLiveData
     }
-
-    override fun mapFrom(by: DeliveryResponse.Progresses): Progress =
-        Progress(
-            by.time,
-            by.status.text,
-            by.location.name,
-            by.description
-        )
 
 }

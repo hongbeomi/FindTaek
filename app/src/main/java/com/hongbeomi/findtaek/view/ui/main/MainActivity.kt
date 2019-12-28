@@ -54,9 +54,6 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
                 if (initEvent.value == null) {
                     initEvent.value = true
                 }
-                initEvent.value ?: run {
-                     initEvent.value = true
-                }
             })
             it.observeInit(this) {
                 mainViewModel.updateDelivery()

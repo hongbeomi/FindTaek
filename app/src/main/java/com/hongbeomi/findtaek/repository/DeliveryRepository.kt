@@ -10,6 +10,9 @@ import com.hongbeomi.findtaek.repository.util.*
 import com.hongbeomi.findtaek.view.util.CarrierIdMap
 import com.hongbeomi.findtaek.view.util.event.hideLoading
 import com.hongbeomi.findtaek.view.ui.add.AddViewModel.Companion.finishEvent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * @author hongbeomi
@@ -18,7 +21,8 @@ import com.hongbeomi.findtaek.view.ui.add.AddViewModel.Companion.finishEvent
 class DeliveryRepository
 constructor(
     private val deliveryDao: DeliveryDao,
-    private val deliveryClient: DeliveryClient
+    private val deliveryClient: DeliveryClient,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : Mapper<DeliveryResponse, Delivery> {
 
     private lateinit var inputProductName: String
@@ -40,12 +44,12 @@ constructor(
             status = by.state.text
         )
 
-    fun loadDeliveryDataAndInsert(
+    suspend fun loadDeliveryDataAndInsert(
         productName: String,
         carrierName: String,
         trackId: String,
         error: (String) -> Unit
-    ) {
+    ) = withContext(ioDispatcher) {
         val carrierId = CarrierIdMap().convertId(carrierName)
         deliveryClient.fetchDelivery(carrierId, trackId) { response ->
             when (response) {
@@ -72,25 +76,31 @@ constructor(
         }
     }
 
-    fun loadDeliveryDataAndUpdate(delivery: Delivery, error: (String) -> Unit) {
-        deliveryClient.fetchDelivery(delivery.carrierId, delivery.trackId) { response ->
-            when (response) {
-                is ApiResponse.Success -> {
-                    response.data?.let { data ->
-                        deliveryDao.update(makeUpdateDelivery(delivery, data))
+    suspend fun loadDeliveryDataAndUpdate(delivery: Delivery, error: (String) -> Unit) =
+        withContext(ioDispatcher) {
+            deliveryClient.fetchDelivery(delivery.carrierId, delivery.trackId) { response ->
+                when (response) {
+                    is ApiResponse.Success -> {
+                        response.data?.let { data ->
+                            deliveryDao.update(makeUpdateDelivery(delivery, data))
+                        }
+                        error("업데이트 완료!")
                     }
-                    error("업데이트 완료!")
+                    is ApiResponse.Failure.Error -> error(response.errorMessage)
+                    is ApiResponse.Failure.Exception -> error("통신 상태를 확인해주세요!")
                 }
-                is ApiResponse.Failure.Error -> error(response.errorMessage)
-                is ApiResponse.Failure.Exception -> error("통신 상태를 확인해주세요!")
             }
         }
+
+    suspend fun rollbackByRepository(delivery: Delivery) = withContext(ioDispatcher) {
+        deliveryDao.insert(delivery)
     }
 
-    fun rollbackByRepository(delivery: Delivery) = deliveryDao.insert(delivery)
+    suspend fun deleteByRepository(delivery: Delivery) = withContext(ioDispatcher) {
+        deliveryDao.delete(delivery)
+    }
 
-    fun deleteByRepository(delivery: Delivery) = deliveryDao.delete(delivery)
-
-    fun getAllByRepository(): LiveData<List<Delivery>> = deliveryDao.getAll()
+    fun getAllByRepository(): LiveData<List<Delivery>> =
+        deliveryDao.getAll()
 
 }

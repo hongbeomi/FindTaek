@@ -21,7 +21,7 @@ constructor(private val repository: DeliveryRepository) :
         val initEvent = InitListEvent()
     }
 
-    lateinit var liveItemList: LiveData<List<Delivery>>
+    private lateinit var liveItemList: LiveData<List<Delivery>>
 
     fun getAllDelivery(): LiveData<List<Delivery>> {
         liveItemList = repository.getAllByRepository()
