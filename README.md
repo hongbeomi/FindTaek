@@ -30,6 +30,10 @@
 
 <br>
 
+<img src="https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/add.gif" width="33%" height="33%">
+
+<br>
+
 ## 📝 Development Record
 
 - [Medium Blog](https://medium.com/@hongbeomi/findtaek-app-개발기-1-4223daf676bf)
