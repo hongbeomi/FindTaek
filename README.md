@@ -26,7 +26,7 @@
 
 ## 📱 Preview
 
-🔍 택배 조회하기 										🗓 타임라인										⚙️ 수동 업데이트 & 삭제하기
+🔍 택배 조회하기                                           🗓 타임라인                                            ⚙️ 수동 업데이트 & 삭제하기
 
 <img src="https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/add.gif" width="33%" height="33%"> <img src="https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/timeline.gif" width="33%" height="33%"> <img src="https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/swipe%26delete.gif" width="33%" height="33%"> 
 
