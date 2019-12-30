@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="vm"
             type="com.hongbeomi.findtaek.view.ui.add.AddViewModel" />
+
         <variable
             name="event"
-            type="com.hongbeomi.findtaek.view.util.event.LoadingEventKt"/>
+            type="com.hongbeomi.findtaek.view.util.event.LoadingEventKt" />
+
+        <variable
+            name="map"
+            type="com.hongbeomi.findtaek.view.util.CarrierIdMap" />
+
         <import type="com.hongbeomi.findtaek.view.ui.add.AddActivity" />
 
     </data>
@@ -23,83 +30,144 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/background_light"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:fontFamily="@font/scdream5"
+                android:gravity="center_horizontal|bottom"
+                android:text="@string/add_delivery"
+                android:textColor="@color/marine"
+                android:textSize="30sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/whiteMarine" />
+
+            <TextView
+                android:textColor="@android:color/black"
+                android:layout_marginTop="40dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="120dp"
-                android:orientation="horizontal">
+                android:fontFamily="@font/scdream3"
+                android:text="@string/product_name_item"
+                android:textSize="20sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/product_name_item" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginStart="64dp"
+                android:layout_marginEnd="64dp"
+                android:layout_marginTop="16dp"
+                style="@style/CardLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/whiteMarine"
+                app:cardCornerRadius="20dp"
+                app:contentPadding="12dp">
 
                 <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@={vm.productName}" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="120dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/product_num_item" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:importantForAutofill="no"
                     android:inputType="text"
-                    android:text="@={vm.trackId}" />
-            </LinearLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/dropdown_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:hint="택배사">
-
-                <com.google.android.material.textview.MaterialAutoCompleteTextView
-                    android:id="@+id/exposed_dropdown"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:cursorVisible="false"
-                    android:ellipsize="end"
-                    android:inputType="text"
+                    android:maxLength="30"
+                    android:gravity="center"
                     android:singleLine="true"
-                    android:text="@={vm.carrierName}" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:textCursorDrawable="@android:color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/product_name_hint"
+                    android:text="@={vm.productName}" />
 
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:textColor="@android:color/black"
+                android:layout_marginTop="56dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/scdream3"
+                android:text="@string/product_num_item"
+                android:textSize="20sp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginStart="64dp"
+                android:layout_marginEnd="64dp"
+                android:layout_marginTop="16dp"
+                style="@style/CardLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/whiteMarine"
+                app:cardCornerRadius="20dp"
+                app:contentPadding="12dp">
+
+                <EditText
+                    android:importantForAutofill="no"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@android:color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/carrier_num_hint"
+                    android:maxLength="30"
+                    android:text="@={vm.trackId}"
+                    android:inputType="text" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:textColor="@android:color/black"
+                android:layout_marginTop="56dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/scdream3"
+                android:text="@string/delivery_name"
+                android:textSize="20sp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginStart="64dp"
+                android:layout_marginEnd="64dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:background="@color/whiteMarine"
+                app:cardCornerRadius="20dp">
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp" />
+
+            </androidx.cardview.widget.CardView>
 
             <Button
-                android:layout_width="wrap_content"
+                android:background="@drawable/add_button_radius"
+                android:padding="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="120dp"
+                android:layout_marginTop="80dp"
                 android:enabled="@{vm.valid}"
+                android:fontFamily="@font/scdream7"
                 android:onClick="@{() -> vm.insertButtonClick()}"
-                android:text="@string/add_delivery_item" />
+                android:text="@string/add_delivery_item"
+                android:textSize="30sp" />
 
         </LinearLayout>
 
         <ProgressBar
-            android:visibility="@{event.isLoading}"
-            android:indeterminateTint="@android:color/holo_red_dark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:indeterminateTint="@android:color/background_dark"
+            android:visibility="@{event.isLoading}" />
     </FrameLayout>
 </layout>

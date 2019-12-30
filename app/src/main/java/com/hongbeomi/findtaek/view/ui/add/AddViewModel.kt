@@ -34,9 +34,9 @@ constructor(private val repository: DeliveryRepository) : BaseViewModel() {
         showLoading()
         viewModelScope.launch {
             repository.loadDeliveryDataAndInsert(
-                "맥",
+                productName.value.toString(),
                 carrierName.value.toString(),
-                "344054765256"
+                trackId.value.toString()
             ) {
                 showToast(it)
             }

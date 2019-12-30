@@ -4,87 +4,126 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp">
 
     <LinearLayout
-        android:background="@android:color/holo_red_dark"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/holo_red_dark"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="16dp"
-        android:gravity="center_vertical">
+        android:paddingStart="16dp">
 
         <ImageView
             android:id="@+id/delete_image_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_delete_white_48dp"
-            android:contentDescription="@string/delete_image" />
+            android:contentDescription="@string/delete_image"
+            android:src="@drawable/ic_delete_white_48dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="삭제"
+            android:text="@string/delete"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:padding="8dp"
         android:id="@+id/foreground_view"
-        android:background="@android:color/white"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/carrier_name_text"
-            tools:text="택배사 이름"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:id="@+id/product_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
-            tools:text="제품이름"
-            android:textSize="20sp" />
+            android:textSize="25sp"
+            android:fontFamily="@font/scdream4"
+            tools:text="택배사 이름" />
 
-        <TextView
-            android:id="@+id/track_num_text"
-            tools:text="운송장번호"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
+            android:orientation="horizontal">
 
-        <TextView
-            tools:text="발송자"
-            android:id="@+id/from_name_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <TextView
-            tools:text="수신자"
-            android:id="@+id/to_name_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/product_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/scdream6"
+                    tools:text="제품이름" />
 
-        <TextView
-            tools:text="배송상황"
-            android:id="@+id/status_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/track_num_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/scdream4"
+                    tools:text="운송장번호" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:paddingStart="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/from_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:gravity="start"
+                    android:fontFamily="@font/scdream2"
+                    tools:text="발송자" />
+
+                <TextView
+                    android:id="@+id/to_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:gravity="start"
+                    android:fontFamily="@font/scdream2"
+                    tools:text="수신자" />
+            </LinearLayout>
+
+            <TextView
+                android:gravity="center"
+                android:layout_weight="1"
+                android:id="@+id/status_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:layout_gravity="center"
+                android:fontFamily="@font/scdream6"
+                android:textSize="25sp"
+                tools:text="배송상황" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

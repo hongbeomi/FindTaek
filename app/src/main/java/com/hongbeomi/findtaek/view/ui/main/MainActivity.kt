@@ -2,6 +2,8 @@ package com.hongbeomi.findtaek.view.ui.main
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -65,7 +67,6 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
         }
 
         swipeRefreshRecyclerView(swipe_layout, mainViewModel)
-
         floating_button.setOnClickListener { v -> sendFabButtonCoordinates(v) }
     }
 
@@ -80,10 +81,15 @@ class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHe
         mainViewModel.deleteDelivery(deletedItem)
 
         Snackbar.make(coordinator, "물품 삭제완료", Snackbar.LENGTH_LONG)
+            .setTextColor(ContextCompat.getColor(this, R.color.marine))
             .setAction("취소") {
                 mainViewModel.rollbackDelivery(deletedItem)
             }
-            .setActionTextColor(Color.YELLOW)
+            .setActionTextColor(Color.WHITE)
+            .also {
+                val snackBarView: View = it.view
+                snackBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.snackBarColor))
+            }
             .show()
     }
 

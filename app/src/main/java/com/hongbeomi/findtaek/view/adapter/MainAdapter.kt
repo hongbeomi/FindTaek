@@ -1,5 +1,6 @@
 package com.hongbeomi.findtaek.view.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,11 +46,12 @@ class MainAdapter(val ItemClick: (Delivery) -> Unit) :
         override val containerView: View?
             get() = itemView
         val viewForeground: LinearLayout = foreground_view
+        @SuppressLint("SetTextI18n")
         fun bind(delivery: Delivery) {
             delivery.apply {
                 carrier_name_text.text = carrierName
-                from_name_text.text = fromName
-                to_name_text.text = toName
+                from_name_text.text = "From : $fromName"
+                to_name_text.text = "To : $toName"
                 status_text.text = status
                 product_name_text.text = productName
                 track_num_text.text = trackId

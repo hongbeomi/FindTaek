@@ -1,4 +1,4 @@
-# What is FindTaek? (Test)
+# What is FindTaek?
 
 > MVVM 패턴을 적용한 Toy Project 입니다.
 
@@ -26,7 +26,7 @@
 
 ## 📱 Preview
 
-- Upload 예정
+
 
 <br>
 

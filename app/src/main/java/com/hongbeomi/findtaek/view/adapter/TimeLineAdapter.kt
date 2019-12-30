@@ -54,7 +54,7 @@ class TimeLineAdapter :
             VectorDrawableUtils.getDrawable(
                 holder.itemView.context,
                 R.drawable.ic_marker,
-                ContextCompat.getColor(holder.itemView.context, android.R.color.holo_blue_light)
+                ContextCompat.getColor(holder.itemView.context, R.color.marine)
             )
     }
 

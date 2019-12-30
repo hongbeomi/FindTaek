@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">FindTaek</string>
-    <string name="product_name_item">제품명:</string>
-    <string name="product_num_item">운송장 번호 :</string>
-    <string name="add_delivery_item">확인</string>
+    <string name="product_name_item">제품명</string>
+    <string name="product_num_item">운송장 번호</string>
+    <string name="add_delivery_item">조회하기</string>
     <string name="delete_image">제거 이미지</string>
+    <string name="add_delivery">택배 조회하기</string>
+    <string name="delivery_name">택배사 이름</string>
+    <string name="carrier_num_hint">-를 빼고 입력해주세요</string>
+    <string name="product_name_hint">추가할 물품 이름</string>
+    <string name="delete">삭제</string>
 </resources>
