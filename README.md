@@ -84,6 +84,7 @@
 
 - [**TimeLineView**] Vipulasri - https://github.com/vipulasri/Timeline-View
 - [**MVVM Architecture Example**] skydoves - https://github.com/skydoves/TheMovies2
+- [**Design By**] Jeongseo Lee - wjdtj981222@gmail.com
 
 <br>
 
