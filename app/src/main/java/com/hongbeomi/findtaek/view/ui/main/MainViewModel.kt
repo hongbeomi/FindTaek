@@ -14,7 +14,10 @@ import kotlinx.coroutines.*
  */
 
 class MainViewModel
-constructor(private val repository: DeliveryRepository) :
+constructor(
+    private val repository: DeliveryRepository,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+) :
     BaseViewModel() {
 
     companion object {
@@ -29,13 +32,13 @@ constructor(private val repository: DeliveryRepository) :
     }
 
     fun deleteDelivery(delivery: Delivery) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(ioDispatcher) {
             repository.deleteByRepository(delivery)
         }
     }
 
     fun rollbackDelivery(delivery: Delivery) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(ioDispatcher) {
             repository.rollbackByRepository(delivery)
         }
     }
@@ -43,7 +46,7 @@ constructor(private val repository: DeliveryRepository) :
     fun updateDelivery() {
         try {
             for (item in liveItemList.value!!) {
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(ioDispatcher) {
                     repository.loadDeliveryDataAndUpdate(item) {
                         showToast(it)
                     }
