@@ -7,7 +7,7 @@ import com.hongbeomi.findtaek.models.NetworkResponseModel
  * @author hongbeomi
  */
 
-class ErrorResponse(
+data class ErrorResponse(
 
     @SerializedName("message")
     val message: String

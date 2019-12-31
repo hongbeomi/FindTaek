@@ -54,8 +54,9 @@ constructor(private val client: DeliveryClient) :
     @SuppressLint("SimpleDateFormat")
     private fun getFormatterTime(time: String): String {
         return SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분")
-            .format(SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-                .parse(time))
+            .format(
+                SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(time)
+            )
     }
 
 }
