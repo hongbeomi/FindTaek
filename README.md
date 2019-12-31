@@ -36,6 +36,8 @@
 
 <br>
 
+[https://medium.com/@hongbeomi/findtaek-app-%EA%B0%9C%EB%B0%9C%EA%B8%B0-1-4223daf676bf](https://medium.com/@hongbeomi/findtaek-app-개발기-1-4223daf676bf)
+
 ## 🛠  Architecture - MVVM
 
 ![mvvm](https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/mvvm.png)
