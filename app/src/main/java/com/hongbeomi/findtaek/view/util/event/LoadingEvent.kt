@@ -7,12 +7,8 @@ import androidx.lifecycle.MutableLiveData
  * @author hongbeomi
  */
 
-fun showLoading() {
-    isLoading.postValue(View.VISIBLE)
-}
+fun showLoading() = isLoading.postValue(View.VISIBLE)
 
-fun hideLoading() {
-    isLoading.postValue(View.INVISIBLE)
-}
+fun hideLoading() = isLoading.postValue(View.INVISIBLE)
 
 val isLoading = MutableLiveData<Int>(View.INVISIBLE)
