@@ -1,4 +1,4 @@
-package com.hongbeomi.findtaek.repository.util
+package com.hongbeomi.findtaek.repository.utils
 
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.models.network.DeliveryResponse

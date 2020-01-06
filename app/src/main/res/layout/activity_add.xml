@@ -70,6 +70,7 @@
                 app:contentPadding="12dp">
 
                 <EditText
+                    android:id="@+id/product_name_edit_text"
                     android:importantForAutofill="no"
                     android:inputType="text"
                     android:maxLength="30"
@@ -105,6 +106,7 @@
                 app:contentPadding="12dp">
 
                 <EditText
+                    android:id="@+id/track_id_edit_text"
                     android:importantForAutofill="no"
                     android:gravity="center"
                     android:singleLine="true"
@@ -147,6 +149,7 @@
             </androidx.cardview.widget.CardView>
 
             <Button
+                android:id="@+id/insert_button"
                 android:background="@drawable/add_button_radius"
                 android:padding="8dp"
                 android:layout_marginStart="16dp"

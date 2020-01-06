@@ -4,7 +4,7 @@ import androidx.room.Room
 import com.hongbeomi.findtaek.db.DATABASE.DATABASE_DELIVERY
 import com.hongbeomi.findtaek.db.DeliveryDatabase
 import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module.module
+import org.koin.dsl.module
 
 /**
  * @author hongbeomi

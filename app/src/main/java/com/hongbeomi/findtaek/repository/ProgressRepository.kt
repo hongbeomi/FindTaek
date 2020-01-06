@@ -6,7 +6,7 @@ import com.hongbeomi.findtaek.api.ApiResponse
 import com.hongbeomi.findtaek.api.client.DeliveryClient
 import com.hongbeomi.findtaek.models.entity.Progress
 import com.hongbeomi.findtaek.models.network.DeliveryResponse
-import com.hongbeomi.findtaek.repository.util.Mapper
+import com.hongbeomi.findtaek.repository.utils.Mapper
 import java.text.SimpleDateFormat
 import kotlin.collections.ArrayList
 
