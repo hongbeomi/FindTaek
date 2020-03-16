@@ -1,8 +1,12 @@
-# What is FindTaek?
+# 🚧 🚧 FindTaek V2 🚧 🚧 👨‍💻 🛠 
 
 > MVVM 패턴을 적용한 Toy Project 입니다.
 
 ![image](https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/image.png)
+
+<br>
+
+[TOC]
 
 <br>
 
