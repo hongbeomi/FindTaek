@@ -1,15 +1,14 @@
-package com.hongbeomi.findtaek.view.util
+package com.hongbeomi.findtaek.view.ui.main
 
 import android.graphics.Canvas
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.hongbeomi.findtaek.view.ui.main.MainRecyclerAdapter
 
 /**
  * @author hongbeomi
  */
 
-class RecyclerItemTouchHelper(
+class MainRecyclerItemTouchHelper(
     dragDirs: Int,
     swipeDirs: Int,
     private val listener: RecyclerItemTouchHelperListener
@@ -64,4 +63,5 @@ class RecyclerItemTouchHelper(
     interface RecyclerItemTouchHelperListener {
         fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int)
     }
+
 }

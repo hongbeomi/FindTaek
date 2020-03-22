@@ -1,8 +1,9 @@
-package com.hongbeomi.findtaek.repository
+package com.hongbeomi.findtaek.data.repository
 
 import androidx.lifecycle.LiveData
-import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.models.dto.DeliveryResponse
+import com.hongbeomi.findtaek.models.dto.DeliveryResponse.Progresses
+import com.hongbeomi.findtaek.models.entity.Delivery
 
 /**
  * @author hongbeomi
@@ -11,6 +12,8 @@ import com.hongbeomi.findtaek.models.dto.DeliveryResponse
 interface Repository {
 
     suspend fun getData(carrierName: String, trackId: String): DeliveryResponse
+
+    suspend fun getProgresses(carrierName: String, trackId: String): ArrayList<Progresses>
 
     fun getAll(): LiveData<List<Delivery>>
 
@@ -21,7 +24,7 @@ interface Repository {
         deliveryResponse: DeliveryResponse
     )
 
-    suspend fun update(delivery: Delivery)
+    suspend fun updateAll(deliveryList: List<Delivery>)
 
     suspend fun rollback(delivery: Delivery)
 

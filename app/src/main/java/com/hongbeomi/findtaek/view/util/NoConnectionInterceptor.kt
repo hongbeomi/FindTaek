@@ -1,4 +1,4 @@
-package com.hongbeomi.findtaek.view.util.network
+package com.hongbeomi.findtaek.view.util
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -10,7 +10,6 @@ import java.io.IOException
 /**
  * @author hongbeomi
  */
-
 
 class NoConnectionInterceptor constructor(
     private val context: Context

@@ -10,14 +10,14 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "delivery")
 data class Delivery (
     @PrimaryKey(autoGenerate = true)
-    var id: Long?,
-    var fromName: String,
-    var fromTime: String,
-    var toName: String,
-    var toTime: String,
-    var carrierId: String,
-    var carrierName: String,
-    var productName: String,
-    var trackId: String,
-    var status: String
+    val id: Long?,
+    val fromName: String,
+    val fromTime: String,
+    val toName: String,
+    val toTime: String,
+    val carrierId: String,
+    val carrierName: String,
+    val productName: String,
+    val trackId: String,
+    val status: String
 )

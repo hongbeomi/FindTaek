@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.hongbeomi.findtaek.view.ui.add.AddFragmentViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout_add_top_area"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_add_bottom_sheet">
+
+            <ImageButton
+                android:id="@+id/imageButton_add_cancel"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:onClick="@{() -> vm.callOnClose()}"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/ic_baseline_close_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_add_header_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/scdream5"
+                android:text="@string/add_title_text"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView_add_chipGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/textView_add_header_title"
+                app:layout_constraintTop_toBottomOf="@id/textView_add_header_title">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroup_add_carrierName"
+                        android:layout_width="620dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        app:singleSelection="true" />
+                </RelativeLayout>
+            </HorizontalScrollView>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editText_add_product"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_add_fragment_text"
+                android:gravity="center"
+                android:hint="@string/add_product_name_hint_text"
+                android:minHeight="48dp"
+                android:padding="8dp"
+                android:text="@={vm.productName}"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/editTextBackgroundColor"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@id/horizontalScrollView_add_chipGroup"
+                app:layout_constraintStart_toStartOf="@id/textView_add_header_title"
+                app:layout_constraintTop_toBottomOf="@id/horizontalScrollView_add_chipGroup" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editText_add_track"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_add_fragment_text"
+                android:gravity="center"
+                android:hint="@string/add_carrier_number_hint_text"
+                android:minHeight="48dp"
+                android:padding="8dp"
+                android:text="@={vm.trackId}"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/editTextBackgroundColor"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@id/horizontalScrollView_add_chipGroup"
+                app:layout_constraintStart_toStartOf="@id/textView_add_header_title"
+                app:layout_constraintTop_toBottomOf="@id/editText_add_product" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_add_look_up"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_add_fragment_button"
+                android:enabled="@{vm.valid}"
+                android:fontFamily="@font/scdream7"
+                android:onClick="@{() -> vm.onClickInsertButton()}"
+                android:text="@string/add_button_text"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/horizontalScrollView_add_chipGroup"
+                app:layout_constraintStart_toStartOf="@id/textView_add_header_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@android:color/background_dark"
+            android:visibility="@{vm.isLoading}" />
+    </FrameLayout>
+</layout>

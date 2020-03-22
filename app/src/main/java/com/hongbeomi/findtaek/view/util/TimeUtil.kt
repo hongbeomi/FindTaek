@@ -1,12 +1,15 @@
-package com.hongbeomi.findtaek.repository.utils
+package com.hongbeomi.findtaek.view.util
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
 
+/**
+ * @author hongbeomi
+ */
+
 class TimeUtil {
 
     companion object {
-
         @JvmStatic
         @SuppressLint("SimpleDateFormat")
         fun getFormatterTime(time: String): String {
@@ -18,7 +21,6 @@ class TimeUtil {
         @JvmStatic
         fun determineTime(toTimeData: String?) =
             if (toTimeData.isNullOrEmpty()) "정보없음" else toTimeData.substring(0, 10)
-
     }
 
 }

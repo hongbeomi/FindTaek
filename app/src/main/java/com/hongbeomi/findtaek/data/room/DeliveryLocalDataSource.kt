@@ -1,6 +1,6 @@
-package com.hongbeomi.findtaek.data_source
+package com.hongbeomi.findtaek.data.room
 
-import com.hongbeomi.findtaek.db.DeliveryDao
+import com.hongbeomi.findtaek.data.room.dao.DeliveryDao
 import com.hongbeomi.findtaek.models.entity.Delivery
 
 /**
@@ -14,7 +14,7 @@ class DeliveryLocalDataSource(private val deliveryDao: DeliveryDao) : LocalDataS
 
     override suspend fun insert(delivery: Delivery) = deliveryDao.insert(delivery)
 
-    override suspend fun update(delivery: Delivery)= deliveryDao.update(delivery)
+    override suspend fun updateAll(deliveryList: List<Delivery>)= deliveryDao.updateAll(deliveryList)
 
     override suspend fun rollback(delivery: Delivery) = deliveryDao.insert(delivery)
 

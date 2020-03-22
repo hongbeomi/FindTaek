@@ -1,4 +1,4 @@
-package com.hongbeomi.findtaek.models.entity
+package com.hongbeomi.findtaek.models.dto
 
 /**
  * @author hongbeomi

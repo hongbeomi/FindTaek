@@ -1,7 +1,8 @@
-package com.hongbeomi.findtaek.db
+package com.hongbeomi.findtaek.data.room.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Query
 import com.hongbeomi.findtaek.models.entity.Delivery
 
 /**
@@ -9,18 +10,9 @@ import com.hongbeomi.findtaek.models.entity.Delivery
  */
 
 @Dao
-interface DeliveryDao {
+abstract class DeliveryDao : BaseDao<Delivery>() {
 
     @Query("SELECT * FROM delivery")
-    fun getAll(): LiveData<List<Delivery>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(delivery: Delivery)
-
-    @Update
-    suspend fun update(delivery: Delivery)
-
-    @Delete
-    suspend fun delete(delivery: Delivery)
+    abstract fun getAll(): LiveData<List<Delivery>>
 
 }

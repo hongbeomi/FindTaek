@@ -2,93 +2,123 @@ package com.hongbeomi.findtaek.view.ui.main
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.*
 import com.google.android.material.snackbar.Snackbar
-import com.hongbeomi.findtaek.R
-import com.hongbeomi.findtaek.core.BaseActivity
-import com.hongbeomi.findtaek.extension.sendFabButtonCoordinates
-import com.hongbeomi.findtaek.extension.swipeRefreshRecyclerView
+import com.hongbeomi.findtaek.data.worker.DeliveryWorker
+import com.hongbeomi.findtaek.databinding.ActivityMainBinding
 import com.hongbeomi.findtaek.models.entity.Delivery
-import com.hongbeomi.findtaek.view.adapter.MainAdapter
-import com.hongbeomi.findtaek.view.ui.main.MainViewModel.Companion.initEvent
-import com.hongbeomi.findtaek.view.ui.timeline.TimeLineActivity
-import com.hongbeomi.findtaek.view.util.RecyclerItemTouchHelper
-import com.hongbeomi.findtaek.view.util.TimeLineActivity.EXTRA_CARRIER_ID
-import com.hongbeomi.findtaek.view.util.TimeLineActivity.EXTRA_TRACK_ID
+import com.hongbeomi.findtaek.view.ui.add.AddDialogFragment
+import com.hongbeomi.findtaek.view.ui.base.BaseActivity
+import com.hongbeomi.findtaek.view.ui.timeline.TimeLineDialogFragment
+import com.hongbeomi.findtaek.view.util.KEY_WORK_DATA
+import com.hongbeomi.findtaek.view.util.ToastUtil.Companion.showShort
+import com.hongbeomi.findtaek.view.util.serializeToJson
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import com.hongbeomi.findtaek.R
+import java.util.concurrent.TimeUnit
 
 /**
  * @author hongbeomi
  */
 
-class MainActivity : BaseActivity(), RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
+class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
 
-    private lateinit var adapter: MainAdapter
-    private lateinit var mainViewModel: MainViewModel
+    private val binding by binding<ActivityMainBinding>(R.layout.activity_main)
+    private lateinit var viewModel: MainViewModel
+    private lateinit var adapter: MainRecyclerAdapter
+    private val workManager = WorkManager.getInstance(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
-        mainViewModel = getViewModel()
-
-        adapter = MainAdapter { delivery ->
-            startActivity<TimeLineActivity>(
-                EXTRA_TRACK_ID to delivery.trackId,
-                EXTRA_CARRIER_ID to delivery.carrierId
-            )
+        setSupportActionBar(binding.toolbarMain)
+        viewModel = getViewModel()
+        binding.apply {
+            lifecycleOwner = this@MainActivity
+            vm = viewModel
         }
-
-        initRecyclerView(recycler_view, adapter)
-
-        mainViewModel.also {
-            it.observeToast(this) { message -> toast(message) }
-            it.getAllDelivery().observe(this, Observer<List<Delivery>> { deliveryList ->
-                adapter.setItemList(deliveryList)
-
-                if (initEvent.value == null) {
-                    initEvent.value = true
-                }
-            })
-            it.observeInit(this) {
-                mainViewModel.updateDelivery()
-            }
-        }
-
-        RecyclerItemTouchHelper(0, ItemTouchHelper.RIGHT, this).let {
-            ItemTouchHelper(it).attachToRecyclerView(recycler_view)
-        }
-
-        swipeRefreshRecyclerView(swipe_layout, mainViewModel)
-        floating_button.setOnClickListener { v -> sendFabButtonCoordinates(v) }
+        initObserver()
+        setRecyclerView()
+        setSwipeRefresh()
     }
 
-    override fun onPause() {
-        initEvent.value = null
-        super.onPause()
+    private fun setRecyclerView() {
+        adapter = MainRecyclerAdapter { delivery ->
+            viewModel.getProgressesList(delivery.carrierName, delivery.trackId) {
+                TimeLineDialogFragment.newInstance(it).show(supportFragmentManager, null)
+            }
+        }
+        binding.recyclerViewMain.adapter = this.adapter
+        MainRecyclerItemTouchHelper(0, ItemTouchHelper.RIGHT, this).let {
+            ItemTouchHelper(it).attachToRecyclerView(binding.recyclerViewMain)
+        }
+    }
+
+    private fun initObserver() {
+        viewModel.apply {
+            allDeliveryList.observe(::getLifecycle) {
+                adapter.setItemList(it)
+                binding.recyclerViewMain.scheduleLayoutAnimation()
+            }
+            isRefresh.observe(::getLifecycle) {
+                it?.let {
+                    if (it) showShort(R.string.main_complete_list_update)
+                    else showShort(R.string.main_list_empty)
+                    binding.swipeLayout.isRefreshing = false
+                }
+            }
+            onSendCoordinatesEvent.observe(::getLifecycle) {
+                AddDialogFragment().show(supportFragmentManager, null)
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        startWork(viewModel.allDeliveryList.value)
+    }
+
+    private fun startWork(deliveryList: List<Delivery>?) {
+        val deliveryWork = PeriodicWorkRequest.Builder(
+            DeliveryWorker::class.java, 1, TimeUnit.HOURS
+        ).setConstraints(
+            Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
+        ).setInputData(
+            workDataOf(Pair(KEY_WORK_DATA, serializeToJson(deliveryList)))
+        ).build()
+
+        workManager.apply {
+            cancelAllWork()
+            enqueue(deliveryWork)
+        }
+    }
+
+    private fun setSwipeRefresh() {
+        binding.swipeLayout.apply {
+            setColorSchemeResources(android.R.color.holo_blue_light)
+            setOnRefreshListener { viewModel.updateAll() }
+        }
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {
         val deletedItem = adapter.getItemPosition(position)
+        viewModel.delete(deletedItem)
+        showSnackBar(deletedItem)
+    }
 
-        mainViewModel.deleteDelivery(deletedItem)
-
-        Snackbar.make(coordinator, "물품 삭제완료", Snackbar.LENGTH_LONG)
+    private fun showSnackBar(deleteItem: Delivery) {
+        Snackbar
+            .make(coordinator, getString(R.string.main_delete_complete), Snackbar.LENGTH_LONG)
             .setTextColor(ContextCompat.getColor(this, R.color.marine))
-            .setAction("취소") {
-                mainViewModel.rollbackDelivery(deletedItem)
-            }
+            .setAction(getString(R.string.main_snackbar_cancel)) { viewModel.rollback(deleteItem) }
             .setActionTextColor(Color.WHITE)
             .also {
-                val snackBarView: View = it.view
-                snackBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.snackBarColor))
+                it.view.setBackgroundColor(
+                    ContextCompat.getColor(this, R.color.snackBarColor)
+                )
             }
             .show()
     }

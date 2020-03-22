@@ -1,64 +1,62 @@
 package com.hongbeomi.findtaek.view.ui.main
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import com.hongbeomi.findtaek.data.repository.Repository
+import com.hongbeomi.findtaek.models.CoroutineDispatcherProvider
+import com.hongbeomi.findtaek.models.dto.DeliveryResponse.Progresses
 import com.hongbeomi.findtaek.models.entity.Delivery
-import com.hongbeomi.findtaek.core.BaseViewModel
-import com.hongbeomi.findtaek.repository.DeliveryRepository
-import com.hongbeomi.findtaek.view.util.event.InitListEvent
-import kotlinx.coroutines.*
+import com.hongbeomi.findtaek.view.ui.base.BaseViewModel
+import com.hongbeomi.findtaek.view.util.SingleLiveEvent
+import kotlinx.coroutines.launch
 
 /**
  * @author hongbeomi
  */
 
-class MainViewModel
-constructor(
-    private val repository: DeliveryRepository,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) :
-    BaseViewModel() {
+class MainViewModel(
+    private val dispatcher: CoroutineDispatcherProvider,
+    private val repository: Repository
+) : BaseViewModel() {
 
-    companion object {
-        val initEvent = InitListEvent()
-    }
+    val onSendCoordinatesEvent = SingleLiveEvent<Unit>()
 
-    private lateinit var liveItemList: LiveData<List<Delivery>>
+    val isRefresh: MutableLiveData<Boolean?> = MutableLiveData()
+    val allDeliveryList = liveData { emitSource(repository.getAll()) }
 
-    fun getAllDelivery(): LiveData<List<Delivery>> {
-        liveItemList = repository.getAllByRepository()
-        return liveItemList
-    }
+    fun callSendCoordinates() = onSendCoordinatesEvent.call()
 
-    fun deleteDelivery(delivery: Delivery) {
-        viewModelScope.launch(ioDispatcher) {
-            repository.deleteByRepository(delivery)
-        }
-    }
+    fun delete(delivery: Delivery) =
+        viewModelScope.launch(dispatcher.io) { repository.delete(delivery) }
 
-    fun rollbackDelivery(delivery: Delivery) {
-        viewModelScope.launch(ioDispatcher) {
-            repository.rollbackByRepository(delivery)
-        }
-    }
+    fun rollback(delivery: Delivery) =
+        viewModelScope.launch(dispatcher.io) { repository.rollback(delivery) }
 
-    fun updateDelivery() {
-        try {
-            for (item in liveItemList.value!!) {
-                viewModelScope.launch(ioDispatcher) {
-                    repository.loadDeliveryDataAndUpdate(item) {
-                        showToast(it)
-                    }
+    fun updateAll() = viewModelScope.launch(dispatcher.io) {
+        if (allDeliveryList.value.isNullOrEmpty())
+            isRefresh.postValue(false)
+        else {
+            allDeliveryList.value!!
+                .map {
+                    handle { repository.getData(it.carrierName, it.trackId) }?.toDelivery(
+                        it.id, it.carrierName, it.productName, it.trackId
+                    )
                 }
-            }
-        } catch (e: NullPointerException) {
-            showToast("리스트가 비었습니다!")
+                .apply { repository.updateAll(this.filterNotNull()) }
+            isRefresh.postValue(true)
         }
     }
 
-    fun observeInit(lifecycleOwner: LifecycleOwner, observer: (Boolean) -> Unit) =
-        initEvent.observe(lifecycleOwner, observer)
+    fun getProgressesList(
+        carrierName: String,
+        trackId: String,
+        action: (ArrayList<Progresses>) -> Unit
+    ) = viewModelScope.launch(dispatcher.io) {
+        showLoading()
+        handle { repository.getProgresses(carrierName, trackId) }?.let { action(it) }
+        hideLoading()
+    }
 
 }
 

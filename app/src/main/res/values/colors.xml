@@ -4,8 +4,11 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="marine">#012060</color>
+
     <color name="whiteMarine">#e5e8ef</color>
+    <color name="disable">#9F9FA8</color>
     <color name="snackBarColor">#c0c7d4</color>
     <color name="yellow">#ffc832</color>
     <color name="splash_background">#002060</color>
+    <color name="editTextBackgroundColor">#c8c8c8</color>
 </resources>

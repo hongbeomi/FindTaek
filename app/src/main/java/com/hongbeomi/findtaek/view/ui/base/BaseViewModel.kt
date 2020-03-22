@@ -1,14 +1,18 @@
-package com.hongbeomi.findtaek.view.base
+package com.hongbeomi.findtaek.view.ui.base
 
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
-import com.hongbeomi.findtaek.view.util.network.NoConnectionInterceptor
-import com.hongbeomi.findtaek.models.Result
-import com.hongbeomi.findtaek.models.entity.ErrorResponse
+import com.hongbeomi.findtaek.R
+import com.hongbeomi.findtaek.models.dto.ErrorResponse
+import com.hongbeomi.findtaek.view.util.NoConnectionInterceptor
 import com.hongbeomi.findtaek.view.util.ToastUtil.Companion.showShort
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import kotlin.coroutines.coroutineContext
 
@@ -22,15 +26,15 @@ abstract class BaseViewModel : ViewModel() {
     open fun showLoading() = isLoading.postValue(View.VISIBLE)
     open fun hideLoading() = isLoading.postValue(View.INVISIBLE)
 
-    open fun onError(e: Exception) {
+    open fun onError(t: Throwable) {
         viewModelScope.launch {
-            when (e) {
+            when (t) {
                 is NoConnectionInterceptor.NoConnectivityException ->
-                    showShort("인터넷 연결이 끊어졌습니다!")
-                is HttpException -> showShort(getErrorMessage(e))
+                    showShort(R.string.base_error_no_connect_network)
+                is HttpException -> showShort(getErrorMessage(t))
                 else -> {
-                    Log.e("ERROR", "${e.message}")
-                    showShort("알 수 없는 오류가 발생했습니다")
+                    showShort(R.string.base_error_unknown)
+                    Log.e("ERROR", "${t.message}")
                 }
             }
             hideLoading()
@@ -45,17 +49,13 @@ abstract class BaseViewModel : ViewModel() {
         return errorDto?.message ?: "UnknownException"
     }
 
-    suspend fun <T> handle(caller: suspend () -> Result<T>): T? {
+    suspend fun <T> handle(call: suspend () -> T): T? {
         return withContext(CoroutineScope(coroutineContext).coroutineContext) {
-            caller.invoke().let {
-                when (it) {
-                    is Result.Success -> it.data
-                    is Result.Error -> {
-                        onError(it.exception)
-                        null
-                    }
+            call.runCatching { this.invoke() }
+                .getOrElse {
+                    onError(it)
+                    null
                 }
-            }
         }
     }
 

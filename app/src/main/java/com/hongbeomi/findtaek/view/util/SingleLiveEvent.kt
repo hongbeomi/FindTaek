@@ -1,4 +1,4 @@
-package com.hongbeomi.findtaek.view.util.event
+package com.hongbeomi.findtaek.view.util
 
 import android.util.Log
 import androidx.annotation.MainThread

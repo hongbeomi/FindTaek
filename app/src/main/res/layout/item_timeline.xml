@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="progress"
+            type="com.hongbeomi.findtaek.models.dto.DeliveryResponse.Progresses" />
+        <import type="com.hongbeomi.findtaek.view.util.TimeUtil" />
+
+    </data>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
@@ -8,7 +17,7 @@
     android:orientation="horizontal">
 
     <com.github.vipulasri.timelineview.TimelineView
-        android:id="@+id/timeline_view"
+        android:id="@+id/timelineView_line"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:endLineColor="@android:color/white"
@@ -35,7 +44,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/progress_status_text"
+                android:id="@+id/textView_timeline_progress_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -43,6 +52,7 @@
                 android:fontFamily="@font/scdream6"
                 android:textColor="@color/marine"
                 android:textStyle="bold"
+                android:text="@{progress.status.text}"
                 tool:text="상품인수" />
 
             <LinearLayout
@@ -52,36 +62,37 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/progress_time_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:textSize="12sp"
+                    android:textColor="@android:color/black"
                     android:fontFamily="@font/scdream3"
+                    android:text="@{TimeUtil.getFormatterTime(progress.time)}"
                     tool:text="2019-12-13" />
 
                 <TextView
-                    android:id="@+id/progress_location_name_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/scdream5"
                     android:textColor="@color/marine"
+                    android:text="@{progress.location.name}"
                     tool:text="옥천HUB" />
 
                 <TextView
                     android:gravity="fill_horizontal"
-                    android:id="@+id/progress_description_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/scdream3"
+                    android:textColor="@android:color/black"
+                    android:text="@{progress.description}"
                     tool:text="고객님의 상품을 배송합니다." />
             </LinearLayout>
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
-
 </LinearLayout>
+</layout>

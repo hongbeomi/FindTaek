@@ -1,45 +1,53 @@
 package com.hongbeomi.findtaek.view.ui.timeline
 
-import android.content.Context
+import android.app.Dialog
+import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.databinding.DataBindingUtil
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hongbeomi.findtaek.R
-import com.hongbeomi.findtaek.databinding.ActivityTimelineBinding
-import com.hongbeomi.findtaek.databinding.DialogTimelineBinding
-import com.hongbeomi.findtaek.models.entity.DeliveryResponse
-import com.hongbeomi.findtaek.view.ui.main.MainViewModel
+import com.hongbeomi.findtaek.databinding.FragmentTimelineBinding
+import com.hongbeomi.findtaek.models.dto.DeliveryResponse
+import com.hongbeomi.findtaek.view.ui.base.BaseBottomSheetDialogFragment
 
-class TimeLineDialog(
-    context: Context
-//    private val viewModel: MainViewModel,
-//    private val carrierId: String,
-//    private val trackId: String
-//    private val list: ArrayList<DeliveryResponse.Progresses>
-) : BottomSheetDialog(context) {
+/**
+ * @author hongbeomi
+ */
 
-    val binding = DialogTimelineBinding.inflate(
-        layoutInflater,
-        layoutInflater.inflate(R.layout.dialog_timeline, null) as ViewGroup,
-        false
-    )
-    lateinit var adapter: TimeLineRecyclerAdapter
+
+class TimeLineDialogFragment : BaseBottomSheetDialogFragment() {
+
+    companion object {
+        const val PROGRESSES = "progresses"
+        fun newInstance(
+            progresses: ArrayList<DeliveryResponse.Progresses>
+        ) = TimeLineDialogFragment().apply {
+            arguments = Bundle().apply { putParcelableArrayList(PROGRESSES, progresses) }
+        }
+    }
+
+    private lateinit var adapter: TimeLineRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        val binding = DialogTimelineBinding.inflate(
-//            layoutInflater,
-//            layoutInflater.inflate(R.layout.dialog_timeline, null) as ViewGroup,
-//            false
-//        )
-        setContentView(binding.root)
         adapter = TimeLineRecyclerAdapter()
-
-//        viewModel.getProgressesList(carrierId, trackId)
-//        adapter.setItemList(list)
-//        binding = DataBindingUtil.bind(R.layout.dialog_timeline)
-        binding.timelineDialogRecyclerView.adapter = adapter
+        adapter.setItemList(arguments?.getParcelableArrayList(PROGRESSES)!!)
     }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) = DataBindingUtil.inflate<FragmentTimelineBinding>(
+        inflater,
+        R.layout.fragment_timeline, container, false
+    ).apply {
+        lifecycleOwner = viewLifecycleOwner
+        this.timelineDialogRecyclerView.adapter = adapter
+    }.root
 
 }

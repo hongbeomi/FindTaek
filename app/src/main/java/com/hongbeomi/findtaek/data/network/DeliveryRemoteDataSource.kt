@@ -1,4 +1,4 @@
-package com.hongbeomi.findtaek.data_source
+package com.hongbeomi.findtaek.data.network
 
 
 /**
@@ -11,6 +11,6 @@ class DeliveryRemoteDataSource(
 ): RemoteDataSource {
 
     override suspend fun getData(carrierId: String?, trackId: String) =
-         deliveryService.getData(carrierId ?: "null", trackId)
+         deliveryService.getData(carrierId ?: "unknown", trackId)
 
 }

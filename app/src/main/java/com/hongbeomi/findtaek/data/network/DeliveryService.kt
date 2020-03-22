@@ -1,6 +1,6 @@
-package com.hongbeomi.findtaek.data_source
+package com.hongbeomi.findtaek.data.network
 
-import com.hongbeomi.findtaek.models.entity.DeliveryResponse
+import com.hongbeomi.findtaek.models.dto.DeliveryResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 

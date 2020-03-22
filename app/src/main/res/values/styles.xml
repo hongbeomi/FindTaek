@@ -1,23 +1,11 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents">
         <!-- Customize your theme here. -->
-        <item name="android:windowDisablePreview">true</item>
-        <item name="colorPrimary">@android:color/black</item>
-        <item name="colorPrimaryDark">@android:color/black</item>
-        <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:textColorSecondary">@android:color/white</item>
-    </style>
-
-    <style name="AppTheme.Transparent" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
     <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Medium">
@@ -33,10 +21,8 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="CardLabel" parent="CardView">
-        <item name="android:textColorHint">@android:color/black</item>
-        <item name="colorControlNormal">@color/whiteMarine</item>
-        <item name="colorControlActivated">#3260cb</item>
+    <style name="AppBottomSheetDialogStyle" parent="Theme.MaterialComponents.BottomSheetDialog">
+        <item name="android:colorBackground">@android:color/transparent</item>
     </style>
 
 </resources>

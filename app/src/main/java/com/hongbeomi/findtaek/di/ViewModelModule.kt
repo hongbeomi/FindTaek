@@ -1,8 +1,7 @@
 package com.hongbeomi.findtaek.di
 
-import com.hongbeomi.findtaek.view.ui.add.AddViewModel
+import com.hongbeomi.findtaek.view.ui.add.AddFragmentViewModel
 import com.hongbeomi.findtaek.view.ui.main.MainViewModel
-import com.hongbeomi.findtaek.view.ui.timeline.TimeLineViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -11,7 +10,8 @@ import org.koin.dsl.module
  */
 
 val viewModelModule = module {
-    viewModel { AddViewModel(get()) }
-    viewModel { MainViewModel(get()) }
-    viewModel { TimeLineViewModel(get()) }
+
+    viewModel { AddFragmentViewModel(repository = get(), dispatcher = get()) }
+    viewModel { MainViewModel(repository = get(), dispatcher = get()) }
+
 }

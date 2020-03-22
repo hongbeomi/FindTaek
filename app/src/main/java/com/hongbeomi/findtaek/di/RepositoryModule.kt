@@ -1,7 +1,7 @@
 package com.hongbeomi.findtaek.di
 
-import com.hongbeomi.findtaek.repository.DeliveryRepository
-import com.hongbeomi.findtaek.repository.ProgressRepository
+import com.hongbeomi.findtaek.data.repository.DeliveryRepository
+import com.hongbeomi.findtaek.data.repository.Repository
 import org.koin.dsl.module
 
 /**
@@ -9,6 +9,7 @@ import org.koin.dsl.module
  */
 
 val repositoryModule = module {
-    single { DeliveryRepository(get(), get()) }
-    single { ProgressRepository(get()) }
+
+    single<Repository> { DeliveryRepository(localDataSource = get(), remoteDataSource = get()) }
+
 }

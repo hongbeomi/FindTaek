@@ -1,83 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="73dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="64dp"
-    android:background="@drawable/bg_notifycation"
+    android:background="@color/marine"
     android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|start"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
+        android:layout_toStartOf="@id/rea"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/item_notify_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/scdream9"
-            android:text="FindTaek"
+            android:text=""
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textSize="14sp"
+            tools:text="CJ대한통운 - 운송장번호 : 123412341234"/>
 
         <TextView
             android:id="@+id/item_notify_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/scdream3"
-            android:text="주문하신 택배의 배송이 시작되었습니다"
+            android:layout_marginTop="2dp"
+            android:text="@string/view_notification_content_title"
             android:textColor="@android:color/white"
             android:textSize="12sp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/rea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true">
 
         <ImageView
             android:id="@+id/imageView_notify_icon"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_gravity="center_vertical|end"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/splash_findtaek" />
-    </LinearLayout>
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/item_notify_title"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="FindTaek"-->
-    <!--        android:fontFamily="@font/scdream9"-->
-    <!--        android:textColor="@android:color/white"-->
-    <!--        android:textSize="16sp"-->
-    <!--        android:layout_marginStart="16dp"-->
-    <!--        app:layout_constraintBottom_toTopOf="@id/item_notify_subtitle"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"/>-->
-    <!--    <TextView-->
-    <!--        android:id="@+id/item_notify_subtitle"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="주문하신 택배의 배송이 시작되었습니다"-->
-    <!--        android:fontFamily="@font/scdream3"-->
-    <!--        android:textColor="@android:color/white"-->
-    <!--        android:textSize="12sp"-->
-    <!--        app:layout_constraintStart_toStartOf="@id/item_notify_title"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/item_notify_title"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/imageView_notify_icon"-->
-    <!--        android:layout_width="64dp"-->
-    <!--        android:layout_height="64dp"-->
-    <!--        android:layout_marginEnd="16dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        tools:src="@drawable/splash_findtaek"/>-->
-</LinearLayout>
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/splash_findtaek"/>
+        <TextView
+            android:id="@+id/textView_notify_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:includeFontPadding="false"
+            android:textColor="@android:color/white"
+            android:textAppearance="@style/TextAppearance.Compat.Notification.Title"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp"
+            android:layout_below="@id/imageView_notify_icon"/>
+    </RelativeLayout>
+</RelativeLayout>

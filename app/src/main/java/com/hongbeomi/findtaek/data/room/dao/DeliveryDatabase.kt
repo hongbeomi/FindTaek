@@ -1,8 +1,7 @@
-package com.hongbeomi.findtaek.db
+package com.hongbeomi.findtaek.data.room.dao
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.hongbeomi.findtaek.data.room.dao.DeliveryDao
 import com.hongbeomi.findtaek.data.room.dao.DATABASE.DATABASE_DELIVERY_VERSION
 import com.hongbeomi.findtaek.models.entity.Delivery
 

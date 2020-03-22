@@ -1,4 +1,4 @@
-package com.hongbeomi.findtaek.db
+package com.hongbeomi.findtaek.data.room.dao
 
 /**
  * @author hongbeomi

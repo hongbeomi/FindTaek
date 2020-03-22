@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<layout>
+    <data>
+        <variable
+            name="vm"
+            type="com.hongbeomi.findtaek.view.ui.main.MainViewModel" />
+    </data>
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/coordinator"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,15 +17,15 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="242dp"
+        android:layout_height="240dp"
         android:background="@color/marine"
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="242dp"
+            android:layout_height="240dp"
             app:contentScrim="@color/marine"
-            app:expandedTitleMarginBottom="28dp"
+            app:expandedTitleMarginBottom="24dp"
             app:expandedTitleMarginStart="16dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:collapsedTitleTextAppearance="@style/CollapsedAppBar"
@@ -26,7 +33,7 @@
             app:title="FindTaek">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/toolbar_main"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_margin="8dp"
@@ -37,35 +44,46 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-
-        android:id="@+id/swipe_layout">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recyclerView_main"
         android:background="@color/whiteMarine"
         android:layout_width="match_parent"
-        tools:listitem="@layout/item_main"
         android:layout_height="match_parent"
+        android:layoutAnimation="@anim/anim_item_main"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_main"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_button"
+        android:id="@+id/floatingButton_main"
         android:src="@drawable/ic_add_white_48dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
+        android:onClick="@{() -> vm.callSendCoordinates()}"
         app:fabSize="normal"
-        app:layout_anchor="@id/recycler_view"
+        app:tint="@android:color/white"
+        app:layout_anchor="@id/recyclerView_main"
         app:layout_anchorGravity="bottom|right|end"
         app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"
         app:backgroundTint="@color/yellow"
         app:rippleColor="@android:color/white" />
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@android:color/background_dark"
+        android:visibility="@{vm.isLoading}" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
