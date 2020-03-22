@@ -35,6 +35,9 @@ buildscript {
 
         // work manager
         workManagerVersion = '2.3.3'
+
+        // intro view
+        introViewVersion = '1.6.0'
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.3'

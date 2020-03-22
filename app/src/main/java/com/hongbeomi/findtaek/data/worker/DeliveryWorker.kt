@@ -1,7 +1,6 @@
 package com.hongbeomi.findtaek.data.worker
 
 import android.content.Context
-import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.hongbeomi.findtaek.data.repository.Repository
@@ -23,8 +22,6 @@ class DeliveryWorker(
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         val repository: Repository by inject()
-
-        Log.w("WorkManager 작업 시작", "########################################")
 
         val data: List<Delivery>? = deserializeFromJson(inputData.getString(KEY_WORK_DATA))
 

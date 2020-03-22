@@ -30,7 +30,8 @@ class DeliveryRepository(
         deliveryResponse: DeliveryResponse
     ) = localDataSource.insert(deliveryResponse.toDelivery(null, carrierName, productName, trackId))
 
-    override suspend fun updateAll(deliveryList: List<Delivery>) = localDataSource.updateAll(deliveryList)
+    override suspend fun updateAll(deliveryList: List<Delivery>) =
+        localDataSource.updateAll(deliveryList)
 
     override suspend fun rollback(delivery: Delivery) = localDataSource.rollback(delivery)
 

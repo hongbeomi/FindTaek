@@ -1,14 +1,9 @@
 package com.hongbeomi.findtaek.view.ui.timeline
 
-import android.app.Dialog
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.databinding.DataBindingUtil
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.databinding.FragmentTimelineBinding
 import com.hongbeomi.findtaek.models.dto.DeliveryResponse

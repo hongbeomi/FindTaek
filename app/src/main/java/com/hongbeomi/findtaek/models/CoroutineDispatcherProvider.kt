@@ -7,7 +7,6 @@ import kotlinx.coroutines.Dispatchers
  * @author hongbeomi
  */
 
-
 data class CoroutineDispatcherProvider(
     val main: CoroutineDispatcher = Dispatchers.Main,
     val computation: CoroutineDispatcher = Dispatchers.Default,

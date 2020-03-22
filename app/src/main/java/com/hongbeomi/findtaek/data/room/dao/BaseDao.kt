@@ -1,6 +1,9 @@
 package com.hongbeomi.findtaek.data.room.dao
 
-import androidx.room.*
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Update
 
 /**
  * @author hongbeomi

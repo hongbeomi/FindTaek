@@ -17,9 +17,12 @@
     <string name="main_list_empty">리스트가 비었습니다</string>
     <string name="main_delete_complete">삭제완료</string>
     <string name="main_snackbar_cancel">취소</string>
+    <string name="main_intro_add_button">버튼을 눌러서 택배를 추가할 수 있습니다.</string>
+    <string name="main_intro_delivery_item">추가한 물품을 오른쪽으로 밀어서 삭제할 수 있고 아래로 당기면 리스트가 업데이트 됩니다.</string>
 
     <string name="view_notification_content_title">주문하신 물품의 배송이 시작되었습니다</string>
 
     <string name="base_error_unknown">알 수 없는 오류가 발생했습니다</string>
     <string name="base_error_no_connect_network">인터넷 연결이 끊어졌습니다!</string>
+    <string name="dialog_guide_close_text">확인</string>
 </resources>

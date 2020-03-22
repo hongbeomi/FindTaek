@@ -2,7 +2,6 @@ package com.hongbeomi.findtaek.models.dto
 
 import android.os.Parcelable
 import com.hongbeomi.findtaek.models.entity.Delivery
-import com.hongbeomi.findtaek.view.util.CarrierIdUtil
 import com.hongbeomi.findtaek.view.util.CarrierIdUtil.Companion.convertId
 import com.hongbeomi.findtaek.view.util.TimeUtil
 import kotlinx.android.parcel.Parcelize

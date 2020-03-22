@@ -6,19 +6,21 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.*
+import co.mobiwise.materialintro.shape.ShapeType
 import com.google.android.material.snackbar.Snackbar
+import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.data.worker.DeliveryWorker
 import com.hongbeomi.findtaek.databinding.ActivityMainBinding
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.view.ui.add.AddDialogFragment
 import com.hongbeomi.findtaek.view.ui.base.BaseActivity
 import com.hongbeomi.findtaek.view.ui.timeline.TimeLineDialogFragment
+import com.hongbeomi.findtaek.view.util.IntroUtil.Companion.initIntro
 import com.hongbeomi.findtaek.view.util.KEY_WORK_DATA
 import com.hongbeomi.findtaek.view.util.ToastUtil.Companion.showShort
 import com.hongbeomi.findtaek.view.util.serializeToJson
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
-import com.hongbeomi.findtaek.R
 import java.util.concurrent.TimeUnit
 
 /**
@@ -32,10 +34,24 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
     private lateinit var adapter: MainRecyclerAdapter
     private val workManager = WorkManager.getInstance(this)
 
+    companion object {
+        const val KEY_INTRO_ADD_BUTTON = "key_intro_add_button"
+        const val KEY_INTRO_DELIVERY_ITEM = "key_intro_delivery_item"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(binding.toolbarMain)
         viewModel = getViewModel()
+
+        initIntro(
+            view = binding.floatingButtonMain,
+            activity = this,
+            text = getString(R.string.main_intro_add_button),
+            key = KEY_INTRO_ADD_BUTTON,
+            shapeType = ShapeType.CIRCLE
+        )
+
         binding.apply {
             lifecycleOwner = this@MainActivity
             vm = viewModel
@@ -46,7 +62,7 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
     }
 
     private fun setRecyclerView() {
-        adapter = MainRecyclerAdapter { delivery ->
+        adapter = MainRecyclerAdapter(this) { delivery ->
             viewModel.getProgressesList(delivery.carrierName, delivery.trackId) {
                 TimeLineDialogFragment.newInstance(it).show(supportFragmentManager, null)
             }

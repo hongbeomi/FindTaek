@@ -7,7 +7,6 @@ import com.hongbeomi.findtaek.models.entity.Delivery
  * @author hongbeomi
  */
 
-
 class DeliveryLocalDataSource(private val deliveryDao: DeliveryDao) : LocalDataSource {
 
     override fun getAll() = deliveryDao.getAll()

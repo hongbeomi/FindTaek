@@ -1,6 +1,7 @@
 package com.hongbeomi.findtaek.view.ui.add
 
 import android.app.Dialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.hongbeomi.findtaek.databinding.FragmentAddBinding
 import com.hongbeomi.findtaek.view.ui.base.BaseBottomSheetDialogFragment
 import com.hongbeomi.findtaek.view.util.CarrierIdUtil
 import com.hongbeomi.findtaek.view.util.ToastUtil
+import org.jetbrains.anko.textColor
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class AddDialogFragment : BaseBottomSheetDialogFragment() {
@@ -69,6 +71,7 @@ class AddDialogFragment : BaseBottomSheetDialogFragment() {
                     isClickable = true
                     elevation = 4f
                     setIconStartPaddingResource(R.dimen.chip_padding_start)
+                    textColor = Color.WHITE
                     checkedIcon =
                         resources.getDrawable(R.drawable.ic_outline_local_shipping_24)
                     chipBackgroundColor =

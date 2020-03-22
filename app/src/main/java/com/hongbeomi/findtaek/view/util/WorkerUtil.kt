@@ -35,14 +35,20 @@ fun sendNotification(context: Context, carrierName: String, trackId: String) {
     val notificationManager =
         context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-    val contentIntent = PendingIntent.getActivity(context, 0,
+    val contentIntent = PendingIntent.getActivity(
+        context, 0,
         Intent(context, SplashActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT
     )
 
     val notification = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL)
         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         .setSmallIcon(R.drawable.splash_findtaek)
-        .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.drawable.ic_app_notification))
+        .setLargeIcon(
+            BitmapFactory.decodeResource(
+                context.resources,
+                R.drawable.ic_app_notification
+            )
+        )
         .setStyle(androidx.media.app.NotificationCompat.MediaStyle())
         .setContentTitle(context.getString(R.string.view_notification_content_title))
         .setContentText("$carrierName - 운송장 번호 : $trackId")

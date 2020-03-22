@@ -8,6 +8,10 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hongbeomi.findtaek.R
 
+/**
+ * @author hongbeomi
+ */
+
 open class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

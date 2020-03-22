@@ -1,20 +1,24 @@
 package com.hongbeomi.findtaek.view.ui.main
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import co.mobiwise.materialintro.shape.ShapeType
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.databinding.ItemMainBinding
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.view.ui.main.MainRecyclerAdapter.Status.*
+import com.hongbeomi.findtaek.view.util.IntroUtil.Companion.initIntro
 
 /**
  * @author hongbeomi
  */
 
 class MainRecyclerAdapter(
+    private val activity: Activity,
     private val itemClick: (Delivery) -> Unit
 ) : RecyclerView.Adapter<MainRecyclerAdapter.ViewHolder>() {
 
@@ -30,8 +34,18 @@ class MainRecyclerAdapter(
 
     override fun getItemCount() = itemList.size
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) =
-        viewHolder.bind(itemList[position])
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        if (itemList.isNotEmpty()) {
+            initIntro(
+                view = viewHolder.itemView,
+                activity = activity,
+                text = activity.getString(R.string.main_intro_delivery_item),
+                key = MainActivity.KEY_INTRO_DELIVERY_ITEM,
+                shapeType = ShapeType.RECTANGLE
+            )
+        }
+        return viewHolder.bind(itemList[position])
+    }
 
     fun setItemList(itemList: List<Delivery>) {
         this.itemList = itemList

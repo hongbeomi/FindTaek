@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
  */
 
 @Entity(tableName = "delivery")
-data class Delivery (
+data class Delivery(
     @PrimaryKey(autoGenerate = true)
     val id: Long?,
     val fromName: String,

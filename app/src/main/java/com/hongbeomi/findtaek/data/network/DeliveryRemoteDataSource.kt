@@ -8,9 +8,9 @@ package com.hongbeomi.findtaek.data.network
 
 class DeliveryRemoteDataSource(
     private val deliveryService: DeliveryService
-): RemoteDataSource {
+) : RemoteDataSource {
 
     override suspend fun getData(carrierId: String?, trackId: String) =
-         deliveryService.getData(carrierId ?: "unknown", trackId)
+        deliveryService.getData(carrierId ?: "unknown", trackId)
 
 }
