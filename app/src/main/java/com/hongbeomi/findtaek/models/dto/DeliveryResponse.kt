@@ -19,12 +19,12 @@ data class DeliveryResponse(
 ) : NetworkResponse {
     data class From(
         val name: String,
-        val time: String
+        val time: String?
     )
 
     data class To(
         val name: String,
-        val time: String
+        val time: String?
     )
 
     data class State(
@@ -57,7 +57,7 @@ data class DeliveryResponse(
         Delivery(
             id = id,
             fromName = from.name,
-            fromTime = from.time,
+            fromTime = from.time ?: "정보없음",
             toName = to.name,
             toTime = TimeUtil.determineTime(to.time),
             carrierId = convertId(carrierName)!!,

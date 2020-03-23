@@ -25,7 +25,7 @@ class DeliveryWorker(
 
         val data: List<Delivery>? = deserializeFromJson(inputData.getString(KEY_WORK_DATA))
 
-        if (data.isNullOrEmpty()) return@withContext Result.retry()
+        if (data.isNullOrEmpty()) return@withContext Result.failure()
 
         return@withContext try {
             data.filter {

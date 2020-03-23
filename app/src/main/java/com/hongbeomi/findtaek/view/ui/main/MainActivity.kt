@@ -2,6 +2,8 @@ package com.hongbeomi.findtaek.view.ui.main
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -94,7 +96,7 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
 
     override fun onDestroy() {
         super.onDestroy()
-        startWork(viewModel.allDeliveryList.value)
+        viewModel.allDeliveryList.value.takeIf { !it.isNullOrEmpty() }?.let { startWork(it) }
     }
 
     private fun startWork(deliveryList: List<Delivery>?) {
