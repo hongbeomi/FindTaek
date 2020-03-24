@@ -46,7 +46,7 @@ abstract class BaseViewModel : ViewModel() {
         val errorDto: ErrorResponse? = Gson().fromJson<ErrorResponse>(
             errorString, ErrorResponse::class.java
         )
-        return errorDto?.message ?: "UnknownException"
+        return errorDto?.message ?: "알 수 없는 오류가 발생했습니다"
     }
 
     suspend fun <T> handle(call: suspend () -> T): T? {

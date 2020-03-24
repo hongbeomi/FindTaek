@@ -18,17 +18,17 @@ data class DeliveryResponse(
     val carrier: Carrier
 ) : NetworkResponse {
     data class From(
-        val name: String,
+        val name: String?,
         val time: String?
     )
 
     data class To(
-        val name: String,
+        val name: String?,
         val time: String?
     )
 
     data class State(
-        val text: String
+        val text: String?
     )
 
     @Parcelize
@@ -50,21 +50,21 @@ data class DeliveryResponse(
     }
 
     data class Carrier(
-        val name: String
+        val name: String?
     )
 
     fun toDelivery(id: Long?, carrierName: String, productName: String, trackId: String) =
         Delivery(
             id = id,
-            fromName = from.name,
+            fromName = from.name ?: "정보없음",
             fromTime = from.time ?: "정보없음",
-            toName = to.name,
+            toName = to.name ?: "정보없음",
             toTime = TimeUtil.determineTime(to.time),
             carrierId = convertId(carrierName)!!,
-            carrierName = carrier.name,
+            carrierName = carrier.name ?: "정보없음",
             productName = productName,
             trackId = trackId,
-            status = state.text
+            status = state.text ?: "정보없음"
         )
 
 }

@@ -1,4 +1,4 @@
-# 🚧 🚧 FindTaek V2 🚧 🚧 👨‍💻 🛠 
+# FindTaek V2
 
 > MVVM 패턴을 적용한 Toy Project 입니다.
 
@@ -8,17 +8,19 @@
 
 ## ✨ Features
 
-![kotlin](https://img.shields.io/badge/kotlin-black?logo=kotlin) ![api](https://img.shields.io/badge/API-19%2B-green?logo=android) ![license](https://img.shields.io/github/license/hongbeomi/FindTaek?color=blue&logo=apache) ![build](https://img.shields.io/github/workflow/status/hongbeomi/FindTaek/Android%20CI/master)
+![kotlin](https://img.shields.io/badge/kotlin-black?logo=kotlin) ![api](https://img.shields.io/badge/API-21%2B-green?logo=android) ![license](https://img.shields.io/github/license/hongbeomi/FindTaek?color=blue&logo=apache) ![build](https://img.shields.io/github/workflow/status/hongbeomi/FindTaek/Android%20CI/master)
 
 <br>
 
 **+ 버튼을 눌러서 직접 택배를 추가할 수 있습니다.**
 
-**물품을 아래로 당겨서 상태를 수동으로 업데이트 할 수 있습니다.**
+**물품을 아래로 당겨서 상태를 업데이트 할 수 있습니다.**
 
 **물품을 오른쪽으로 밀어서 항목을 삭제하거나 되돌릴 수 있습니다.**
 
-**앱을 사용할 때 자동으로 상태가 업데이트 됩니다.**
+**~~앱을 사용할 때 자동으로 상태가 업데이트 됩니다.~~  --> 앱을 종료해도 상태가 자동으로 업데이트 됩니다.**
+
+**택배의 배송이 시작되면 알림이 옵니다.**
 
 **추가한 항목을 클릭하면 내가 구매한 택배가 어디쯤 왔는지 타임라인으로 확인 할 수 있습니다.**
 
@@ -32,7 +34,8 @@
 
 ## 📝 Development Record
 
-- [Medium Blog](https://medium.com/@hongbeomi/findtaek-app-개발기-1-4223daf676bf)
+- [FindTaek dev](https://medium.com/@hongbeomi/findtaek-app-개발기-1-4223daf676bf)
+- [FindTaekV2  dev]()
 
 <br>
 
@@ -59,10 +62,11 @@
 
 **Jetpack AAC**
 
-- Data Binding (AddActivity)
-- Lifecycle
+- Data Binding
+- Lifecycles
 - LiveData
 - ViewModel
+- WorkManager
 
 **DI**
 
@@ -83,6 +87,7 @@
 ## 🙌 Thanks
 
 - [**TimeLineView**] Vipulasri - https://github.com/vipulasri/Timeline-View
+- [**MaterialInroView**] iammert - https://github.com/iammert/MaterialIntroView
 - [**MVVM Architecture Example**] skydoves - https://github.com/skydoves/TheMovies2
 - [**Design By**] Jeongseo Lee - wjdtj981222@gmail.com
 
