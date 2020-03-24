@@ -100,13 +100,16 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
     }
 
     private fun startWork(deliveryList: List<Delivery>?) {
-        val deliveryWork = PeriodicWorkRequest.Builder(
-            DeliveryWorker::class.java, 1, TimeUnit.HOURS
-        ).setConstraints(
-            Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
-        ).setInputData(
-            workDataOf(Pair(KEY_WORK_DATA, serializeToJson(deliveryList)))
-        ).build()
+        val deliveryWork = PeriodicWorkRequest
+            .Builder(DeliveryWorker::class.java, 1, TimeUnit.HOURS)
+            .setConstraints(
+                Constraints
+                    .Builder()
+                    .setRequiredNetworkType(NetworkType.CONNECTED)
+                    .build()
+            )
+            .setInputData(workDataOf(Pair(KEY_WORK_DATA, serializeToJson(deliveryList))))
+            .build()
 
         workManager.apply {
             cancelAllWork()
