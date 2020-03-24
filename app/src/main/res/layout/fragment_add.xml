@@ -85,6 +85,8 @@
                 android:textColorHint="@color/editTextBackgroundColor"
                 android:textCursorDrawable="@drawable/cursor_color"
                 android:textSize="16sp"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
                 app:layout_constraintEnd_toEndOf="@id/horizontalScrollView_add_chipGroup"
                 app:layout_constraintStart_toStartOf="@id/textView_add_header_title"
                 app:layout_constraintTop_toBottomOf="@id/horizontalScrollView_add_chipGroup" />
@@ -99,6 +101,8 @@
                 android:hint="@string/add_carrier_number_hint_text"
                 android:minHeight="48dp"
                 android:padding="8dp"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
                 android:text="@={vm.trackId}"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/editTextBackgroundColor"
