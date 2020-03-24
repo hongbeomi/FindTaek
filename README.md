@@ -87,7 +87,7 @@
 ## 🙌 Thanks
 
 - [**TimeLineView**] Vipulasri - https://github.com/vipulasri/Timeline-View
-- [**MaterialInroView**] iammert - https://github.com/iammert/MaterialIntroView
+- [**MaterialIntroView**] iammert - https://github.com/iammert/MaterialIntroView
 - [**MVVM Architecture Example**] skydoves - https://github.com/skydoves/TheMovies2
 - [**Design By**] Jeongseo Lee - wjdtj981222@gmail.com
 
