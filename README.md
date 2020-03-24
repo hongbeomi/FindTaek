@@ -1,4 +1,4 @@
-# FindTaek V2
+# 📦 FindTaek V2
 
 > MVVM 패턴을 적용한 Toy Project 입니다.
 
