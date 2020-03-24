@@ -28,7 +28,7 @@
 
 ## 📱 Preview
 
-<img src="https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/swipe%26delete.gif" width="33%" height="33%"> <img src="https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/add.gif" width="33%" height="33%"> <img src="https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/timeline.gif" width="33%" height="33%"> 
+<img src="https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/findtaek_video1.gif" width="50%" height="50%">  <img src="https://github.com/hongbeomi/FindTaek/blob/master/Demo%26Picture/timeline.gif" width="50%" height="50%"> 
 
 <br>
 
