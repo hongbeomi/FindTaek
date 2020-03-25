@@ -16,15 +16,32 @@ import com.hongbeomi.findtaek.view.util.CarrierIdUtil
 import com.hongbeomi.findtaek.view.util.ToastUtil
 import org.jetbrains.anko.textColor
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddDialogFragment : BaseBottomSheetDialogFragment() {
 
-    private lateinit var viewModel: AddFragmentViewModel
-    private lateinit var binding: FragmentAddBinding
+    private val viewModel by viewModel<AddFragmentViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = getViewModel()
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return super.onCreateDialog(savedInstanceState).apply {
+            window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) = binding<FragmentAddBinding>(
+        inflater, R.layout.fragment_add, container
+    ).apply {
+        vm = viewModel
+        lifecycleOwner = this@AddDialogFragment
+        setChipGroup(this)
+        initObserve()
+    }.root
+
+    private fun initObserve() {
         with(viewModel) {
             deliveryResponse.observe(::getLifecycle) {
                 it?.let {
@@ -38,31 +55,7 @@ class AddDialogFragment : BaseBottomSheetDialogFragment() {
         }
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return super.onCreateDialog(savedInstanceState).apply {
-            window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return (DataBindingUtil.inflate<FragmentAddBinding>(
-            inflater,
-            R.layout.fragment_add,
-            container,
-            false
-        ).also { binding = it }.root)
-            .also {
-                binding.lifecycleOwner = viewLifecycleOwner
-                binding.vm = viewModel
-                setChipGroup()
-            }
-    }
-
-    private fun setChipGroup() {
+    private fun setChipGroup(binding: FragmentAddBinding) {
         for (name in CarrierIdUtil.getCarrierKeys()) {
             binding.chipGroupAddCarrierName.addView(
                 Chip(activity).apply {

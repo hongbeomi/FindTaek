@@ -12,8 +12,6 @@ import org.koin.dsl.module
 
 
 val dataSourceModule = module {
-
     single<LocalDataSource> { DeliveryLocalDataSource(deliveryDao = get()) }
     single<RemoteDataSource> { DeliveryRemoteDataSource(deliveryService = get()) }
-
 }

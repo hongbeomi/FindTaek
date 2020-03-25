@@ -2,13 +2,14 @@ package com.hongbeomi.findtaek.view.ui.main
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View
-import android.view.WindowManager
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.*
 import co.mobiwise.materialintro.shape.ShapeType
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.data.worker.DeliveryWorker
@@ -21,7 +22,7 @@ import com.hongbeomi.findtaek.view.util.IntroUtil.Companion.initIntro
 import com.hongbeomi.findtaek.view.util.KEY_WORK_DATA
 import com.hongbeomi.findtaek.view.util.ToastUtil.Companion.showShort
 import com.hongbeomi.findtaek.view.util.serializeToJson
-import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.padding
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import java.util.concurrent.TimeUnit
 
@@ -132,15 +133,12 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
 
     private fun showSnackBar(deleteItem: Delivery) {
         Snackbar
-            .make(coordinator, getString(R.string.main_delete_complete), Snackbar.LENGTH_LONG)
+            .make(binding.root, getString(R.string.main_delete_complete), Snackbar.LENGTH_LONG)
             .setTextColor(ContextCompat.getColor(this, R.color.marine))
             .setAction(getString(R.string.main_snackbar_cancel)) { viewModel.rollback(deleteItem) }
             .setActionTextColor(Color.WHITE)
-            .also {
-                it.view.setBackgroundColor(
-                    ContextCompat.getColor(this, R.color.snackBarColor)
-                )
-            }
+            .setBackgroundTint(resources.getColor(R.color.snackBarColor))
+            .setGestureInsetBottomIgnored(true)
             .show()
     }
 

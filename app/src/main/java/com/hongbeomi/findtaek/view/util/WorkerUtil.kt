@@ -17,7 +17,6 @@ import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.view.ui.splash.SplashActivity
 
-
 const val STATE_DELIVERY_COMPLETE = "배달완료"
 const val STATE_DELIVERY_START = "배송출발"
 const val KEY_WORK_DATA = "work_data"

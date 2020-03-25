@@ -9,7 +9,5 @@ import org.koin.dsl.module
  */
 
 val repositoryModule = module {
-
     single<Repository> { DeliveryRepository(localDataSource = get(), remoteDataSource = get()) }
-
 }

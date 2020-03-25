@@ -10,8 +10,6 @@ import org.koin.dsl.module
  */
 
 val viewModelModule = module {
-
-    viewModel { AddFragmentViewModel(repository = get(), dispatcher = get()) }
-    viewModel { MainViewModel(repository = get(), dispatcher = get()) }
-
+    viewModel { AddFragmentViewModel(repository = get()) }
+    viewModel { MainViewModel(repository = get()) }
 }

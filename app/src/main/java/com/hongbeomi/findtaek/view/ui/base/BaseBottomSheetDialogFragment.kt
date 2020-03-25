@@ -3,7 +3,12 @@ package com.hongbeomi.findtaek.view.ui.base
 import android.app.Dialog
 import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hongbeomi.findtaek.R
@@ -13,6 +18,12 @@ import com.hongbeomi.findtaek.R
  */
 
 open class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
+
+    protected inline fun <reified T : ViewDataBinding> binding(
+        inflater: LayoutInflater,
+        @LayoutRes resId: Int,
+        container: ViewGroup?
+    ): T = DataBindingUtil.inflate(inflater, resId, container, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

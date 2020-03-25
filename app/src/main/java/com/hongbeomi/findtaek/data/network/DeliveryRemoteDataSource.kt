@@ -5,7 +5,6 @@ package com.hongbeomi.findtaek.data.network
  * @author hongbeomi
  */
 
-
 class DeliveryRemoteDataSource(
     private val deliveryService: DeliveryService
 ) : RemoteDataSource {

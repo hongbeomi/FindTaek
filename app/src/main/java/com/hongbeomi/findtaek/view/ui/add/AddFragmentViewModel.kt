@@ -2,17 +2,13 @@ package com.hongbeomi.findtaek.view.ui.add
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.hongbeomi.findtaek.data.repository.Repository
-import com.hongbeomi.findtaek.models.CoroutineDispatcherProvider
 import com.hongbeomi.findtaek.models.dto.DeliveryResponse
 import com.hongbeomi.findtaek.view.ui.base.BaseViewModel
 import com.hongbeomi.findtaek.view.util.SingleLiveEvent
-import kotlinx.coroutines.launch
 
 class AddFragmentViewModel(
-    private val repository: Repository,
-    private val dispatcher: CoroutineDispatcherProvider
+    private val repository: Repository
 ) : BaseViewModel() {
 
     val productName = MutableLiveData<String>()
@@ -32,15 +28,15 @@ class AddFragmentViewModel(
 
     fun onClickInsertButton() {
         showLoading()
-        viewModelScope.launch(dispatcher.io) {
+        launchViewModelScope {
             deliveryResponse.postValue(
                 handle { repository.getData(carrierName.value!!, trackId.value!!) }
             )
         }
     }
 
-    fun insert(deliveryResponse: DeliveryResponse) {
-        viewModelScope.launch(dispatcher.io) {
+    fun insert(deliveryResponse: DeliveryResponse) =
+        launchViewModelScope {
             repository.insert(
                 trackId.value!!,
                 carrierName.value!!,
@@ -48,7 +44,6 @@ class AddFragmentViewModel(
                 deliveryResponse
             )
         }
-    }
 
     private fun isValid() = !productName.value.isNullOrEmpty() &&
             !carrierName.value.isNullOrEmpty() &&

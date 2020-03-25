@@ -25,7 +25,6 @@ class FindTaekApp : Application() {
             androidContext(this@FindTaekApp)
             modules(
                 listOf(
-                    coroutineDispatcherProviderModule,
                     dataSourceModule,
                     networkModule,
                     roomModule,

@@ -11,6 +11,7 @@ import com.hongbeomi.findtaek.models.dto.ErrorResponse
 import com.hongbeomi.findtaek.view.util.NoConnectionInterceptor
 import com.hongbeomi.findtaek.view.util.ToastUtil.Companion.showShort
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -21,6 +22,11 @@ import kotlin.coroutines.coroutineContext
  */
 
 abstract class BaseViewModel : ViewModel() {
+
+    open fun launchViewModelScope(block: suspend () -> Unit) =
+        viewModelScope.launch(viewModelScope.coroutineContext + Dispatchers.IO) {
+            block()
+        }
 
     open val isLoading = MutableLiveData<Int>(View.INVISIBLE)
     open fun showLoading() = isLoading.postValue(View.VISIBLE)

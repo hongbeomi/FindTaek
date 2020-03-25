@@ -11,7 +11,6 @@ import org.koin.dsl.module
  */
 
 val roomModule = module {
-
     single {
         Room.databaseBuilder(androidApplication(), DeliveryDatabase::class.java, DATABASE_DELIVERY)
             .allowMainThreadQueries()
@@ -19,5 +18,4 @@ val roomModule = module {
             .build()
     }
     single { get<DeliveryDatabase>().deliveryDao() }
-
 }

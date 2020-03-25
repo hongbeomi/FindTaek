@@ -13,7 +13,6 @@ import com.hongbeomi.findtaek.view.ui.base.BaseBottomSheetDialogFragment
  * @author hongbeomi
  */
 
-
 class TimeLineDialogFragment : BaseBottomSheetDialogFragment() {
 
     companion object {
@@ -25,24 +24,17 @@ class TimeLineDialogFragment : BaseBottomSheetDialogFragment() {
         }
     }
 
-    private lateinit var adapter: TimeLineRecyclerAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        adapter = TimeLineRecyclerAdapter()
-        adapter.setItemList(arguments?.getParcelableArrayList(PROGRESSES)!!)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = DataBindingUtil.inflate<FragmentTimelineBinding>(
-        inflater,
-        R.layout.fragment_timeline, container, false
+    ) = binding<FragmentTimelineBinding>(
+        inflater, R.layout.fragment_timeline, container
     ).apply {
         lifecycleOwner = viewLifecycleOwner
-        this.timelineDialogRecyclerView.adapter = adapter
+        this.timelineDialogRecyclerView.adapter = TimeLineRecyclerAdapter().apply {
+            setItemList(arguments?.getParcelableArrayList(PROGRESSES)!!)
+        }
     }.root
 
 }
