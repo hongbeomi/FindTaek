@@ -56,15 +56,15 @@ data class DeliveryResponse(
     fun toDelivery(id: Long?, carrierName: String, productName: String, trackId: String) =
         Delivery(
             id = id,
-            fromName = from.name ?: "정보없음",
-            fromTime = from.time ?: "정보없음",
-            toName = to.name ?: "정보없음",
+            fromName = from.name ?: "-",
+            fromTime = from.time ?: "-",
+            toName = to.name ?: "-",
             toTime = TimeUtil.determineTime(to.time),
             carrierId = convertId(carrierName)!!,
-            carrierName = carrier.name ?: "정보없음",
+            carrierName = carrier.name ?: "-",
             productName = productName,
             trackId = trackId,
-            status = state.text ?: "정보없음"
+            status = state.text ?: "-"
         )
 
 }
