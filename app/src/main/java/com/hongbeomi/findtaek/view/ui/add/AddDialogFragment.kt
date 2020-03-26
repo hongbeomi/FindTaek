@@ -65,10 +65,8 @@ class AddDialogFragment : BaseBottomSheetDialogFragment() {
                     elevation = 4f
                     setIconStartPaddingResource(R.dimen.chip_padding_start)
                     textColor = Color.WHITE
-                    checkedIcon =
-                        resources.getDrawable(R.drawable.ic_outline_local_shipping_24)
-                    chipBackgroundColor =
-                        resources.getColorStateList(R.color.color_add_chip_bg)
+                    checkedIcon = resources.getDrawable(R.drawable.ic_outline_local_shipping_24)
+                    chipBackgroundColor = resources.getColorStateList(R.color.color_add_chip_bg)
                 }
             )
         }
