@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.*
@@ -78,8 +79,10 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
 
     private fun initObserver() {
         viewModel.apply {
+            onInitUpdateListEvent.observe(::getLifecycle) { updateAll() }
             allDeliveryList.observe(::getLifecycle) {
                 adapter.setItemList(it)
+                callOnInitUpdateList()
                 binding.recyclerViewMain.scheduleLayoutAnimation()
             }
             isRefresh.observe(::getLifecycle) {
@@ -143,4 +146,3 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
     }
 
 }
-

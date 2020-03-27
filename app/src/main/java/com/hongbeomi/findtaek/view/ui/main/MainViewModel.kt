@@ -6,6 +6,7 @@ import com.hongbeomi.findtaek.data.repository.Repository
 import com.hongbeomi.findtaek.models.dto.DeliveryResponse.Progresses
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.view.ui.base.BaseViewModel
+import com.hongbeomi.findtaek.view.util.OneTakeLiveData
 import com.hongbeomi.findtaek.view.util.SingleLiveEvent
 
 /**
@@ -15,6 +16,7 @@ import com.hongbeomi.findtaek.view.util.SingleLiveEvent
 class MainViewModel(private val repository: Repository) : BaseViewModel() {
 
     val onSendCoordinatesEvent = SingleLiveEvent<Unit>()
+    val onInitUpdateListEvent = OneTakeLiveData<Unit>()
 
     val isRefresh: MutableLiveData<Boolean?> = MutableLiveData()
     val allDeliveryList = liveData {
@@ -22,6 +24,7 @@ class MainViewModel(private val repository: Repository) : BaseViewModel() {
     }
 
     fun callSendCoordinates() = onSendCoordinatesEvent.call()
+    fun callOnInitUpdateList() = onInitUpdateListEvent.call()
 
     fun delete(delivery: Delivery) =
         launchViewModelScope { repository.delete(delivery) }
