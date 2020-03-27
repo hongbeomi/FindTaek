@@ -7,6 +7,10 @@ import com.hongbeomi.findtaek.models.dto.DeliveryResponse
 import com.hongbeomi.findtaek.view.ui.base.BaseViewModel
 import com.hongbeomi.findtaek.view.util.SingleLiveEvent
 
+/**
+ * @author hongbeomi
+ */
+
 class AddFragmentViewModel(
     private val repository: Repository
 ) : BaseViewModel() {

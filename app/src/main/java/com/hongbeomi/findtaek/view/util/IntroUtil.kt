@@ -7,6 +7,10 @@ import co.mobiwise.materialintro.shape.FocusGravity
 import co.mobiwise.materialintro.shape.ShapeType
 import co.mobiwise.materialintro.view.MaterialIntroView
 
+/**
+ * @author hongbeomi
+ */
+
 class IntroUtil {
 
     companion object {

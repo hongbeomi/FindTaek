@@ -18,6 +18,10 @@ import org.jetbrains.anko.textColor
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * @author hongbeomi
+ */
+
 class AddDialogFragment : BaseBottomSheetDialogFragment() {
 
     private val viewModel by viewModel<AddFragmentViewModel>()

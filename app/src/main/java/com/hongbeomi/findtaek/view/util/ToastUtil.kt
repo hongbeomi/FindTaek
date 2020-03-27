@@ -9,7 +9,6 @@ import com.hongbeomi.findtaek.FindTaekApp
  * @author hongbeomi
  */
 
-
 class ToastUtil {
 
     companion object {
