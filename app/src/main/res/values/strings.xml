@@ -25,4 +25,10 @@
     <string name="base_error_unknown">알 수 없는 오류가 발생했습니다</string>
     <string name="base_error_no_connect_network">인터넷 연결이 끊어졌습니다!</string>
     <string name="dialog_guide_close_text">확인</string>
+
+    <string name="main_update_cancel_toast">업데이트가 취소되었습니다.</string>
+
+    <string name="main_update_complete_title_text">업데이트 완료</string>
+    <string name="main_update_complete_cancel_text">재시작</string>
+
 </resources>

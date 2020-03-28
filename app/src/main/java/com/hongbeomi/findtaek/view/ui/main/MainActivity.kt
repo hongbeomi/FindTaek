@@ -1,5 +1,7 @@
 package com.hongbeomi.findtaek.view.ui.main
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.annotation.ColorInt
@@ -12,6 +14,11 @@ import androidx.work.*
 import co.mobiwise.materialintro.shape.ShapeType
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.InstallStateUpdatedListener
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.InstallStatus
+import com.google.android.play.core.install.model.UpdateAvailability
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.data.worker.DeliveryWorker
 import com.hongbeomi.findtaek.databinding.ActivityMainBinding
@@ -21,6 +28,7 @@ import com.hongbeomi.findtaek.view.ui.base.BaseActivity
 import com.hongbeomi.findtaek.view.ui.timeline.TimeLineDialogFragment
 import com.hongbeomi.findtaek.view.util.IntroUtil.Companion.initIntro
 import com.hongbeomi.findtaek.view.util.KEY_WORK_DATA
+import com.hongbeomi.findtaek.view.util.SnackBarUtil.Companion.showSnackBar
 import com.hongbeomi.findtaek.view.util.ToastUtil.Companion.showShort
 import com.hongbeomi.findtaek.view.util.serializeToJson
 import org.jetbrains.anko.padding
@@ -39,6 +47,7 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
     private val workManager = WorkManager.getInstance(this)
 
     companion object {
+        const val REQUEST_CODE_UPDATE = 200
         const val KEY_INTRO_ADD_BUTTON = "key_intro_add_button"
         const val KEY_INTRO_DELIVERY_ITEM = "key_intro_delivery_item"
     }
@@ -47,7 +56,6 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
         super.onCreate(savedInstanceState)
         setSupportActionBar(binding.toolbarMain)
         viewModel = getViewModel()
-
         initIntro(
             view = binding.floatingButtonMain,
             activity = this,
@@ -60,6 +68,7 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
             lifecycleOwner = this@MainActivity
             vm = viewModel
         }
+        setUpdateManager()
         initObserver()
         setRecyclerView()
         setSwipeRefresh()
@@ -131,18 +140,53 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {
         val deletedItem = adapter.getItemPosition(position)
         viewModel.delete(deletedItem)
-        showSnackBar(deletedItem)
+        showSnackBar(
+            binding.root, this, getString(R.string.main_delete_complete), Snackbar.LENGTH_LONG,
+            getString(R.string.main_snackbar_cancel)
+        ) {
+            viewModel.rollback(deletedItem)
+        }
     }
 
-    private fun showSnackBar(deleteItem: Delivery) {
-        Snackbar
-            .make(binding.root, getString(R.string.main_delete_complete), Snackbar.LENGTH_LONG)
-            .setTextColor(ContextCompat.getColor(this, R.color.marine))
-            .setAction(getString(R.string.main_snackbar_cancel)) { viewModel.rollback(deleteItem) }
-            .setActionTextColor(Color.WHITE)
-            .setBackgroundTint(resources.getColor(R.color.snackBarColor))
-            .setGestureInsetBottomIgnored(true)
-            .show()
+    private fun setUpdateManager() {
+        val appUpdateManager = AppUpdateManagerFactory.create(this)
+        appUpdateManager?.let {
+            it.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
+                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
+                ) {
+                    appUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        AppUpdateType.FLEXIBLE,
+                        this,
+                        REQUEST_CODE_UPDATE
+                    )
+                }
+            }
+        }
+        val listener = InstallStateUpdatedListener {
+            if (it.installStatus() == InstallStatus.DOWNLOADED) {
+                showSnackBar(
+                    binding.root,
+                    this,
+                    getString(R.string.main_update_complete_title_text),
+                    Snackbar.LENGTH_INDEFINITE,
+                    getString(R.string.main_update_complete_cancel_text)
+                ) {
+                    appUpdateManager.completeUpdate()
+                }
+            }
+        }
+        appUpdateManager.registerListener(listener)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_UPDATE) {
+            if (resultCode != Activity.RESULT_OK) {
+                showShort(getString(R.string.main_update_cancel_toast))
+            }
+        }
     }
 
 }
