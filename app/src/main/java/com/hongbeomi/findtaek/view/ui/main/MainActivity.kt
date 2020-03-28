@@ -79,10 +79,9 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
 
     private fun initObserver() {
         viewModel.apply {
-            onInitUpdateListEvent.observe(::getLifecycle) { updateAll() }
             allDeliveryList.observe(::getLifecycle) {
                 adapter.setItemList(it)
-                callOnInitUpdateList()
+                callInitUpdate()
                 binding.recyclerViewMain.scheduleLayoutAnimation()
             }
             isRefresh.observe(::getLifecycle) {
@@ -92,6 +91,7 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
                     binding.swipeLayout.isRefreshing = false
                 }
             }
+            onInitUpdateEvent.observe(::getLifecycle) { updateAll() }
             onSendCoordinatesEvent.observe(::getLifecycle) {
                 AddDialogFragment().show(supportFragmentManager, null)
             }
