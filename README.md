@@ -8,7 +8,9 @@
 
 ## ✨ Features
 
-![kotlin](https://img.shields.io/badge/kotlin-black?logo=kotlin) ![api](https://img.shields.io/badge/API-21%2B-green?logo=android) ![license](https://img.shields.io/github/license/hongbeomi/FindTaek?color=blue&logo=apache) ![build](https://img.shields.io/github/workflow/status/hongbeomi/FindTaek/Android%20CI/master)
+![kotlin](https://img.shields.io/badge/kotlin-black?logo=kotlin) ![api](https://img.shields.io/badge/API-21%2B-green?logo=android) ![license](https://img.shields.io/github/license/hongbeomi/FindTaek?color=blue&logo=apache) ![build](https://img.shields.io/github/workflow/status/hongbeomi/FindTaek/Android%20CI/master) 
+
+ <a href="https://play.google.com/store/apps/details?id=com.hongbeomi.findtaek"><img src="https://camo.githubusercontent.com/b908ff6651d5ec11d504a37d2f441de9bc1362bc/68747470733a2f2f706c61792e676f6f676c652e636f6d2f696e746c2f656e5f75732f6261646765732f696d616765732f617070732f656e2d706c61792d62616467652e706e67" alt="z" style="zoom:20%;" /></a>
 
 <br>
 
