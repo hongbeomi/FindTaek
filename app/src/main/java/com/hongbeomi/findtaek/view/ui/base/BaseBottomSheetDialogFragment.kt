@@ -35,7 +35,7 @@ open class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
             .apply {
                 setOnShowListener {
                     var fullScreenHeight = 0
-                    if (isValid())
+                    if (checkSDKVersion())
                         fullScreenHeight = window?.decorView!!.run {
                             height - rootWindowInsets.run { systemWindowInsetTop + systemWindowInsetBottom }
                         }
@@ -52,6 +52,6 @@ open class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
             }
     }
 
-    private fun isValid() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+    private fun checkSDKVersion() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
 
 }

@@ -29,11 +29,9 @@ class MainViewModel(private val repository: Repository) : BaseViewModel() {
 
     fun callSendCoordinates() = onSendCoordinatesEvent.call()
 
-    fun delete(delivery: Delivery) =
-        launchViewModelScope { repository.delete(delivery) }
+    fun delete(delivery: Delivery) = launchViewModelScope { repository.delete(delivery) }
 
-    fun rollback(delivery: Delivery) =
-        launchViewModelScope { repository.rollback(delivery) }
+    fun rollback(delivery: Delivery) = launchViewModelScope { repository.rollback(delivery) }
 
     fun updateAll() =
         launchViewModelScope {
@@ -45,7 +43,7 @@ class MainViewModel(private val repository: Repository) : BaseViewModel() {
                 } ?: isRefresh.postValue(false)
         }
 
-    suspend fun update(list: List<Delivery>) {
+    private suspend fun update(list: List<Delivery>) {
         Log.e("업데이트", list.first().id.toString())
         list.map {
             handle { repository.getData(it.carrierName, it.trackId) }?.toDelivery(

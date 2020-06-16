@@ -23,12 +23,12 @@ import kotlin.coroutines.coroutineContext
 
 abstract class BaseViewModel : ViewModel() {
 
-    open fun launchViewModelScope(block: suspend () -> Unit) =
+    open fun launchViewModelScope(doWork: suspend () -> Unit) =
         viewModelScope.launch(viewModelScope.coroutineContext + Dispatchers.IO) {
-            block()
+            doWork()
         }
 
-    open val isLoading = MutableLiveData<Int>(View.INVISIBLE)
+    open val isLoading = MutableLiveData(View.INVISIBLE)
     open fun showLoading() = isLoading.postValue(View.VISIBLE)
     open fun hideLoading() = isLoading.postValue(View.INVISIBLE)
 

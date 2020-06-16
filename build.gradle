@@ -38,9 +38,6 @@ buildscript {
 
         // intro view
         introViewVersion = '1.6.0'
-
-        // google play core
-        googlePlayCoreVersion = '1.6.1'
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.3'

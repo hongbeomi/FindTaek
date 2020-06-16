@@ -30,8 +30,8 @@ class DeliveryWorker(
         return@withContext try {
             data.filter {
                 it.status != STATE_DELIVERY_COMPLETE &&
-                it.status != STATE_DELIVERY_START }
-                .map {
+                it.status != STATE_DELIVERY_START
+            }.map {
                     val response = repository.getData(it.carrierName, it.trackId)
                     if (response.state.text == STATE_DELIVERY_START) {
                         sendNotification(context, it.carrierName, it.trackId)

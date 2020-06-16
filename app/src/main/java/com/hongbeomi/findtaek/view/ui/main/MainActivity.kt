@@ -1,6 +1,7 @@
 package com.hongbeomi.findtaek.view.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.*
@@ -20,6 +21,7 @@ import com.hongbeomi.findtaek.view.util.ToastUtil.Companion.showShort
 import com.hongbeomi.findtaek.view.util.serializeToJson
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import java.util.concurrent.TimeUnit
+import kotlin.time.seconds
 
 /**
  * @author hongbeomi
@@ -33,7 +35,6 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
     private val workManager = WorkManager.getInstance(this)
 
     companion object {
-        const val REQUEST_CODE_UPDATE = 200
         const val KEY_INTRO_ADD_BUTTON = "key_intro_add_button"
         const val KEY_INTRO_DELIVERY_ITEM = "key_intro_delivery_item"
     }
@@ -98,6 +99,7 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
     }
 
     private fun startWork(deliveryList: List<Delivery>?) {
+        workManager.cancelAllWork()
         val deliveryWork = PeriodicWorkRequest
             .Builder(DeliveryWorker::class.java, 1, TimeUnit.HOURS)
             .setConstraints(
@@ -108,11 +110,7 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
             )
             .setInputData(workDataOf(Pair(KEY_WORK_DATA, serializeToJson(deliveryList))))
             .build()
-
-        workManager.apply {
-            cancelAllWork()
-            enqueue(deliveryWork)
-        }
+        workManager.enqueue(deliveryWork)
     }
 
     private fun setSwipeRefresh() {

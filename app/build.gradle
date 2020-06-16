@@ -108,7 +108,4 @@ dependencies {
     // material intro view
     implementation "com.github.iammert:MaterialIntroView:$introViewVersion"
 
-    // update manager
-    implementation "com.google.android.play:core:$googlePlayCoreVersion"
-
 }
