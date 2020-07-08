@@ -50,7 +50,6 @@ class AddDialogFragment : BaseBottomSheetDialogFragment() {
             deliveryResponse.observe(::getLifecycle) {
                 it?.let {
                     insert(it)
-                    hideLoading()
                     ToastUtil.showLong(R.string.add_new_delivery_insert_complete_toast)
                     dismiss()
                 }
@@ -66,10 +65,9 @@ class AddDialogFragment : BaseBottomSheetDialogFragment() {
                     text = name
                     isCheckable = true
                     isClickable = true
-                    elevation = 4f
-                    setIconStartPaddingResource(R.dimen.chip_padding_start)
                     textColor = Color.WHITE
-                    checkedIcon = resources.getDrawable(R.drawable.ic_outline_local_shipping_24)
+                    setEnsureMinTouchTargetSize(false)
+                    checkedIcon = null
                     chipBackgroundColor = resources.getColorStateList(R.color.color_add_chip_bg)
                 }
             )

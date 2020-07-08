@@ -15,15 +15,14 @@ class AddFragmentViewModel(
     private val repository: Repository
 ) : BaseViewModel() {
 
-    val productName = MutableLiveData<String>()
+    val productName = MutableLiveData("")
     val carrierName = MutableLiveData<String>()
     val trackId = MutableLiveData<String>()
     val onCloseEvent = SingleLiveEvent<Unit>()
 
     val deliveryResponse = MutableLiveData<DeliveryResponse?>()
 
-    var valid = MediatorLiveData<Boolean>().apply {
-        addSource(productName) { value = isValid() }
+    var isValidInput = MediatorLiveData<Boolean>().apply {
         addSource(carrierName) { value = isValid() }
         addSource(trackId) { value = isValid() }
     }
@@ -36,6 +35,7 @@ class AddFragmentViewModel(
             deliveryResponse.postValue(
                 handle { repository.getData(carrierName.value!!, trackId.value!!) }
             )
+            hideLoading()
         }
     }
 
@@ -49,8 +49,6 @@ class AddFragmentViewModel(
             )
         }
 
-    private fun isValid() = !productName.value.isNullOrEmpty() &&
-            !carrierName.value.isNullOrEmpty() &&
-            !trackId.value.isNullOrEmpty()
+    private fun isValid() = !carrierName.value.isNullOrEmpty() && !trackId.value.isNullOrEmpty()
 
 }

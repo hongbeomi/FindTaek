@@ -5,7 +5,7 @@
     <string name="add_title_text">택배 조회하기</string>
     <string name="add_button_text">조회하기</string>
     <string name="add_carrier_number_hint_text">운송장 번호 (-를 빼고 입력해주세요)</string>
-    <string name="add_product_name_hint_text">조회하실 물건을 입력해주세요</string>
+    <string name="add_product_name_hint_text">조회하실 물건을 입력해주세요 (선택)</string>
     <string name="add_new_delivery_insert_complete_toast">택배 추가 완료!</string>
 
     <string name="item_main_delete_image_content_description">제거</string>

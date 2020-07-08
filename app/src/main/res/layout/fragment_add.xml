@@ -47,49 +47,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <HorizontalScrollView
+            <androidx.core.widget.NestedScrollView
                 android:id="@+id/horizontalScrollView_add_chipGroup"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="240dp"
+                android:fillViewport="true"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/imageButton_add_cancel"
                 app:layout_constraintStart_toStartOf="@id/textView_add_header_title"
                 app:layout_constraintTop_toBottomOf="@id/textView_add_header_title">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/chipGroup_add_carrierName"
-                        android:layout_width="620dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
+                        app:chipSpacingVertical="4dp"
+                        app:chipSpacingHorizontal="4dp"
                         app:singleSelection="true" />
-                </RelativeLayout>
-            </HorizontalScrollView>
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/editText_add_product"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/bg_add_fragment_text"
-                android:gravity="center"
-                android:hint="@string/add_product_name_hint_text"
-                android:minHeight="48dp"
-                android:padding="8dp"
-                android:text="@={vm.productName}"
-                android:textColor="@android:color/black"
-                android:textColorHint="@color/editTextBackgroundColor"
-                android:textCursorDrawable="@drawable/cursor_color"
-                android:textSize="16sp"
-                android:imeOptions="actionNext"
-                android:singleLine="true"
-                app:layout_constraintEnd_toEndOf="@id/horizontalScrollView_add_chipGroup"
-                app:layout_constraintStart_toStartOf="@id/textView_add_header_title"
-                app:layout_constraintTop_toBottomOf="@id/horizontalScrollView_add_chipGroup" />
+            </androidx.core.widget.NestedScrollView>
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/editText_add_track"
@@ -110,7 +86,31 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@id/horizontalScrollView_add_chipGroup"
                 app:layout_constraintStart_toStartOf="@id/textView_add_header_title"
-                app:layout_constraintTop_toBottomOf="@id/editText_add_product" />
+                app:layout_constraintTop_toBottomOf="@id/horizontalScrollView_add_chipGroup" />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editText_add_product"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_add_fragment_text"
+                android:gravity="center"
+                android:hint="@string/add_product_name_hint_text"
+                android:minHeight="48dp"
+                android:padding="8dp"
+                android:text="@={vm.productName}"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/editTextBackgroundColor"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textSize="16sp"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                app:layout_constraintBottom_toTopOf="@id/button_add_look_up"
+                app:layout_constraintEnd_toEndOf="@id/horizontalScrollView_add_chipGroup"
+                app:layout_constraintStart_toStartOf="@id/textView_add_header_title"
+                app:layout_constraintTop_toBottomOf="@id/editText_add_track" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_add_look_up"
@@ -118,12 +118,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/bg_add_fragment_button"
-                android:enabled="@{vm.valid}"
+                android:enabled="@{vm.isValidInput}"
                 android:fontFamily="@font/scdream7"
                 android:onClick="@{() -> vm.onClickInsertButton()}"
                 android:text="@string/add_button_text"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/editText_add_product"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/horizontalScrollView_add_chipGroup"
                 app:layout_constraintStart_toStartOf="@id/textView_add_header_title" />
