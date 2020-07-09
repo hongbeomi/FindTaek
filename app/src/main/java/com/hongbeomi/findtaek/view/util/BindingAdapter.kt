@@ -3,6 +3,7 @@ package com.hongbeomi.findtaek.view.util
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import com.daimajia.swipe.SwipeLayout
 import com.hongbeomi.findtaek.R

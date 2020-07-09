@@ -66,6 +66,7 @@ class MainRecyclerAdapter(
                 "배달완료" -> COMPLETE
                 else -> UNKNOWN
             }
+
             binding.constraintLayoutForeground.setOnClickListener {
                 binding.swipeLayoutItemMain.close()
                 if (!binding.constraintLayoutDeleteButtonContainer.isShown) {

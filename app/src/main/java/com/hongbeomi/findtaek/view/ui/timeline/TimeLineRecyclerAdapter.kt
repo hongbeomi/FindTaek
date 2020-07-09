@@ -32,7 +32,7 @@ class TimeLineRecyclerAdapter : RecyclerView.Adapter<TimeLineRecyclerAdapter.Tim
         ).let { TimeLineViewHolder(it, viewType) }
 
     override fun onBindViewHolder(holder: TimeLineViewHolder, position: Int) =
-        holder.bind(itemList[position])
+        holder.bind(itemList[itemList.size.minus(1) - position])
 
     override fun getItemCount() = itemList.size
 
