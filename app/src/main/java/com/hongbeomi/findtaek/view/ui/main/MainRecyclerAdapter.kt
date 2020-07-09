@@ -7,6 +7,7 @@ import androidx.annotation.DrawableRes
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import co.mobiwise.materialintro.shape.ShapeType
+import com.daimajia.swipe.SwipeLayout
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.databinding.ItemMainBinding
 import com.hongbeomi.findtaek.models.entity.Delivery
@@ -19,7 +20,8 @@ import com.hongbeomi.findtaek.view.util.IntroUtil.Companion.initIntro
 
 class MainRecyclerAdapter(
     private val activity: Activity,
-    private val itemClick: (Delivery) -> Unit
+    private val itemClick: (Delivery) -> Unit,
+    private val itemDelete: (Delivery) -> Unit
 ) : RecyclerView.Adapter<MainRecyclerAdapter.ViewHolder>() {
 
     private var itemList: List<Delivery> = listOf()
@@ -52,11 +54,9 @@ class MainRecyclerAdapter(
         notifyDataSetChanged()
     }
 
-    fun getItemPosition(position: Int): Delivery = itemList[position]
-
     inner class ViewHolder(private val binding: ItemMainBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val viewForeground = binding.constraintLayoutForeground
+
         fun bind(delivery: Delivery) {
             binding.delivery = delivery
             binding.status = when (delivery.status) {
@@ -66,8 +66,17 @@ class MainRecyclerAdapter(
                 "배달완료" -> COMPLETE
                 else -> UNKNOWN
             }
-            binding.root.setOnClickListener { itemClick(delivery) }
+            binding.constraintLayoutForeground.setOnClickListener {
+                binding.swipeLayoutItemMain.close()
+                if (!binding.constraintLayoutDeleteButtonContainer.isShown) {
+                    itemClick(delivery)
+                }
+            }
+            binding.constraintLayoutDeleteButtonContainer.setOnClickListener {
+                itemDelete(delivery)
+            }
         }
+
     }
 
     enum class Status(@DrawableRes val drawableId: Int) {

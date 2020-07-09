@@ -14,38 +14,51 @@
             type="com.hongbeomi.findtaek.view.ui.main.MainRecyclerAdapter.Status" />
     </data>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/frameLayout_item_main"
+    <com.daimajia.swipe.SwipeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipeLayout_item_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp">
+        android:layout_marginEnd="8dp"
+        bind:dragTargetView="@{constraintLayoutDeleteButtonContainer}">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout_delete_button_container"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@android:color/holo_red_dark"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:paddingEnd="36dp"
+            android:paddingStart="36dp"
+            android:layout_gravity="end"
+            android:background="@android:color/holo_red_dark">
 
             <ImageView
                 android:id="@+id/imageView_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:contentDescription="@string/item_main_delete_image_content_description"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/textView_delete"
                 android:src="@drawable/ic_delete_white_48dp" />
 
             <TextView
+                android:id="@+id/textView_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="@id/imageView_delete"
+                app:layout_constraintEnd_toEndOf="@id/imageView_delete"
+                app:layout_constraintTop_toBottomOf="@id/imageView_delete"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:text="@string/item_main_delete_text"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout_foreground"
@@ -53,170 +66,195 @@
             android:layout_height="match_parent"
             android:background="@drawable/bg_main_item_linear">
 
-            <TextView
-                android:id="@+id/textView_product_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/scdream5"
-                android:text="@{delivery.productName}"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                android:singleLine="true"
-                android:maxEms="8"
-                android:ellipsize="end"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toTopOf="@id/linearLayout_add_delivery_area"
-                app:layout_constraintStart_toStartOf="@id/linearLayout_add_delivery_area"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="제품 이름" />
+<!--            <TextView-->
+<!--                android:id="@+id/textView_product_name"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/scdream5"-->
+<!--                android:text="@{delivery.productName}"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="24sp"-->
+<!--                android:singleLine="true"-->
+<!--                android:maxEms="8"-->
+<!--                android:ellipsize="end"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/linearLayout_add_delivery_area"-->
+<!--                app:layout_constraintStart_toStartOf="@id/linearLayout_add_delivery_area"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                tools:text="제품 이름" />-->
 
-            <LinearLayout
-                android:id="@+id/linearLayout_add_delivery_area"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintEnd_toStartOf="@id/constraintLayout_add_name_area"
+<!--            <LinearLayout-->
+<!--                android:id="@+id/linearLayout_add_delivery_area"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginBottom="8dp"-->
+<!--                app:layout_constraintEnd_toStartOf="@id/constraintLayout_add_name_area"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/textView_product_name">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/textView_carrier_name1"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:ellipsize="end"-->
+<!--                    android:fontFamily="@font/scdream4"-->
+<!--                    android:maxEms="8"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:text="@{delivery.carrierName}"-->
+<!--                    android:textColor="@android:color/black"-->
+<!--                    android:textSize="16sp"-->
+<!--                    tools:text="택배사 이름" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/textView_track_num"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:ellipsize="end"-->
+<!--                    android:fontFamily="@font/scdream4"-->
+<!--                    android:maxEms="15"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:text="@{delivery.trackId}"-->
+<!--                    android:textColor="@android:color/black"-->
+<!--                    android:textSize="16sp"-->
+<!--                    tools:text="운송장번호" />-->
+<!--            </LinearLayout>-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/constraintLayout_add_name_area"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="8dp"-->
+<!--                android:layout_marginEnd="8dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/linearLayout_add_delivery_area"-->
+<!--                app:layout_constraintStart_toEndOf="@id/linearLayout_add_delivery_area">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/textView_from_text"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/scdream3"-->
+<!--                    android:text="@string/item_main_from_text"-->
+<!--                    android:textColor="@android:color/black"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintBottom_toTopOf="@id/textView_to_text"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/textView_from_name"-->
+<!--                    app:layout_constraintHorizontal_chainStyle="packed"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/textView_from_name"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:ellipsize="end"-->
+<!--                    android:fontFamily="@font/scdream3"-->
+<!--                    android:maxEms="5"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:textColor="@android:color/black"-->
+<!--                    android:text="@{delivery.fromName}"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintBottom_toTopOf="@id/textView_to_name"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_chainStyle="packed"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/textView_from_text"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    tools:text="보낸 사람" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/textView_to_text"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/scdream3"-->
+<!--                    android:text="@string/item_main_to_text"-->
+<!--                    android:textColor="@android:color/black"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/textView_to_name"-->
+<!--                    app:layout_constraintHorizontal_chainStyle="packed"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/textView_from_text" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/textView_to_name"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:ellipsize="end"-->
+<!--                    android:fontFamily="@font/scdream3"-->
+<!--                    android:maxEms="5"-->
+<!--                    android:textColor="@android:color/black"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:text="@{delivery.toName}"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_chainStyle="packed"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/textView_to_text"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/textView_from_name"-->
+<!--                    tools:text="받는 사람" />-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/imageView_main_status"-->
+<!--                android:layout_width="48dp"-->
+<!--                android:layout_height="48dp"-->
+<!--                bind:setDrawable="@{status.drawableId}"-->
+<!--                tools:src="@drawable/ic_delivery_complete"-->
+<!--                app:layout_constraintStart_toStartOf="@id/textView_status"-->
+<!--                app:layout_constraintTop_toTopOf="@id/textView_product_name"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/textView_status"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/textView_status"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView_status"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginStart="8dp"-->
+<!--                android:ellipsize="end"-->
+<!--                android:fontFamily="@font/scdream6"-->
+<!--                android:singleLine="true"-->
+<!--                android:text="@{delivery.status}"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="24sp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/imageView_main_status"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/linearLayout_add_delivery_area"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_chainStyle="spread"-->
+<!--                tools:text="배송상황" />-->
+
+            <kr.co.prnd.StepProgressBar
+                android:id="@+id/stepProgressbar_item"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                bind:setProgressStep="@{delivery.status}"
+                android:layout_marginTop="4dp"
+                app:max="4"
+                app:stepDoneColor="@android:color/holo_green_dark"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView_product_name">
-
-                <TextView
-                    android:id="@+id/textView_carrier_name1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/scdream4"
-                    android:maxEms="8"
-                    android:singleLine="true"
-                    android:text="@{delivery.carrierName}"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    tools:text="택배사 이름" />
-
-                <TextView
-                    android:id="@+id/textView_track_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/scdream4"
-                    android:maxEms="15"
-                    android:singleLine="true"
-                    android:text="@{delivery.trackId}"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    tools:text="운송장번호" />
-            </LinearLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout_add_name_area"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@id/linearLayout_add_delivery_area"
-                app:layout_constraintStart_toEndOf="@id/linearLayout_add_delivery_area">
-
-                <TextView
-                    android:id="@+id/textView_from_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/scdream3"
-                    android:text="@string/item_main_from_text"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@id/textView_to_text"
-                    app:layout_constraintEnd_toStartOf="@id/textView_from_name"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView_from_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/scdream3"
-                    android:maxEms="5"
-                    android:singleLine="true"
-                    android:textColor="@android:color/black"
-                    android:text="@{delivery.fromName}"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@id/textView_to_name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toEndOf="@id/textView_from_text"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="보낸 사람" />
-
-                <TextView
-                    android:id="@+id/textView_to_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/scdream3"
-                    android:text="@string/item_main_to_text"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/textView_to_name"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView_from_text" />
-
-                <TextView
-                    android:id="@+id/textView_to_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/scdream3"
-                    android:maxEms="5"
-                    android:textColor="@android:color/black"
-                    android:singleLine="true"
-                    android:text="@{delivery.toName}"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toEndOf="@id/textView_to_text"
-                    app:layout_constraintTop_toBottomOf="@id/textView_from_name"
-                    tools:text="받는 사람" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <ImageView
-                android:id="@+id/imageView_main_status"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                bind:setDrawable="@{status.drawableId}"
-                tools:src="@drawable/ic_delivery_complete"
-                app:layout_constraintStart_toStartOf="@id/textView_status"
-                app:layout_constraintTop_toTopOf="@id/textView_product_name"
-                app:layout_constraintBottom_toTopOf="@id/textView_status"
-                app:layout_constraintEnd_toEndOf="@id/textView_status"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
-                android:id="@+id/textView_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/scdream6"
                 android:singleLine="true"
-                android:text="@{delivery.status}"
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintTop_toBottomOf="@id/imageView_main_status"
-                app:layout_constraintBottom_toBottomOf="@id/linearLayout_add_delivery_area"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_chainStyle="spread"
-                tools:text="배송상황" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="배송완료"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </FrameLayout>
+    </com.daimajia.swipe.SwipeLayout>
 </layout>

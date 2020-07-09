@@ -2,6 +2,6 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="@color/whiteMarine">
     <item >
-        <color android:color="@android:color/white" />
+        <color android:color="@android:color/white"/>
     </item>
 </ripple>

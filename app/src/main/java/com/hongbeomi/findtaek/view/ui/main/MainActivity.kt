@@ -1,9 +1,6 @@
 package com.hongbeomi.findtaek.view.ui.main
 
 import android.os.Bundle
-import android.util.Log
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import androidx.work.*
 import co.mobiwise.materialintro.shape.ShapeType
 import com.google.android.material.snackbar.Snackbar
@@ -21,13 +18,12 @@ import com.hongbeomi.findtaek.view.util.ToastUtil.Companion.showShort
 import com.hongbeomi.findtaek.view.util.serializeToJson
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import java.util.concurrent.TimeUnit
-import kotlin.time.seconds
 
 /**
  * @author hongbeomi
  */
 
-class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
+class MainActivity : BaseActivity() {
 
     private val binding by binding<ActivityMainBinding>(R.layout.activity_main)
     private lateinit var viewModel: MainViewModel
@@ -61,15 +57,17 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
     }
 
     private fun setRecyclerView() {
-        adapter = MainRecyclerAdapter(this) { delivery ->
+        adapter = MainRecyclerAdapter(this, { delivery ->
             viewModel.getProgressesList(delivery.carrierName, delivery.trackId) {
                 TimeLineDialogFragment.newInstance(it).show(supportFragmentManager, null)
             }
-        }
+        }, { delivery -> viewModel.delete(delivery)
+            showSnackBar(
+                binding.root, this, getString(R.string.main_delete_complete), Snackbar.LENGTH_LONG,
+                getString(R.string.main_snackbar_cancel)
+            ) { viewModel.rollback(delivery) }
+        })
         binding.recyclerViewMain.adapter = this.adapter
-        MainRecyclerItemTouchHelper(0, ItemTouchHelper.RIGHT, this).let {
-            ItemTouchHelper(it).attachToRecyclerView(binding.recyclerViewMain)
-        }
     }
 
     private fun initObserver() {
@@ -117,17 +115,6 @@ class MainActivity : BaseActivity(), MainRecyclerItemTouchHelper.RecyclerItemTou
         binding.swipeLayout.apply {
             setColorSchemeResources(android.R.color.holo_blue_light)
             setOnRefreshListener { viewModel.updateAll() }
-        }
-    }
-
-    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {
-        val deletedItem = adapter.getItemPosition(position)
-        viewModel.delete(deletedItem)
-        showSnackBar(
-            binding.root, this, getString(R.string.main_delete_complete), Snackbar.LENGTH_LONG,
-            getString(R.string.main_snackbar_cancel)
-        ) {
-            viewModel.rollback(deletedItem)
         }
     }
 

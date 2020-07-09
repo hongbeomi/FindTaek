@@ -108,4 +108,10 @@ dependencies {
     // material intro view
     implementation "com.github.iammert:MaterialIntroView:$introViewVersion"
 
+    // recycler view item swipe
+    implementation "com.daimajia.swipelayout:library:$swipeLayoutVersion@aar"
+
+    // step progress bar
+    implementation "kr.co.prnd:stepprogressbar:$stepProgressBarVersion"
+
 }

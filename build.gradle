@@ -38,6 +38,12 @@ buildscript {
 
         // intro view
         introViewVersion = '1.6.0'
+
+        // swipe layout
+        swipeLayoutVersion = '1.2.0'
+
+        // step progressbar
+        stepProgressBarVersion = '1.0.0-alpha1'
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.3'
