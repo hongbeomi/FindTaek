@@ -5,9 +5,7 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.gson.Gson
 import com.hongbeomi.findtaek.R
-import com.hongbeomi.findtaek.models.dto.ErrorResponse
 import com.hongbeomi.findtaek.view.util.NoConnectionInterceptor
 import com.hongbeomi.findtaek.view.util.ToastUtil.Companion.showShort
 import kotlinx.coroutines.CoroutineScope
@@ -37,7 +35,7 @@ abstract class BaseViewModel : ViewModel() {
             when (t) {
                 is NoConnectionInterceptor.NoConnectivityException ->
                     showShort(R.string.base_error_no_connect_network)
-                is HttpException -> showShort(getErrorMessage(t))
+                is HttpException -> showShort(R.string.base_error_https)
                 else -> {
                     showShort(R.string.base_error_unknown)
                     Log.e("ERROR", "${t.message}")
@@ -45,14 +43,6 @@ abstract class BaseViewModel : ViewModel() {
             }
             hideLoading()
         }
-    }
-
-    open fun getErrorMessage(exception: HttpException): String {
-        val errorString = exception.response()?.errorBody()?.string()
-        val errorDto: ErrorResponse? = Gson().fromJson<ErrorResponse>(
-            errorString, ErrorResponse::class.java
-        )
-        return errorDto?.message ?: "알 수 없는 오류가 발생했습니다"
     }
 
     suspend fun <T> handle(call: suspend () -> T): T? {

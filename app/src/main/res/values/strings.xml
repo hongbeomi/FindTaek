@@ -25,6 +25,7 @@
     <string name="base_error_unknown">알 수 없는 오류가 발생했습니다</string>
     <string name="base_error_no_connect_network">인터넷 연결이 끊어졌습니다!</string>
     <string name="dialog_guide_close_text">확인</string>
+    <string name="base_error_https">운송장 번호가 존재하지 않거나 아직 상품이\n준비중 입니다</string>
 
     <string name="main_update_cancel_toast">업데이트가 취소되었습니다.</string>
 
