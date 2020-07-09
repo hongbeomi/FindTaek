@@ -2,6 +2,7 @@ package com.hongbeomi.findtaek.view.util
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
@@ -23,7 +24,7 @@ fun setImage(imageView: ImageView, @DrawableRes drawableId: Int?) {
 }
 
 @BindingAdapter("dragTargetView")
-fun setSwipeLayout(swipeLayout: SwipeLayout,  dragTargetView: View?) {
+fun setSwipeLayout(swipeLayout: SwipeLayout, dragTargetView: View?) {
     dragTargetView ?: return
     swipeLayout.apply {
         showMode = SwipeLayout.ShowMode.LayDown
@@ -34,7 +35,7 @@ fun setSwipeLayout(swipeLayout: SwipeLayout,  dragTargetView: View?) {
 
 @BindingAdapter("setProgressStep")
 fun setProgressBarStep(stepProgressBar: StepProgressBar, status: String) {
-    val step = when(status) {
+    val step = when (status) {
         "상품인수" -> 1
         "상품이동중" -> 2
         "배송출발" -> 3
@@ -46,4 +47,13 @@ fun setProgressBarStep(stepProgressBar: StepProgressBar, status: String) {
         ?: stepProgressBar.apply {
             stepUndoneColor = stepProgressBar.context.resources.getColor(R.color.yellow)
         }
+}
+
+@BindingAdapter("setProductName")
+fun setProductName(view: TextView, name: String?) {
+    var productText = "물품명 : "
+    if (!name.isNullOrEmpty()) {
+        productText += name
+    }
+    view.text = productText
 }

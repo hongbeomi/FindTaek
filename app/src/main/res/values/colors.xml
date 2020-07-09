@@ -11,4 +11,5 @@
     <color name="yellow">#ffc832</color>
     <color name="splash_background">#002060</color>
     <color name="editTextBackgroundColor">#c8c8c8</color>
+    <color name="infoText">#8f000000</color>
 </resources>

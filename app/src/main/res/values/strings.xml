@@ -10,7 +10,7 @@
 
     <string name="item_main_delete_image_content_description">제거</string>
     <string name="item_main_delete_text">삭제</string>
-    <string name="item_main_from_text">발송자 :</string>
+    <string name="item_main_from_text">보내시는 분 : %s</string>
     <string name="item_main_to_text">수신자 :</string>
 
     <string name="main_complete_list_update">리스트가 업데이트 되었습니다</string>
