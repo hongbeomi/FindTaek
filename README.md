@@ -90,6 +90,8 @@
 
 - [**TimeLineView**] Vipulasri - https://github.com/vipulasri/Timeline-View
 - [**MaterialIntroView**] iammert - https://github.com/iammert/MaterialIntroView
+- [**SwipeLayout**] daimajia - https://github.com/daimajia/AndroidSwipeLayout
+- [**StepProgressBar**] PRNDcompany - https://github.com/PRNDcompany/StepProgressBar
 - [**MVVM Architecture Example**] skydoves - https://github.com/skydoves/TheMovies2
 - [**Design By**] Jeongseo Lee - wjdtj981222@gmail.com
 
