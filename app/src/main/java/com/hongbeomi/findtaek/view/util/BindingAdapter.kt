@@ -7,6 +7,7 @@ import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import com.daimajia.swipe.SwipeLayout
+import com.github.vipulasri.timelineview.TimelineView
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.view.ui.main.MainRecyclerAdapter
 import kotlinx.android.synthetic.main.item_main.view.*
@@ -52,8 +53,6 @@ fun setProgressBarStep(stepProgressBar: StepProgressBar, status: String) {
 @BindingAdapter("setProductName")
 fun setProductName(view: TextView, name: String?) {
     var productText = "물품명 : "
-    if (!name.isNullOrEmpty()) {
-        productText += name
-    }
+    productText += if (name.isNullOrEmpty()) "-" else name
     view.text = productText
 }

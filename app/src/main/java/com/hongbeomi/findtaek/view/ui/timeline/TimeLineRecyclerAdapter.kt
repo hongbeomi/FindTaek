@@ -1,12 +1,9 @@
 package com.hongbeomi.findtaek.view.ui.timeline
 
-import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.github.vipulasri.timelineview.TimelineView
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.databinding.ItemTimelineBinding
@@ -50,17 +47,6 @@ class TimeLineRecyclerAdapter : RecyclerView.Adapter<TimeLineRecyclerAdapter.Tim
 
         fun bind(progresses: Progresses) {
             binding.progress = progresses
-            binding.timelineViewLine.marker =
-                VectorDrawableCompat.create(
-                    binding.root.context.resources,
-                    R.drawable.ic_marker
-                    , binding.root.context.theme
-                )?.apply {
-                    setColorFilter(
-                        ContextCompat.getColor(binding.root.context, R.color.marine),
-                        PorterDuff.Mode.SRC_IN
-                    )
-                }
         }
     }
 

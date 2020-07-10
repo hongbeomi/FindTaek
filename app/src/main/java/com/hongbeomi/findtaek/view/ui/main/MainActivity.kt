@@ -56,6 +56,11 @@ class MainActivity : BaseActivity() {
         setSwipeRefresh()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.allDeliveryList.value.takeIf { !it.isNullOrEmpty() }?.let { startWork(it) }
+    }
+
     private fun setRecyclerView() {
         adapter = MainRecyclerAdapter(this, { delivery ->
             viewModel.getProgressesList(delivery.carrierName, delivery.trackId) {
@@ -89,11 +94,6 @@ class MainActivity : BaseActivity() {
                 AddDialogFragment().show(supportFragmentManager, null)
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.allDeliveryList.value.takeIf { !it.isNullOrEmpty() }?.let { startWork(it) }
     }
 
     private fun startWork(deliveryList: List<Delivery>?) {
