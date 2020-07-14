@@ -132,7 +132,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:max="4"
-                app:stepDoneColor="@android:color/holo_green_dark"
+                app:stepDoneColor="@color/yellow"
                 bind:setProgressStep="@{delivery.status}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

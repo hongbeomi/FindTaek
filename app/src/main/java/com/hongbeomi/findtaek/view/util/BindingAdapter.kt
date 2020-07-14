@@ -41,13 +41,9 @@ fun setProgressBarStep(stepProgressBar: StepProgressBar, status: String) {
         "상품이동중" -> 2
         "배송출발" -> 3
         "배달완료" -> 4
-        else -> null
+        else -> 0
     }
-
-    step?.let { stepProgressBar.step = it }
-        ?: stepProgressBar.apply {
-            stepUndoneColor = stepProgressBar.context.resources.getColor(R.color.yellow)
-        }
+    stepProgressBar.step = step
 }
 
 @BindingAdapter("setProductName")
