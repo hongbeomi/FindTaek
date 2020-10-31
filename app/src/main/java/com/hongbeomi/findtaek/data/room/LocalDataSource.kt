@@ -1,7 +1,7 @@
 package com.hongbeomi.findtaek.data.room
 
-import androidx.lifecycle.LiveData
 import com.hongbeomi.findtaek.models.entity.Delivery
+import kotlinx.coroutines.flow.Flow
 
 /**
  * @author hongbeomi
@@ -9,7 +9,7 @@ import com.hongbeomi.findtaek.models.entity.Delivery
 
 interface LocalDataSource {
 
-    fun getAll() : LiveData<List<Delivery>>
+    fun getAll() : Flow<List<Delivery>>
 
     suspend fun insert(delivery: Delivery)
 

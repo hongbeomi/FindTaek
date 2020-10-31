@@ -3,11 +3,9 @@ package com.hongbeomi.findtaek.view.ui.main
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.DrawableRes
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import co.mobiwise.materialintro.shape.ShapeType
-import com.daimajia.swipe.SwipeLayout
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.databinding.ItemMainBinding
 import com.hongbeomi.findtaek.models.entity.Delivery
@@ -80,12 +78,12 @@ class MainRecyclerAdapter(
 
     }
 
-    enum class Status(@DrawableRes val drawableId: Int) {
-        TAKEOVER(R.drawable.ic_product_takeover),
-        MOVING(R.drawable.ic_product_moving),
-        START(R.drawable.ic_start_delivery),
-        COMPLETE(R.drawable.ic_delivery_complete),
-        UNKNOWN(R.drawable.ic_unknown)
+    enum class Status {
+        TAKEOVER,
+        MOVING,
+        START,
+        COMPLETE,
+        UNKNOWN
     }
 
 }

@@ -57,6 +57,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.0-alpha05'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
+    implementation "androidx.media:media:1.2.0"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     // test implementation
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
@@ -82,9 +84,6 @@ dependencies {
     // coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
-
-    // Anko
-    implementation "org.jetbrains.anko:anko:$ankoVersion"
 
     // lifecycle component
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"

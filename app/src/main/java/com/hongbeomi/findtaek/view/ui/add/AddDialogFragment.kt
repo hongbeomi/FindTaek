@@ -4,18 +4,14 @@ import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.databinding.DataBindingUtil
 import com.google.android.material.chip.Chip
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.databinding.FragmentAddBinding
 import com.hongbeomi.findtaek.view.ui.base.BaseBottomSheetDialogFragment
 import com.hongbeomi.findtaek.view.util.CarrierIdUtil
 import com.hongbeomi.findtaek.view.util.ToastUtil
-import org.jetbrains.anko.textColor
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -65,7 +61,7 @@ class AddDialogFragment : BaseBottomSheetDialogFragment() {
                     text = name
                     isCheckable = true
                     isClickable = true
-                    textColor = Color.WHITE
+                    setTextColor(Color.WHITE)
                     setEnsureMinTouchTargetSize(false)
                     checkedIcon = null
                     chipBackgroundColor = resources.getColorStateList(R.color.color_add_chip_bg)

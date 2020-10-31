@@ -15,6 +15,7 @@ import com.hongbeomi.findtaek.view.util.IntroUtil.Companion.initIntro
 import com.hongbeomi.findtaek.view.util.KEY_WORK_DATA
 import com.hongbeomi.findtaek.view.util.SnackBarUtil.Companion.showSnackBar
 import com.hongbeomi.findtaek.view.util.ToastUtil.Companion.showShort
+import com.hongbeomi.findtaek.view.util.observeOnce
 import com.hongbeomi.findtaek.view.util.serializeToJson
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import java.util.concurrent.TimeUnit
@@ -89,7 +90,7 @@ class MainActivity : BaseActivity() {
                     binding.swipeLayout.isRefreshing = false
                 }
             }
-            onInitUpdateEvent.observe(::getLifecycle) { updateAll() }
+            onInitUpdateEvent.observeOnce(this@MainActivity) { updateAll() }
             onSendCoordinatesEvent.observe(::getLifecycle) {
                 AddDialogFragment().show(supportFragmentManager, null)
             }

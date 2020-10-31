@@ -1,28 +1,14 @@
 package com.hongbeomi.findtaek.view.util
 
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.DrawableRes
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import com.daimajia.swipe.SwipeLayout
-import com.github.vipulasri.timelineview.TimelineView
-import com.hongbeomi.findtaek.R
-import com.hongbeomi.findtaek.view.ui.main.MainRecyclerAdapter
-import kotlinx.android.synthetic.main.item_main.view.*
 import kr.co.prnd.StepProgressBar
-import org.jetbrains.anko.image
 
 /**
  * @author hongbeomi
  */
-
-@BindingAdapter("setDrawable")
-fun setImage(imageView: ImageView, @DrawableRes drawableId: Int?) {
-    drawableId ?: return
-    imageView.image = imageView.context.getDrawable(drawableId)
-}
 
 @BindingAdapter("dragTargetView")
 fun setSwipeLayout(swipeLayout: SwipeLayout, dragTargetView: View?) {

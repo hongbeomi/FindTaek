@@ -5,6 +5,8 @@ import com.hongbeomi.findtaek.data.room.LocalDataSource
 import com.hongbeomi.findtaek.models.dto.DeliveryResponse
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.view.util.CarrierIdUtil.Companion.convertId
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 /**
  * @author hongbeomi
@@ -21,7 +23,8 @@ class DeliveryRepository(
     override suspend fun getProgresses(carrierName: String, trackId: String) =
         remoteDataSource.getData(convertId(carrierName), trackId).progresses
 
-    override fun getAll() = localDataSource.getAll()
+    @ExperimentalCoroutinesApi
+    override fun getAll() = localDataSource.getAll().distinctUntilChanged()
 
     override suspend fun insert(
         trackId: String,

@@ -1,5 +1,6 @@
 package com.hongbeomi.findtaek.view.ui.splash
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -7,7 +8,6 @@ import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.databinding.ActivitySplashBinding
 import com.hongbeomi.findtaek.view.ui.base.BaseActivity
 import com.hongbeomi.findtaek.view.ui.main.MainActivity
-import org.jetbrains.anko.startActivity
 
 /**
  * @author hongbeomi
@@ -30,7 +30,7 @@ class SplashActivity : BaseActivity() {
             override fun onAnimationRepeat(animation: Animation?) {}
             override fun onAnimationStart(animation: Animation?) {}
             override fun onAnimationEnd(animation: Animation?) {
-                startActivity<MainActivity>()
+                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                 finish()
             }
         })

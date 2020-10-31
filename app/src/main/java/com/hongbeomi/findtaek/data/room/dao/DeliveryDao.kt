@@ -1,9 +1,9 @@
 package com.hongbeomi.findtaek.data.room.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
 import com.hongbeomi.findtaek.models.entity.Delivery
+import kotlinx.coroutines.flow.Flow
 
 /**
  * @author hongbeomi
@@ -13,6 +13,6 @@ import com.hongbeomi.findtaek.models.entity.Delivery
 abstract class DeliveryDao : BaseDao<Delivery>() {
 
     @Query("SELECT * FROM delivery")
-    abstract fun getAll(): LiveData<List<Delivery>>
+    abstract fun getAll(): Flow<List<Delivery>>
 
 }
