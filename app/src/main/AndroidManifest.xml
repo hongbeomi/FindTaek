@@ -16,7 +16,9 @@
         android:name=".FindTaekApp"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".view.ui.splash.SplashActivity"
+        <activity
+            android:name=".view.ui.splash.SplashActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:noHistory="true">
             <intent-filter>
@@ -25,7 +27,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.hongbeomi.findtaek.view.ui.main.MainActivity"
+        <activity
+            android:exported="true"
+            android:name="com.hongbeomi.findtaek.view.ui.main.MainActivity"
             android:screenOrientation="portrait"/>
 
     </application>
