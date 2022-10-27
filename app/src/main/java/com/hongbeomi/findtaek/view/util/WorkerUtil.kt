@@ -31,7 +31,7 @@ const val NOTIFICATION_ID = 1
 fun serializeToJson(deliveryList: List<Delivery>?): String? =
     Gson().toJson(deliveryList)
 
-fun deserializeFromJson(jsonString: String?): List<Delivery>? =
+fun deserializeFromJson(jsonString: String?): List<Delivery> =
     Gson().fromJson(jsonString, Array<Delivery>::class.java).toList()
 
 fun sendNotification(context: Context, carrierName: String, trackId: String) {
@@ -40,7 +40,7 @@ fun sendNotification(context: Context, carrierName: String, trackId: String) {
 
     val contentIntent = PendingIntent.getActivity(
         context, 0,
-        Intent(context, SplashActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT
+        Intent(context, SplashActivity::class.java), PendingIntent.FLAG_IMMUTABLE
     )
 
     val notification = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL)
