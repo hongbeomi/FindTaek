@@ -9,7 +9,7 @@ android {
     compileSdkVersion 31
     defaultConfig {
         applicationId "com.hongbeomi.findtaek"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 31
         versionCode 6
         versionName "1.5.0"
@@ -38,6 +38,10 @@ android {
         unitTests {
             includeAndroidResources = true
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
