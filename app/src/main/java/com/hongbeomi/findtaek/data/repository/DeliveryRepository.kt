@@ -23,7 +23,6 @@ class DeliveryRepository(
     override suspend fun getProgresses(carrierName: String, trackId: String) =
         remoteDataSource.getData(convertId(carrierName), trackId).progresses
 
-    @ExperimentalCoroutinesApi
     override fun getAll() = localDataSource.getAll().distinctUntilChanged()
 
     override suspend fun insert(
