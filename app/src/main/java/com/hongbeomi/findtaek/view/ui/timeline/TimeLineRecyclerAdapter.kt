@@ -15,7 +15,7 @@ import com.hongbeomi.findtaek.models.dto.DeliveryResponse.Progresses
 
 class TimeLineRecyclerAdapter : RecyclerView.Adapter<TimeLineRecyclerAdapter.TimeLineViewHolder>() {
 
-    private var itemList: ArrayList<Progresses> = arrayListOf()
+    private var itemList: List<Progresses> = emptyList()
 
     override fun getItemViewType(position: Int) =
         TimelineView.getTimeLineViewType(position, itemCount)
@@ -28,12 +28,11 @@ class TimeLineRecyclerAdapter : RecyclerView.Adapter<TimeLineRecyclerAdapter.Tim
             false
         ).let { TimeLineViewHolder(it, viewType) }
 
-    override fun onBindViewHolder(holder: TimeLineViewHolder, position: Int) =
-        holder.bind(itemList[itemList.size.minus(1) - position])
+    override fun onBindViewHolder(holder: TimeLineViewHolder, position: Int) = holder.bind(itemList[position])
 
     override fun getItemCount() = itemList.size
 
-    fun setItemList(itemList: ArrayList<Progresses>) {
+    fun setItemList(itemList: List<Progresses>) {
         this.itemList = itemList
         notifyDataSetChanged()
     }

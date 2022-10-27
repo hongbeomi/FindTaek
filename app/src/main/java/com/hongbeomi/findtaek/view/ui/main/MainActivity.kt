@@ -58,8 +58,8 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         viewModel.allDeliveryList.value.takeIf { !it.isNullOrEmpty() }?.let { startWork(it) }
+        super.onDestroy()
     }
 
     private fun setRecyclerView() {
@@ -67,7 +67,8 @@ class MainActivity : BaseActivity() {
             viewModel.getProgressesList(delivery.carrierName, delivery.trackId) {
                 TimeLineDialogFragment.newInstance(it).show(supportFragmentManager, null)
             }
-        }, { delivery -> viewModel.delete(delivery)
+        }, { delivery ->
+            viewModel.delete(delivery)
             showSnackBar(
                 binding.root, this, getString(R.string.main_delete_complete), Snackbar.LENGTH_LONG,
                 getString(R.string.main_snackbar_cancel)
@@ -76,24 +77,22 @@ class MainActivity : BaseActivity() {
         binding.recyclerViewMain.adapter = this.adapter
     }
 
-    private fun initObserver() {
-        viewModel.apply {
-            allDeliveryList.observe(::getLifecycle) {
-                adapter.setItemList(it)
-                callInitUpdate()
-                binding.recyclerViewMain.scheduleLayoutAnimation()
+    private fun initObserver() = with(viewModel) {
+        allDeliveryList.observe(::getLifecycle) {
+            adapter.setItemList(it)
+            callInitUpdate()
+            binding.recyclerViewMain.scheduleLayoutAnimation()
+        }
+        isRefresh.observe(::getLifecycle) {
+            it?.let {
+                if (it) showShort(R.string.main_complete_list_update)
+                else showShort(R.string.main_list_empty)
+                binding.swipeLayout.isRefreshing = false
             }
-            isRefresh.observe(::getLifecycle) {
-                it?.let {
-                    if (it) showShort(R.string.main_complete_list_update)
-                    else showShort(R.string.main_list_empty)
-                    binding.swipeLayout.isRefreshing = false
-                }
-            }
-            onInitUpdateEvent.observeOnce(this@MainActivity) { updateAll() }
-            onSendCoordinatesEvent.observe(::getLifecycle) {
-                AddDialogFragment().show(supportFragmentManager, null)
-            }
+        }
+        onInitUpdateEvent.observeOnce(this@MainActivity) { updateAll() }
+        onSendCoordinatesEvent.observe(::getLifecycle) {
+            AddDialogFragment().show(supportFragmentManager, null)
         }
     }
 
@@ -112,11 +111,9 @@ class MainActivity : BaseActivity() {
         workManager.enqueue(deliveryWork)
     }
 
-    private fun setSwipeRefresh() {
-        binding.swipeLayout.apply {
-            setColorSchemeResources(android.R.color.holo_blue_light)
-            setOnRefreshListener { viewModel.updateAll() }
-        }
+    private fun setSwipeRefresh() = with(binding.swipeLayout) {
+        setColorSchemeResources(android.R.color.holo_blue_light)
+        setOnRefreshListener { viewModel.updateAll() }
     }
 
 }

@@ -33,7 +33,10 @@ class TimeLineDialogFragment : BaseBottomSheetDialogFragment() {
     ).apply {
         lifecycleOwner = viewLifecycleOwner
         this.timelineDialogRecyclerView.adapter = TimeLineRecyclerAdapter().apply {
-            setItemList(arguments?.getParcelableArrayList(PROGRESSES)!!)
+            val itemList = arguments?.getParcelableArrayList<DeliveryResponse.Progresses>(PROGRESSES)
+            if (itemList != null) {
+                setItemList(itemList.reversed())
+            }
         }
     }.root
 

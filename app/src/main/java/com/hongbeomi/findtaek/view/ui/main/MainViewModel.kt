@@ -1,15 +1,12 @@
 package com.hongbeomi.findtaek.view.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import com.hongbeomi.findtaek.data.repository.Repository
 import com.hongbeomi.findtaek.models.dto.DeliveryResponse.Progresses
 import com.hongbeomi.findtaek.models.entity.Delivery
 import com.hongbeomi.findtaek.view.ui.base.BaseViewModel
-import com.hongbeomi.findtaek.view.util.OneTakeLiveData
 import com.hongbeomi.findtaek.view.util.SingleLiveEvent
+import kotlinx.coroutines.launch
 
 /**
  * @author hongbeomi
@@ -25,16 +22,22 @@ class MainViewModel(private val repository: Repository) : BaseViewModel() {
         emitSource(fromDB)
     }
 
-    fun callInitUpdate() { onInitUpdateEvent.value = null }
+    fun callInitUpdate() {
+        onInitUpdateEvent.value = null
+    }
 
     fun callSendCoordinates() = onSendCoordinatesEvent.call()
 
-    fun delete(delivery: Delivery) = launchViewModelScope { repository.delete(delivery) }
+    fun delete(delivery: Delivery) {
+        viewModelScope.launch { repository.delete(delivery) }
+    }
 
-    fun rollback(delivery: Delivery) = launchViewModelScope { repository.rollback(delivery) }
+    fun rollback(delivery: Delivery) {
+        viewModelScope.launch { repository.rollback(delivery) }
+    }
 
-    fun updateAll() =
-        launchViewModelScope {
+    fun updateAll() {
+        viewModelScope.launch {
             allDeliveryList.value
                 .takeIf { !it.isNullOrEmpty() }
                 ?.let {
@@ -42,6 +45,7 @@ class MainViewModel(private val repository: Repository) : BaseViewModel() {
                     isRefresh.postValue(true)
                 } ?: isRefresh.postValue(false)
         }
+    }
 
     private suspend fun update(list: List<Delivery>) {
         list.map {
@@ -54,11 +58,13 @@ class MainViewModel(private val repository: Repository) : BaseViewModel() {
     fun getProgressesList(
         carrierName: String,
         trackId: String,
-        action: (ArrayList<Progresses>) -> Unit
-    ) = launchViewModelScope {
+        action: (ArrayList<Progresses>) -> Unit,
+    ) {
         showLoading()
-        handle { repository.getProgresses(carrierName, trackId) }?.let { action(it) }
-        hideLoading()
+        viewModelScope.launch {
+            handle { repository.getProgresses(carrierName, trackId) }?.let { action(it) }
+            hideLoading()
+        }
     }
 
 }

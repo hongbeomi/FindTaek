@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.WindowManager
 import com.google.android.material.chip.Chip
 import com.hongbeomi.findtaek.R
 import com.hongbeomi.findtaek.databinding.FragmentAddBinding
@@ -22,16 +21,10 @@ class AddDialogFragment : BaseBottomSheetDialogFragment() {
 
     private val viewModel by viewModel<AddFragmentViewModel>()
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return super.onCreateDialog(savedInstanceState).apply {
-            window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ) = binding<FragmentAddBinding>(
         inflater, R.layout.fragment_add, container
     ).apply {
@@ -41,17 +34,15 @@ class AddDialogFragment : BaseBottomSheetDialogFragment() {
         initObserve()
     }.root
 
-    private fun initObserve() {
-        with(viewModel) {
-            deliveryResponse.observe(::getLifecycle) {
-                it?.let {
-                    insert(it)
-                    ToastUtil.showLong(R.string.add_new_delivery_insert_complete_toast)
-                    dismiss()
-                }
+    private fun initObserve() = with(viewModel) {
+        deliveryResponse.observe(::getLifecycle) {
+            it?.let {
+                insert(it)
+                ToastUtil.showLong(R.string.add_new_delivery_insert_complete_toast)
+                dismiss()
             }
-            onCloseEvent.observe(::getLifecycle) { dismiss() }
         }
+        onCloseEvent.observe(::getLifecycle) { dismiss() }
     }
 
     private fun setChipGroup(binding: FragmentAddBinding) {
@@ -69,9 +60,7 @@ class AddDialogFragment : BaseBottomSheetDialogFragment() {
             )
         }
         binding.chipGroupAddCarrierName.setOnCheckedChangeListener { group, checkedId ->
-            group.findViewById<Chip>(checkedId)?.let {
-                viewModel.carrierName.postValue(it.text.toString())
-            } ?: viewModel.carrierName.postValue(null)
+            viewModel.carrierName.value = group.findViewById<Chip>(checkedId)?.text?.toString()
         }
     }
 
