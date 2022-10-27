@@ -1,10 +1,11 @@
 package com.hongbeomi.findtaek.view.ui.base
 
 import android.app.Dialog
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -19,10 +20,12 @@ import com.hongbeomi.findtaek.R
 
 open class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
+    open val bottomSheetTopMargin by lazy { resources.getDimensionPixelSize(R.dimen.bottom_sheet_top_margin) }
+
     protected inline fun <reified T : ViewDataBinding> binding(
         inflater: LayoutInflater,
         @LayoutRes resId: Int,
-        container: ViewGroup?
+        container: ViewGroup?,
     ): T = DataBindingUtil.inflate(inflater, resId, container, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,12 +37,10 @@ open class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
         return super.onCreateDialog(savedInstanceState)
             .apply {
                 setOnShowListener {
-                    var fullScreenHeight = 0
-                    if (checkSDKVersion())
-                        fullScreenHeight = window?.decorView!!.run {
-                            height - rootWindowInsets.run { systemWindowInsetTop + systemWindowInsetBottom }
-                        }
-                    fullScreenHeight -= resources.getDimensionPixelSize(R.dimen.bottom_sheet_top_margin)
+                    var fullScreenHeight = window?.decorView!!.run {
+                        height - rootWindowInsets.run { systemWindowInsetTop + systemWindowInsetBottom }
+                    }
+                    fullScreenHeight -= bottomSheetTopMargin
                     findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
                         .also {
                             BottomSheetBehavior.from(it).apply {
@@ -52,6 +53,9 @@ open class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
             }
     }
 
-    private fun checkSDKVersion() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
 }
